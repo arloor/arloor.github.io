@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Docker on ARLOOR</title>
+    <link>https://arloor.com/categories/docker/</link>
+    <description>Recent content in Docker on ARLOOR</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Wed, 02 Jan 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://arloor.com/categories/docker/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>docker使用笔记</title>
+      <link>https://arloor.com/posts/docker/docker-first-use/</link>
+      <pubDate>Wed, 02 Jan 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://arloor.com/posts/docker/docker-first-use/</guid>
+      <description>&lt;p&gt;docker很火，所以我想入门。这篇文章是记录学习的，所以可能很乱，称为杂说&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

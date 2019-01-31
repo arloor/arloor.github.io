@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>加密 on ARLOOR</title>
+    <link>https://arloor.com/categories/%E5%8A%A0%E5%AF%86/</link>
+    <description>Recent content in 加密 on ARLOOR</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Fri, 04 Jan 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://arloor.com/categories/%E5%8A%A0%E5%AF%86/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>java-AES加密后再Base64混淆</title>
+      <link>https://arloor.com/posts/other/java-aes128-then-base64/</link>
+      <pubDate>Fri, 04 Jan 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://arloor.com/posts/other/java-aes128-then-base64/</guid>
+      <description>&lt;p&gt;这是上一篇&lt;a href=&#34;https://arloor.com/posts/other/java-aes128加密.代码与一些约定/&#34;&gt;java-AES128加密-代码与一些约定&lt;/a&gt;的后续。这一篇将会记录自己看到的在AES128之后所做的混淆。混淆原来为c语言实现，自己转成了java实现。感觉这一套比较好用，所以记下来变成自己的😁咳咳，最终发现这个混淆就是对Base64的一个实现，只是将64个可打印字符的顺序弄乱了。所以我有了自定义Base64来实现混淆的代码？？？黑人问号&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>java-AES128加密-代码与一些约定</title>
+      <link>https://arloor.com/posts/other/java-aes128/</link>
+      <pubDate>Thu, 03 Jan 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://arloor.com/posts/other/java-aes128/</guid>
+      <description>&lt;p&gt;在爬虫岗位实习，免不了接触加密解密，今天的工作中踩了一些java AES128加密的坑，也学习到了一些加密的常用做法。&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

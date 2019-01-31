@@ -1,0 +1,968 @@
+<!DOCTYPE html>
+<html lang="en">
+    
+    
+
+
+    <head>
+    <link href="https://gmpg.org/xfn/11" rel="profile">
+    <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta http-equiv="Cache-Control" content="public" />
+<!-- Enable responsiveness on mobile devices -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<meta name="generator" content="Hugo 0.53" />
+
+    
+    
+    
+
+<title>spring cloud学习（一） • ARLOOR</title>
+
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="spring cloud学习（一）"/>
+<meta name="twitter:description" content="作死了解一下spring cloud。当然，不知道能了解到什么程度。先作一死。
+找到了一个博客，准备照着那个博客来搞搞博客地址。这个博客的好处是原理和介绍带一些，代码、pom、配置全都在博客中可以直接复制。第二点——可以直接复制黏贴实践，第一点——复制了能让你知道复制的是干了嘛。当然，原理和介绍稍微有点少，所以哈，最好还是提前了解一些微服务的一些概念。
+先讲一下我的环境。jdk1.8.0_171&#43;springboot 1.5.2.RELEASE&#43;spring cloud Dalston.RC1 。事实证明，因为springcloud这个项目还在快速的变化之中，版本之间的变化很快，所以版本对应就很重要。
+github源码地址：https://github.com/arloor/cloud/"/>
+
+<meta property="og:title" content="spring cloud学习（一）" />
+<meta property="og:description" content="作死了解一下spring cloud。当然，不知道能了解到什么程度。先作一死。
+找到了一个博客，准备照着那个博客来搞搞博客地址。这个博客的好处是原理和介绍带一些，代码、pom、配置全都在博客中可以直接复制。第二点——可以直接复制黏贴实践，第一点——复制了能让你知道复制的是干了嘛。当然，原理和介绍稍微有点少，所以哈，最好还是提前了解一些微服务的一些概念。
+先讲一下我的环境。jdk1.8.0_171&#43;springboot 1.5.2.RELEASE&#43;spring cloud Dalston.RC1 。事实证明，因为springcloud这个项目还在快速的变化之中，版本之间的变化很快，所以版本对应就很重要。
+github源码地址：https://github.com/arloor/cloud/" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://arloor.com/posts/%E5%BE%AE%E6%9C%8D%E5%8A%A1/spring_cloud-study-one/" /><meta property="article:published_time" content="2018-06-21T00:00:00&#43;00:00"/>
+<meta property="article:modified_time" content="2018-06-21T00:00:00&#43;00:00"/><meta property="og:site_name" content="Title" />
+
+
+    
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/scss/hyde-hyde.e0e469ad030f6f6906870f8469432a17e9699a3466fb4a1ab7ba3b03fc407e37.css" integrity="sha256-4ORprQMPb2kGhw&#43;EaUMqF&#43;lpmjRm&#43;0oat7o7A/xAfjc=">
+
+
+<link rel="stylesheet" href="/scss/print.2744dcbf8a0b2e74f8a50e4b34e5f441be7cf93cc7de27029121c6a09f9e77bc.css" integrity="sha256-J0Tcv4oLLnT4pQ5LNOX0Qb58&#43;TzH3icCkSHGoJ&#43;ed7w=" media="print">
+
+
+
+
+<link rel="stylesheet" href="/scss/hugo-toc.8549a64d301421b4256ea9a0d5ca8b99178799f569d5d2daeb95f24cef3ce6b7.css" integrity="sha256-hUmmTTAUIbQlbqmg1cqLmReHmfVp1dLa65XyTO885rc=">
+
+
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <!-- Icons -->
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+    <link rel="shortcut icon" href="/favicon.png">
+    
+
+</head>
+
+
+    <body class=" ">
+    
+<div class="sidebar">
+  <div class="container ">
+    <div class="sidebar-about">
+      <span class="site__title">
+        <a href="https://arloor.com/">ARLOOR</a>
+      </span>
+      
+        
+        
+        
+        <div class="author-image">
+          <img src="https://arloor.com//img/head.jpeg" alt="Author Image" class="img--circle img--headshot element--center">
+        </div>
+        
+      
+      
+      <p class="site__description">
+        
+      </p>
+    </div>
+    <div class="collapsible-menu">
+      <input type="checkbox" id="menuToggle">
+      <label for="menuToggle">ARLOOR</label>
+      <div class="menu-content">
+        <div>
+	<ul class="sidebar-nav">
+		 
+		 
+			 
+				<li>
+					<a href="/categories/">
+						<span>分类</span>
+					</a>
+				</li>
+			 
+		 
+			 
+				<li>
+					<a href="/posts/">
+						<span>文章</span>
+					</a>
+				</li>
+			 
+		 
+			 
+				<li>
+					<a href="/tags/">
+						<span>标签</span>
+					</a>
+				</li>
+			 
+		 
+			 
+				<li>
+					<a href="/about/">
+						<span>About</span>
+					</a>
+				</li>
+			 
+		
+		</li>
+	</ul>
+</div>
+
+        <section class="social">
+	
+	
+	
+	<a href="https://github.com/arloor" rel="me"><i class="fab fa-github fa-lg" aria-hidden="true"></i></a>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<a href="mailto:admin@arloor.com" rel="me"><i class="fas fa-at fa-lg" aria-hidden="true"></i></a>
+	
+</section>
+
+      </div>
+    </div>
+    
+<div class="copyright">
+  &copy; 2019 htr3n
+  
+    <a href="https://creativecommons.org/licenses/by-sa/4.0">CC BY-SA 4.0</a>
+  
+</div>
+
+
+<div class="builtwith">
+Built with <a href="https://gohugo.io">Hugo</a> ❤️ <a href="https://github.com/htr3n/hyde-hyde">hyde-hyde</a>.
+</div>
+
+
+  </div>
+</div>
+
+        <div class="content container">
+            
+    <article>
+  <header>
+    <h1>spring cloud学习（一）</h1>
+    
+    
+<div class="post__meta">
+    
+    
+      <i class="fas fa-calendar-alt"></i> Jun 21, 2018
+    
+    
+    
+      
+      
+          in
+          
+          
+              <a class="badge badge-category" href="/categories/java">JAVA</a>
+              •
+          
+              <a class="badge badge-category" href="/categories/%E5%BE%AE%E6%9C%8D%E5%8A%A1">微服务</a>
+              
+          
+      
+    
+    
+    
+      
+      
+          <br/>
+           <i class="fas fa-tags"></i>
+          
+          <a class="badge badge-tag" href="/tags/program">program</a>
+          
+      
+    
+    
+    <br/>
+    <i class="fas fa-clock"></i> 5 min read
+</div>
+
+
+  </header>
+  
+  
+  <div class="toc-wrapper">
+    <input type="checkbox" id="tocToggle">
+    <label for="tocToggle">Table of Content</label>
+    
+        <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#模块0-模块1-服务注册与发现">模块0 模块1 服务注册与发现</a>
+<ul>
+<li><a href="#模块-0-eureka-server">模块 0-eureka-server</a></li>
+<li><a href="#模块-1-service-hi-一个微服务-并测试服务注册">模块 1-service-hi 一个微服务，并测试服务注册</a></li>
+<li><a href="#高可用的服务注册中心-多个服务中心相互备份">高可用的服务注册中心——多个服务中心相互备份</a></li>
+</ul></li>
+<li><a href="#模块-2-service-ribbon-服务消费者-ribbon-resttemplate">模块 2-service-ribbon 服务消费者 ribbon+restTemplate</a></li>
+<li><a href="#模块3-service-feign">模块3-service-feign</a></li>
+<li><a href="#在feign和ribbon中加入断路器">在feign和ribbon中加入断路器</a>
+<ul>
+<li><a href="#2-service-ribbon开启hystrix">2-service-ribbon开启Hystrix:</a></li>
+<li><a href="#3-service-feign开启hystrix">3-service-feign开启Hystrix:</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
+    
+  </div>
+  
+  <div class="post">
+    
+
+<p>作死了解一下spring cloud。当然，不知道能了解到什么程度。先作一死。</p>
+
+<p>找到了一个博客，准备照着那个博客来搞搞<a href="https://blog.csdn.net/forezp/article/details/70148833">博客地址</a>。这个博客的好处是原理和介绍带一些，代码、pom、配置全都在博客中可以直接复制。第二点——可以直接复制黏贴实践，第一点——复制了能让你知道复制的是干了嘛。当然，原理和介绍稍微有点少，所以哈，最好还是提前了解一些微服务的一些概念。</p>
+
+<p>先讲一下我的环境。jdk1.8.0_171+springboot 1.5.2.RELEASE+spring cloud Dalston.RC1 。事实证明，因为springcloud这个项目还在快速的变化之中，版本之间的变化很快，所以版本对应就很重要。</p>
+
+<p>github源码地址：<a href="https://github.com/arloor/cloud/">https://github.com/arloor/cloud/</a></p>
+
+<h2 id="模块0-模块1-服务注册与发现">模块0 模块1 服务注册与发现</h2>
+
+<p>在这里，我们需要用的的组件上Spring Cloud Netflix的Eureka ,eureka是一个服务注册和发现模块。</p>
+
+<h3 id="模块-0-eureka-server">模块 0-eureka-server</h3>
+
+<p>该模块负责注册中心的职责</p>
+
+<p>完整的pom.xml</p>
+
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;project xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot;
+         xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+         xsi:schemaLocation=&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&quot;&gt;
+    &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
+
+    &lt;groupId&gt;com.arloor&lt;/groupId&gt;
+    &lt;artifactId&gt;faxian&lt;/artifactId&gt;
+    &lt;version&gt;1.0-SNAPSHOT&lt;/version&gt;
+
+    &lt;parent&gt;
+        &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+        &lt;artifactId&gt;spring-boot-starter-parent&lt;/artifactId&gt;
+        &lt;version&gt;1.5.2.RELEASE&lt;/version&gt;
+        &lt;relativePath/&gt; &lt;!-- lookup parent from repository --&gt;
+    &lt;/parent&gt;
+
+    &lt;properties&gt;
+        &lt;project.build.sourceEncoding&gt;UTF-8&lt;/project.build.sourceEncoding&gt;
+        &lt;project.reporting.outputEncoding&gt;UTF-8&lt;/project.reporting.outputEncoding&gt;
+        &lt;java.version&gt;1.8&lt;/java.version&gt;
+    &lt;/properties&gt;
+
+    &lt;dependencies&gt;
+        &lt;!--eureka server --&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-cloud-starter-eureka-server&lt;/artifactId&gt;
+        &lt;/dependency&gt;
+
+        &lt;!-- spring boot test--&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-boot-starter-test&lt;/artifactId&gt;
+            &lt;scope&gt;test&lt;/scope&gt;
+        &lt;/dependency&gt;
+
+        &lt;dependency&gt;
+            &lt;groupId&gt;com.sun.jersey&lt;/groupId&gt;
+            &lt;artifactId&gt;jersey-bundle&lt;/artifactId&gt;
+            &lt;version&gt;1.19&lt;/version&gt;
+        &lt;/dependency&gt;
+    &lt;/dependencies&gt;
+
+    &lt;dependencyManagement&gt;
+        &lt;dependencies&gt;
+            &lt;dependency&gt;
+                &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
+                &lt;artifactId&gt;spring-cloud-dependencies&lt;/artifactId&gt;
+                &lt;version&gt;Dalston.RC1&lt;/version&gt;
+                &lt;type&gt;pom&lt;/type&gt;
+                &lt;scope&gt;import&lt;/scope&gt;
+            &lt;/dependency&gt;
+        &lt;/dependencies&gt;
+    &lt;/dependencyManagement&gt;
+
+    &lt;build&gt;
+        &lt;plugins&gt;
+            &lt;plugin&gt;
+                &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+                &lt;artifactId&gt;spring-boot-maven-plugin&lt;/artifactId&gt;
+            &lt;/plugin&gt;
+        &lt;/plugins&gt;
+    &lt;/build&gt;
+
+    &lt;repositories&gt;
+        &lt;repository&gt;
+            &lt;id&gt;spring-milestones&lt;/id&gt;
+            &lt;name&gt;Spring Milestones&lt;/name&gt;
+            &lt;url&gt;https://repo.spring.io/milestone&lt;/url&gt;
+            &lt;snapshots&gt;
+                &lt;enabled&gt;false&lt;/enabled&gt;
+            &lt;/snapshots&gt;
+        &lt;/repository&gt;
+    &lt;/repositories&gt;
+&lt;/project&gt;
+</code></pre>
+
+<p>注意：在原博客中dependency中没有</p>
+
+<pre><code>&lt;dependency&gt;
+    &lt;groupId&gt;com.sun.jersey&lt;/groupId&gt;
+    &lt;artifactId&gt;jersey-bundle&lt;/artifactId&gt;
+    &lt;version&gt;1.19&lt;/version&gt;
+&lt;/dependency&gt;
+</code></pre>
+
+<p>但是实际操作会报错，在网上找到的解决方案就是加上这个。</p>
+
+<p>Main类</p>
+
+<pre><code>@EnableEurekaServer
+@SpringBootApplication
+public class EurekaserverApplication {
+
+    public static void main(String[] args) {
+        SpringApplication.run(EurekaserverApplication.class, args);
+    }
+}
+</code></pre>
+
+<p>application.properties</p>
+
+<pre><code>server.port=8761
+
+eureka.instance.hostname=localhost
+eureka.client.registerWithEureka=false
+eureka.client.fetchRegistry=false
+eureka.client.serviceUrl.defaultZone=http://${eureka.instance.hostname}:${server.port}/eureka/
+</code></pre>
+
+<p><code>eureka.client.registerWithEureka=false</code>和<code>eureka.client.fetchRegistry=false</code>来表明自己是一个eureka server。有一个因为这两个配置没有生效导致的问题如下：</p>
+
+<p>在原博客中使用的是application.yml。同样配置下，在实际操作中报错<code>Cannot execute request on any known server</code>。搜了一下，发现说：</p>
+
+<pre><code>原因：Eureka的Server没有启动，而在使用@EnableDiscoveryClient或者@EnableEurekaClient之后，该客户端会自动去寻找Eureka Server，如果找不到就会报这个错。
+</code></pre>
+
+<p>但我们这里做的是，eureka server呀。所以归根揭底还是application.yml没有生效，于是改用了application.properties。报这个错还有一种可能是<code>application.properties</code>没有被加入<code>\target\classes</code>文件夹下（就是idea的output path那个文件夹），刚刚就遇到了这个问题。</p>
+
+<p>eureka server是有后台的。可以访问<a href="http://localhost:8761/">http://localhost:8761/</a>查看，如图：</p>
+
+<p><img src="http://static.moontell.cn/images/eureka_server%E5%90%8E%E5%8F%B0.png" alt="eureka server后台" /></p>
+
+<h3 id="模块-1-service-hi-一个微服务-并测试服务注册">模块 1-service-hi 一个微服务，并测试服务注册</h3>
+
+<p>pom.xml</p>
+
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;project xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot;
+         xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+         xsi:schemaLocation=&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&quot;&gt;
+    &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
+
+    &lt;groupId&gt;com.arloor&lt;/groupId&gt;
+    &lt;artifactId&gt;service-hi&lt;/artifactId&gt;
+    &lt;version&gt;1.0-SNAPSHOT&lt;/version&gt;
+
+
+    &lt;parent&gt;
+        &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+        &lt;artifactId&gt;spring-boot-starter-parent&lt;/artifactId&gt;
+        &lt;version&gt;1.5.2.RELEASE&lt;/version&gt;
+        &lt;relativePath/&gt; &lt;!-- lookup parent from repository --&gt;
+    &lt;/parent&gt;
+
+    &lt;properties&gt;
+        &lt;project.build.sourceEncoding&gt;UTF-8&lt;/project.build.sourceEncoding&gt;
+        &lt;project.reporting.outputEncoding&gt;UTF-8&lt;/project.reporting.outputEncoding&gt;
+        &lt;java.version&gt;1.8&lt;/java.version&gt;
+    &lt;/properties&gt;
+
+    &lt;dependencies&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-cloud-starter-eureka&lt;/artifactId&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-boot-starter-web&lt;/artifactId&gt;
+        &lt;/dependency&gt;
+
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-boot-starter-test&lt;/artifactId&gt;
+            &lt;scope&gt;test&lt;/scope&gt;
+        &lt;/dependency&gt;
+    &lt;/dependencies&gt;
+
+    &lt;dependencyManagement&gt;
+        &lt;dependencies&gt;
+            &lt;dependency&gt;
+                &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
+                &lt;artifactId&gt;spring-cloud-dependencies&lt;/artifactId&gt;
+                &lt;version&gt;Dalston.RC1&lt;/version&gt;
+                &lt;type&gt;pom&lt;/type&gt;
+                &lt;scope&gt;import&lt;/scope&gt;
+            &lt;/dependency&gt;
+        &lt;/dependencies&gt;
+    &lt;/dependencyManagement&gt;
+
+    &lt;build&gt;
+        &lt;plugins&gt;
+            &lt;plugin&gt;
+                &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+                &lt;artifactId&gt;spring-boot-maven-plugin&lt;/artifactId&gt;
+            &lt;/plugin&gt;
+        &lt;/plugins&gt;
+    &lt;/build&gt;
+
+    &lt;repositories&gt;
+        &lt;repository&gt;
+            &lt;id&gt;spring-milestones&lt;/id&gt;
+            &lt;name&gt;Spring Milestones&lt;/name&gt;
+            &lt;url&gt;https://repo.spring.io/milestone&lt;/url&gt;
+            &lt;snapshots&gt;
+                &lt;enabled&gt;false&lt;/enabled&gt;
+            &lt;/snapshots&gt;
+        &lt;/repository&gt;
+    &lt;/repositories&gt;
+&lt;/project&gt;
+</code></pre>
+
+<p>application.yml</p>
+
+<pre><code>eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+server:
+  port: 8762
+spring:
+  application:
+    name: service-hi
+</code></pre>
+
+<p>Main类</p>
+
+<pre><code>@SpringBootApplication
+@EnableEurekaClient
+@RestController
+public class ServiceHiApplication {
+
+    public static void main(String[] args) {
+        SpringApplication.run(ServiceHiApplication.class, args);
+    }
+
+    @Value(&quot;${server.port}&quot;)
+    String port;
+    @RequestMapping(&quot;/hi&quot;)
+    public String home(@RequestParam String name) {
+        return &quot;hi &quot;+name+&quot;,i am from port:&quot; +port;
+    }
+
+}
+</code></pre>
+
+<p>事实证明，application.yml也是可以的，真正不生效的原因是idea没有将它放入<code>\target\classes</code>。</p>
+
+<p><code>eureka.client.serviceUrl.defaultZone=http://localhost:8761/eureka/</code>指明了注册中心的位置。</p>
+
+<p><code>spring.application.name=service-hi</code>指明了服务名。这个服务名就是以后与其他服务交互的标识。</p>
+
+<p>再看Main类，其实就是一个@RestController加上@EnableEurekaClient。</p>
+
+<p>看一下service-hi启动时的log：</p>
+
+<pre><code>2018-06-21 23:55:42.063  INFO 1040 --- [           main] com.netflix.discovery.DiscoveryClient    : Getting all instance registry info from the eureka server
+2018-06-21 23:55:42.452  INFO 1040 --- [           main] com.netflix.discovery.DiscoveryClient    : The response status is 200
+2018-06-21 23:55:42.454  INFO 1040 --- [           main] com.netflix.discovery.DiscoveryClient    : Starting heartbeat executor: renew interval is: 30
+2018-06-21 23:55:42.458  INFO 1040 --- [           main] c.n.discovery.InstanceInfoReplicator     : InstanceInfoReplicator onDemand update allowed rate per min is 4
+2018-06-21 23:55:42.461  INFO 1040 --- [           main] com.netflix.discovery.DiscoveryClient    : Discovery Client initialized at timestamp 1529596542461 with initial instances count: 1
+2018-06-21 23:55:42.487  INFO 1040 --- [           main] o.s.c.n.e.s.EurekaServiceRegistry        : Registering application service-hi with eureka with status UP
+2018-06-21 23:55:42.488  INFO 1040 --- [           main] com.netflix.discovery.DiscoveryClient    : Saw local status change event StatusChangeEvent [timestamp=1529596542488, current=UP, previous=STARTING]
+2018-06-21 23:55:42.490  INFO 1040 --- [nfoReplicator-0] com.netflix.discovery.DiscoveryClient    : DiscoveryClient_SERVICE-HI/laptop:service-hi:8762: registering service...
+2018-06-21 23:55:42.537  INFO 1040 --- [nfoReplicator-0] com.netflix.discovery.DiscoveryClient    : DiscoveryClient_SERVICE-HI/laptop:service-hi:8762 - registration status: 204
+2018-06-21 23:55:42.563  INFO 1040 --- [           main] s.b.c.e.t.TomcatEmbeddedServletContainer : Tomcat started on port(s): 8762 (http)
+2018-06-21 23:55:42.564  INFO 1040 --- [           main] .s.c.n.e.s.EurekaAutoServiceRegistration : Updating port to 8762
+2018-06-21 23:55:42.569  INFO 1040 --- [           main] c.arloor.servicehi.ServiceHiApplication  : Started ServiceHiApplication in 7.299 seconds (JVM running for 9.267)
+</code></pre>
+
+<p>能看到注册、status up、心跳间隔30等信息。</p>
+
+<p>现在再看一下<a href="http://localhost:8761/">http://localhost:8761/</a>就会发现有名为<code>service-hi</code>的服务。</p>
+
+<p>至此第一学习博客的第一篇看完了。可以看到spring cloud基本上就是在spring boot写restful api的基础上加了一些注解和一些配置。唯一不太好的问题就是，依赖关系好像还不太稳定，比如上面需要添加<code>jersey-bundle</code>的依赖。</p>
+
+<h3 id="高可用的服务注册中心-多个服务中心相互备份">高可用的服务注册中心——多个服务中心相互备份</h3>
+
+<p>只有一个服务注册中心的话，当服务过多的情况下，注册中心的压力是很大的。</p>
+
+<p>现在来搞多个服务注册中心。</p>
+
+<p>代码和依赖无需改变，只需要使用不同的配置文件，启动三个<code>erueka server</code>并且这三个erueka-server互相注册，那么就会互相识别为备份，向一个server注册，则所有server都会怎讲所注册的服务。</p>
+
+<p>首先修改hosts，增加：</p>
+
+<pre><code>127.0.0.1 peer1
+127.0.0.1 peer2
+127.0.0.1 peer0
+</code></pre>
+
+<p>然后，定义application-peer0.yml</p>
+
+<pre><code>server:
+  port: 8760
+
+spring:
+  profiles: peer0
+eureka:
+  instance:
+    hostname: peer0
+  client:
+    serviceUrl:
+      defaultZone: http://peer1:8761/eureka/
+</code></pre>
+
+<p>然后，定义application-peer1.yml</p>
+
+<pre><code>server:
+  port: 8761
+
+spring:
+  profiles: peer1
+eureka:
+  instance:
+    hostname: peer1
+  client:
+    serviceUrl:
+      defaultZone: http://peer2:8762/eureka/
+</code></pre>
+
+<p>然后，定义application-peer2.yml</p>
+
+<pre><code>server:
+  port: 8762
+
+spring:
+  profiles: peer2
+eureka:
+  instance:
+    hostname: peer2
+  client:
+    serviceUrl:
+        defaultZone: http://peer0:8760/eureka/
+</code></pre>
+
+<p>这样的含义就是，peer0的注册中心会向peer1注册自己；peer1的注册中心会向peer2注册自己；peer2的注册中心会向peer0的注册中心注册自己。这样就是一个环形的结构。但是其实这不是peer to peer，而其实是链式，如果一个点断了就不行了。感觉这还是一个不足。</p>
+
+<p>另外一个不足是，当需要服务注册中心的服务时（注册自己或者发现其他服务）还是需要通过url指定特定的一个服务注册中心。也就是服务注册中心没有进行负载均衡。。</p>
+
+<p>这两个点，想着就很不舒服啊。</p>
+
+<p>如何把这三个peer跑起来：</p>
+
+<p>在idea的启动配置中增加<code>EurekaserverApplicationPeerX</code>，并且在<code>Environment</code>-&gt;<code>Program arguments</code>中输入<code>--spring.profiles.active=peerX</code></p>
+
+<p>这样把三个都加一下，然后就能启动了。</p>
+
+<p>这是eureka的网页控制台如下：</p>
+
+<p><img src="http://static.moontell.cn/images/eureka_server_with_peer.png" alt="eureka_server_with_peer.png" /></p>
+
+<h2 id="模块-2-service-ribbon-服务消费者-ribbon-resttemplate">模块 2-service-ribbon 服务消费者 ribbon+restTemplate</h2>
+
+<p>从现在开始，博客中不再写完整的pom.xml</p>
+
+<p>我们现在有了一个服务注册中心<code>eureka server@8761</code>，还有<code>service-hi</code>模块，提供一个restful的服务。下面就来实践怎么把service-hi以服务的方式消费掉。</p>
+
+<p>ribbon是一个客户端的负载均衡器，可以有效地对tcp/http进行控制。</p>
+
+<p>先上代码吧：</p>
+
+<pre><code>//主类
+@SpringBootApplication
+@EnableDiscoveryClient
+public class ServiceRibbonApplication {
+
+    public static void main(String[] args) {
+        SpringApplication.run(ServiceRibbonApplication.class, args);
+    }
+
+    @Bean
+    @LoadBalanced
+    RestTemplate restTemplate() {
+        return new RestTemplate();
+    }
+
+}
+
+//调用service-hi服务的bean
+@Service
+public class HelloService {
+
+    @Autowired
+    RestTemplate restTemplate;
+
+    public String hiService(String name) {
+        return restTemplate.getForObject(&quot;http://SERVICE-HI/hi?name=&quot;+name,String.class);
+    }
+}
+
+//restController
+@RestController
+public class HelloControler {
+
+    @Autowired
+    HelloService helloService;
+    @RequestMapping(value = &quot;/hi&quot;)
+    public String hi(@RequestParam String name){
+        return helloService.hiService(name);
+    }
+}
+</code></pre>
+
+<p>可以看到在主类中定义了一个restTemplate的bean，并且加了@LoadBalanced注解，顾名思义就是这个bean会做负载均衡了。</p>
+
+<p>再看<code>helloService</code>中，通过<code>http://SERVICE-HI/hi?name=</code>的方式，用<code>SERVICE-HI</code>代替了服务具体的URL。</p>
+
+<p>另外，再看主类，有注解<code>@EnableDiscoveryClient</code>表示这是一个服务发现的客户端。application.yml中配置如下：</p>
+
+<pre><code>eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+server:
+  port: 8764
+spring:
+  application:
+    name: service-ribbon
+</code></pre>
+
+<p>基本和<code>service-hi</code>的配置一样，端口、eureka-server地址、服务名。</p>
+
+<p>看代码大概就能知道，<code>service-ribbon</code>是用户会在浏览器通过url访问的地址（客户端），然后<code>service-ribbon</code>通过负载均衡，去调用某一个<code>service-hi</code>。</p>
+
+<p>跑一下试试</p>
+
+<p>1.先在8761跑0-eureka-server<br />
+2.在8762跑一个1-service-hi<br />
+3.在8763跑一个1-service-hi。<a href="https://blog.csdn.net/forezp/article/details/76408139">idea如何跑多个实例</a>这样就注册了两个service-hi的实例。<br />
+4.在8764跑<code>service-ribbon</code><br />
+5.在浏览器输入<code>http://localhost:8764/hi?name=moontell</code></p>
+
+<p>多次输入5，可以看到<code>hi moontell,i am from port:8763</code>,<code>hi moontell,i am from port:8762</code>轮流出现，说明实现了负载均衡。此时的架构部署如下：</p>
+
+<p><img src="http://static.moontell.cn/images/simple_microservice_structure.png" alt="此时的部署图" /></p>
+
+<p>这个图看着就很舒服了，我也算是接触了分布式了哈哈哈。</p>
+
+<p>关于ribbon这个负载均衡的实现，再稍微看一点其他东西。现在能做的也只是多看一点点。就跟这个博客一样，只为了入个门，以后再看文档去。不实践一下，spring cloud这么多组件都不知道是干嘛的，文档都看不懂。。。（另外，spring cloud的文档感觉更新的不怎么好，现在fin..版本都出来了，但是文档好像还没跟上。</p>
+
+<p>先放参考地址：<a href="https://www.jianshu.com/p/9f8e712ed1a9">ribbon ILoadBalancer接口及其实现</a></p>
+
+<p>学习的博客中提到，ribbon提供了默认配置的一些bean，各个bean的职责虽然不清楚，但是几个词还是明白干什么的。<code>ServerList</code>,<code>Ping</code>,<code>ZonePreferenceServerListFilter</code>。就猜一猜，跟据ping的值，对server
+List进行挑选，挑选的规则就是ZonePreference。大概就是这个意思吧。再看参考博客确实也是这样。当然这些bean感觉都是可以配置的，可以根据自己的需要去改变，以后看文档搞。</p>
+
+<p>想想当初的体系结构课上，自己想用filter架构模式，对服务实例通过ping值，找到最佳的服务节点，以达到客户端负载均衡的目的。那个时候啥分布式负载均衡的实现都不知道，但还能用<code>客户端负载均衡</code>这个精准的名词。当时的那个想法跟这一套是一样的呀。</p>
+
+<p>另外，以前还没有用过restTemplate这个bean，可以试试用用。</p>
+
+<h2 id="模块3-service-feign">模块3-service-feign</h2>
+
+<p>Feign是一个声明式的伪Http客户端，它使得写Http客户端变得更简单。使用Feign，只需要创建一个接口并注解。它具有可插拔的注解特性，可使用Feign 注解和JAX-RS注解。Feign支持可插拔的编码器和解码器。Feign默认集成了Ribbon，并和Eureka结合，默认实现了负载均衡的效果。</p>
+
+<p>简而言之：</p>
+
+<ul>
+<li>Feign 采用的是基于接口的注解</li>
+<li>Feign 整合了ribbon</li>
+</ul>
+
+<p>这个模块其实就是用feign代替了上面的ribbon。其实Feign可以理解微ribbon的一个高级封装。在代码中就可以看到，Feign的使用是Interface类加注解。</p>
+
+<p>Main类:@EnableFeignClients开启Feign</p>
+
+<pre><code>@SpringBootApplication
+@EnableDiscoveryClient
+@EnableFeignClients
+public class ServiceFeignApplication {
+
+    public static void main(String[] args) {
+        SpringApplication.run(ServiceFeignApplication.class, args);
+    }
+}
+</code></pre>
+
+<p>feign接口：指明了使用<code>service-hi</code>服务。注意还加了@RequestMapping注解</p>
+
+<pre><code>@FeignClient(value = &quot;service-hi&quot;)
+public interface SchedualServiceHi {
+    @RequestMapping(value = &quot;/hi&quot;,method = RequestMethod.GET)
+    String sayHiFromClientOne(@RequestParam(value = &quot;name&quot;) String name);
+}
+</code></pre>
+
+<p>RestController:消费服务</p>
+
+<pre><code>@RestController
+public class HiController {
+
+    @Autowired
+    SchedualServiceHi schedualServiceHi;
+    @RequestMapping(value = &quot;/hi&quot;,method = RequestMethod.GET)
+    public String sayHi(@RequestParam String name){
+        return schedualServiceHi.sayHiFromClientOne(name);
+    }
+}
+</code></pre>
+
+<p>application.yml:一样的注册中心地址、端口、服务名</p>
+
+<pre><code>eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+server:
+  port: 8765
+spring:
+  application:
+    name: service-feign
+</code></pre>
+
+<p>跑一下：
+1.先在8761跑0-eureka-server<br />
+2.在8762跑一个1-service-hi<br />
+3.在8763跑一个1-service-hi。<a href="https://blog.csdn.net/forezp/article/details/76408139">idea如何跑多个实例</a>这样就注册了两个service-hi的实例。<br />
+4.在8765跑<code>service-feign</code><br />
+5.在浏览器输入<code>http://localhost:8765/hi?name=moontell</code></p>
+
+<p>重复5，效果和跑<code>service-ribbon</code>是一样的。可以看到<code>hi moontell,i am from port:8763</code>,<code>hi moontell,i am from port:8762</code>轮流出现，说明实现了负载均衡。</p>
+
+<p>Spring cloud有两种服务调用方式，一种是ribbon+restTemplate，另一种是feign。至此都实践了。</p>
+
+<h2 id="在feign和ribbon中加入断路器">在feign和ribbon中加入断路器</h2>
+
+<p>想想看上面已经有了服务注册中心，也会开发服务了，两种消费服务的方式也有了。但是这不是微服务的全部。这里就搞一下断路器。</p>
+
+<p>在微服务架构中，根据业务来拆分成一个个的服务，服务与服务之间可以相互调用（RPC），在Spring Cloud可以用RestTemplate+Ribbon和Feign来调用。为了保证其高可用，单个服务通常会集群部署。由于网络原因或者自身的原因，服务并不能保证100%可用，如果单个服务出现问题，调用这个服务就会出现线程阻塞，此时若有大量的请求涌入，Servlet容器的线程资源会被消耗完毕，导致服务瘫痪。服务与服务之间的依赖性，故障会传播，会对整个微服务系统造成灾难性的严重后果，这就是服务故障的“雪崩”效应。</p>
+
+<p>Netflix开源了Hystrix组件，实现了断路器模式，SpringCloud对这一组件进行了整合。较底层的服务如果出现故障，会导致连锁故障。当对特定的服务的调用的不可用达到一个阀值（Hystric 是5秒20次） 断路器将会被打开。</p>
+
+<h3 id="2-service-ribbon开启hystrix">2-service-ribbon开启Hystrix:</h3>
+
+<p>pom.xml增加依赖：</p>
+
+<pre><code>&lt;dependency&gt;
+    &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
+    &lt;artifactId&gt;spring-cloud-starter-hystrix&lt;/artifactId&gt;
+&lt;/dependency&gt;
+</code></pre>
+
+<p>在主类中增加@EnableHystrix</p>
+
+<pre><code>@SpringBootApplication
+@EnableDiscoveryClient
+@EnableHystrix//允许断路器
+public class ServiceRibbonApplication {
+
+    public static void main(String[] args) {
+        SpringApplication.run(ServiceRibbonApplication.class, args);
+    }
+
+    @Bean
+    @LoadBalanced
+    RestTemplate restTemplate() {
+        return new RestTemplate();
+    }
+
+}
+</code></pre>
+
+<p>在service中增加 @HystrixCommand(fallbackMethod = &ldquo;hiError&rdquo;)//定义断路器的fallback方法，并定义hiError方法</p>
+
+<pre><code>@Service
+public class HelloService {
+
+    @Autowired
+    RestTemplate restTemplate;
+
+    @HystrixCommand(fallbackMethod = &quot;hiError&quot;)//定义断路器的fallback方法
+    public String hiService(String name) {
+        return restTemplate.getForObject(&quot;http://SERVICE-HI/hi?name=&quot;+name,String.class);
+    }
+
+    public String hiError(String name) {
+        return &quot;hi,&quot;+name+&quot;,sorry,error!&quot;;
+    }
+
+}
+</code></pre>
+
+<p>这样，当service-hi不可用时（测试时关闭service-hi就不可用了），ribbon会直接调用hiError方法，返回<code>hi ,forezp,orry,error!</code>。</p>
+
+<p>这就说明当 service-hi 工程不可用的时候，service-ribbon调用 service-hi的API接口时，会执行快速失败，直接返回一组字符串，而不是等待响应超时，这很好的控制了容器的线程阻塞。</p>
+
+<h3 id="3-service-feign开启hystrix">3-service-feign开启Hystrix:</h3>
+
+<p>Feign是自带断路器的，在D版本的Spring Cloud中，它没有默认打开。需要在配置文件中配置打开它，在配置文件加以下代码：</p>
+
+<pre><code>feign.hystrix.enabled=true
+</code></pre>
+
+<p>在@FeignClient中增加fallback字段，定义fallback时接口的实现类。</p>
+
+<pre><code>@FeignClient(value = &quot;service-hi&quot;,fallback = SchedualServiceHiHystric.class)
+public interface SchedualServiceHi {
+    @RequestMapping(value = &quot;/hi&quot;,method = RequestMethod.GET)
+    String sayHiFromClientOne(@RequestParam(value = &quot;name&quot;) String name);
+}
+</code></pre>
+
+<p>SchedualServiceHiHystric.class实现：(需要@Coponent注解纳入spring容器管理，并实现SchedualServiceHi接口)</p>
+
+<pre><code>//service-hi断路时调用的方法。需要@Component加入容器，需要implements Feign的接口
+@Component
+public class SchedualServiceHiHystric implements SchedualServiceHi {
+    @Override
+    public String sayHiFromClientOne(String name) {
+        return &quot;sorry &quot;+name;
+    }
+}
+</code></pre>
+
+<p>同样的，如果关闭<code>service-hi</code>，访问<code>http://laptop:8765/hi?name=a</code>就会返回<code>sorry ...</code>。</p>
+
+  </div>
+  
+    
+        
+<script src="https://utteranc.es/client.js"
+        repo="arloor/blog"
+        issue-term="pathname"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+        
+</script>
+
+<script>
+document.head.insertAdjacentHTML("beforeend", "<style>\n    .utterances {\n      position: relative;\n      box-sizing: border-box;\n      width: 100%;\n      max-width: 100%;\n      margin-left: auto;\n      margin-right: auto;\n    }\n    .utterances-frame {\n      position: absolute;\n      left: 0;\n      right: 0;\n      width: 1px;\n      min-width: 100%;\n      max-width: 100%;\n      height: 100%;\n      border: 0;\n    }\n  </style>");
+</script>
+
+    
+
+
+  
+
+<div class="navigation navigation-single">
+    
+    <a href="/posts/%E5%BE%AE%E6%9C%8D%E5%8A%A1/what-is-microservice/" class="navigation-prev">
+      <i aria-hidden="true" class="fa fa-chevron-left"></i>
+      <span class="navigation-tittle">微服务架构是什么</span>
+    </a>
+    
+    
+    <a href="/posts/%E5%BE%AE%E6%9C%8D%E5%8A%A1/spring_cloud-study-two/" class="navigation-next">
+      <span class="navigation-tittle">spring cloud学习（二）</span>
+      <i aria-hidden="true" class="fa fa-chevron-right"></i>
+    </a>
+    
+</div>
+
+
+  
+
+</article>
+
+
+        </div>
+        
+    
+  
+  
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-133187648-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+<script defer src="https://use.fontawesome.com/releases/v5.5.0/js/all.js" integrity="sha384-GqVMZRt5Gn7tB9D9q7ONtcp4gtHIUEW/yG7h98J7IpE3kpi+srfFyyB/04OV6pG0" crossorigin="anonymous"></script>
+
+
+    
+    
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/highlight.min.js"></script>
+        
+    
+    <script type="text/javascript">
+        
+        hljs.initHighlightingOnLoad();
+    </script>
+    
+
+
+
+
+
+
+    
+
+
+
+    </body>
+</html>

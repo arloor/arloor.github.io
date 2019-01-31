@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Netty on ARLOOR</title>
+    <link>https://arloor.com/categories/netty/</link>
+    <description>Recent content in Netty on ARLOOR</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Thu, 10 Jan 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://arloor.com/categories/netty/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>基于netty的http服务器实现</title>
+      <link>https://arloor.com/posts/netty/httpserver-on-netty/</link>
+      <pubDate>Thu, 10 Jan 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://arloor.com/posts/netty/httpserver-on-netty/</guid>
+      <description>&lt;p&gt;现在发现自己代理的一个问题，准备将代理的http请求解析改用netty自带的一些组件，所以来研究一下netty源码中http服务器的实现。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>HttpProxy-基于netty的翻墙代理</title>
+      <link>https://arloor.com/posts/netty/proxynew-break-the-wall-by-netty/</link>
+      <pubDate>Mon, 31 Dec 2018 23:55:22 +0800</pubDate>
+      
+      <guid>https://arloor.com/posts/netty/proxynew-break-the-wall-by-netty/</guid>
+      <description>&lt;p&gt;暑假使用java NIO实现了一个java http代理。那个http代理远远不算完善：两个线程，不能翻墙。之后学习了netty，并且使用netty实现了一个可翻墙的http代理，经过一个多月的使用，十分满意。今天来记录一下这里面值得写下来的东西。&lt;/p&gt;
+
+&lt;p&gt;先放项目地址&lt;a href=&#34;https://github.com/arloor/HttpProxy&#34;&gt;HttpProxy&lt;/a&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Netty直接内存溢出问题解决</title>
+      <link>https://arloor.com/posts/netty/netty-direct-memory-leak/</link>
+      <pubDate>Mon, 10 Dec 2018 20:24:51 +0800</pubDate>
+      
+      <guid>https://arloor.com/posts/netty/netty-direct-memory-leak/</guid>
+      <description>&lt;h2 id=&#34;问题&#34;&gt;问题&lt;/h2&gt;
+
+&lt;p&gt;自己用netty实现的代理，在测速、下载（跑满网速）的情况下总是会报OutOfDirectMemory异常。&lt;/p&gt;
+
+&lt;h2 id=&#34;原因及解决&#34;&gt;原因及解决&lt;/h2&gt;
+
+&lt;p&gt;在github netty项目下有这样一个&lt;a href=&#34;https://github.com/netty/netty/issues/7699&#34;&gt;issue&lt;/a&gt;。描述了这样一个问题。&lt;/p&gt;
+
+&lt;p&gt;总结一下里面说的。出现这个异常有两种情况，pooled buf没有release；写太快，超过了极限。&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

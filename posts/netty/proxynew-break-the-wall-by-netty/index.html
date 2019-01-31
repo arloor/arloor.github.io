@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+    
+    
+
+
+    <head>
+    <link href="https://gmpg.org/xfn/11" rel="profile">
+    <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta http-equiv="Cache-Control" content="public" />
+<!-- Enable responsiveness on mobile devices -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<meta name="generator" content="Hugo 0.53" />
+
+    
+    
+    
+
+<title>HttpProxy-基于netty的翻墙代理 • ARLOOR</title>
+
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="HttpProxy-基于netty的翻墙代理"/>
+<meta name="twitter:description" content="暑假使用java NIO实现了一个java http代理。那个http代理远远不算完善：两个线程，不能翻墙。之后学习了netty，并且使用netty实现了一个可翻墙的http代理，经过一个多月的使用，十分满意。今天来记录一下这里面值得写下来的东西。
+
+先放项目地址HttpProxy"/>
+
+<meta property="og:title" content="HttpProxy-基于netty的翻墙代理" />
+<meta property="og:description" content="暑假使用java NIO实现了一个java http代理。那个http代理远远不算完善：两个线程，不能翻墙。之后学习了netty，并且使用netty实现了一个可翻墙的http代理，经过一个多月的使用，十分满意。今天来记录一下这里面值得写下来的东西。
+
+先放项目地址HttpProxy" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://arloor.com/posts/netty/proxynew-break-the-wall-by-netty/" /><meta property="article:published_time" content="2018-12-31T23:55:22&#43;08:00"/>
+<meta property="article:modified_time" content="2018-12-31T23:55:22&#43;08:00"/><meta property="og:site_name" content="Title" />
+
+
+    
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/scss/hyde-hyde.e0e469ad030f6f6906870f8469432a17e9699a3466fb4a1ab7ba3b03fc407e37.css" integrity="sha256-4ORprQMPb2kGhw&#43;EaUMqF&#43;lpmjRm&#43;0oat7o7A/xAfjc=">
+
+
+<link rel="stylesheet" href="/scss/print.2744dcbf8a0b2e74f8a50e4b34e5f441be7cf93cc7de27029121c6a09f9e77bc.css" integrity="sha256-J0Tcv4oLLnT4pQ5LNOX0Qb58&#43;TzH3icCkSHGoJ&#43;ed7w=" media="print">
+
+
+
+
+<link rel="stylesheet" href="/scss/hugo-toc.8549a64d301421b4256ea9a0d5ca8b99178799f569d5d2daeb95f24cef3ce6b7.css" integrity="sha256-hUmmTTAUIbQlbqmg1cqLmReHmfVp1dLa65XyTO885rc=">
+
+
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <!-- Icons -->
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+    <link rel="shortcut icon" href="/favicon.png">
+    
+
+</head>
+
+
+    <body class=" ">
+    
+<div class="sidebar">
+  <div class="container ">
+    <div class="sidebar-about">
+      <span class="site__title">
+        <a href="https://arloor.com/">ARLOOR</a>
+      </span>
+      
+        
+        
+        
+        <div class="author-image">
+          <img src="https://arloor.com//img/head.jpeg" alt="Author Image" class="img--circle img--headshot element--center">
+        </div>
+        
+      
+      
+      <p class="site__description">
+        
+      </p>
+    </div>
+    <div class="collapsible-menu">
+      <input type="checkbox" id="menuToggle">
+      <label for="menuToggle">ARLOOR</label>
+      <div class="menu-content">
+        <div>
+	<ul class="sidebar-nav">
+		 
+		 
+			 
+				<li>
+					<a href="/categories/">
+						<span>分类</span>
+					</a>
+				</li>
+			 
+		 
+			 
+				<li>
+					<a href="/posts/">
+						<span>文章</span>
+					</a>
+				</li>
+			 
+		 
+			 
+				<li>
+					<a href="/tags/">
+						<span>标签</span>
+					</a>
+				</li>
+			 
+		 
+			 
+				<li>
+					<a href="/about/">
+						<span>About</span>
+					</a>
+				</li>
+			 
+		
+		</li>
+	</ul>
+</div>
+
+        <section class="social">
+	
+	
+	
+	<a href="https://github.com/arloor" rel="me"><i class="fab fa-github fa-lg" aria-hidden="true"></i></a>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<a href="mailto:admin@arloor.com" rel="me"><i class="fas fa-at fa-lg" aria-hidden="true"></i></a>
+	
+</section>
+
+      </div>
+    </div>
+    
+<div class="copyright">
+  &copy; 2019 htr3n
+  
+    <a href="https://creativecommons.org/licenses/by-sa/4.0">CC BY-SA 4.0</a>
+  
+</div>
+
+
+<div class="builtwith">
+Built with <a href="https://gohugo.io">Hugo</a> ❤️ <a href="https://github.com/htr3n/hyde-hyde">hyde-hyde</a>.
+</div>
+
+
+  </div>
+</div>
+
+        <div class="content container">
+            
+    <article>
+  <header>
+    <h1>HttpProxy-基于netty的翻墙代理</h1>
+    
+    
+<div class="post__meta">
+    
+    
+      <i class="fas fa-calendar-alt"></i> Dec 31, 2018
+    
+    
+    
+      
+      
+          in
+          
+          
+              <a class="badge badge-category" href="/categories/java">JAVA</a>
+              •
+          
+              <a class="badge badge-category" href="/categories/netty">NETTY</a>
+              •
+          
+              <a class="badge badge-category" href="/categories/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B">网络编程</a>
+              
+          
+      
+    
+    
+    
+      
+      
+          <br/>
+           <i class="fas fa-tags"></i>
+          
+          <a class="badge badge-tag" href="/tags/program">program</a>
+          
+      
+    
+    
+    <br/>
+    <i class="fas fa-clock"></i> 2 min read
+</div>
+
+
+  </header>
+  
+  
+  <div class="toc-wrapper">
+    <input type="checkbox" id="tocToggle">
+    <label for="tocToggle">Table of Content</label>
+    
+        <nav id="TableOfContents">
+<ul>
+<li><a href="#如何翻墙">如何翻墙</a></li>
+<li><a href="#什么是netty">什么是netty</a>
+<ul>
+<li><a href="#reactor模式">reactor模式</a></li>
+<li><a href="#event-driven-事件驱动">Event Driven 事件驱动</a></li>
+<li><a href="#pipeline架构模式">pipeline架构模式</a></li>
+</ul></li>
+<li><a href="#outofdirectmemory异常">OutOfDirectMemory异常</a></li>
+<li><a href="#总结">总结</a></li>
+</ul>
+</nav>
+    
+  </div>
+  
+  <div class="post">
+    <p>暑假使用java NIO实现了一个java http代理。那个http代理远远不算完善：两个线程，不能翻墙。之后学习了netty，并且使用netty实现了一个可翻墙的http代理，经过一个多月的使用，十分满意。今天来记录一下这里面值得写下来的东西。</p>
+
+<p>先放项目地址<a href="https://github.com/arloor/HttpProxy">HttpProxy</a></p>
+
+<h1 id="如何翻墙">如何翻墙</h1>
+
+<p>翻墙其实很简单：tcp编程+加解密+（流量伪装）</p>
+
+<ul>
+<li>tcp编程解决的是，获取浏览器的请求、改造（解析+加密+解密）请求、转发请求、获取相应、转发响应。</li>
+<li>加解密解决的是，瞒过GFW的眼睛，实现翻墙</li>
+<li>流量伪装：经过加密的流量虽然可以瞒过GFW，但是可以确定不是正常的流量（例如http、https等）</li>
+</ul>
+
+<p>流量伪装不是翻墙必须的。（不确定对不对start）但是在有些情况下，这很重要。很火的shadowsocks，有一种嗅探方法可以确定流量是不是ss的。原理要牵扯到socks5协议和shadowsocks实现。socks5协议如同http协议一样，是对tcp报文格式的一种约定，约定握手、报文开头等。shadowsocks使用socks5协议，并且自定义了代理的报文。嗅探方法其实就是嗅探这个报文格式，为了应对嗅探，伪装成别的流量就很有价值啦。（不确定对不对end）</p>
+
+<p>我的代理没有做流量伪装，压根不是shadowsocks，也没有用任何协议。关于协议，这么理解吧，协议就是对报文包装格式的定义。网络层下面的几层定义什么帧、数据报、tcp报文，无非做的是对数据的拆解、包装，再加上一些字段比如目标ip等等。应用层的http、socks5则定义了tcp报文的格式，http请求的格式、响应头等等，socks握手等等。而我的代理为了简单，没有定义某种格式，所以谈不上使用了“某种协议”。</p>
+
+<p>所以，shadowsocks的实现是 tcp编程+sock5协议+加解密+（流量伪装），而我的没有使用协议。</p>
+
+<h1 id="什么是netty">什么是netty</h1>
+
+<p>netty是java实现的高性能网络通信框架。在我眼里，netty做了这么几件事：实现reactor模式，事件驱动的编程范式，使用pipeline架构模式管理socket连接的生命周期。</p>
+
+<h2 id="reactor模式">reactor模式</h2>
+
+<p>在<a href="/posts/netty/proxyme-基于javanio的http代理/">proxyme-基于javanio的http代理</a>提到过，可以优化的点是引入reactor模式，使用多个线程来处理多个socket连接。netty使用了<code>EventLoopGroup</code>（多个线程的组）来管理多个连接。每一个连接生效之后，就会在EventloopGroup中分配一个EventLoop给该连接。这个EventLoop实际上就是一个线程，这个线程将会一直负责socket连接的整个生命，由生到死。这个EventLoop负责在某些事件发生时，调用相应的方法。比如发生读事件，就会调用pipeline中所有ChannelInboundHandler的ChannelRead()方法。</p>
+
+<p>提到reactor模式不得不提一下go。go语言使用goroutine来实现并行。<code>go someFunction(a,b,c,d)</code>就开启了一个新的go程。所以在go中实现reactor模式十分容易：accept到一个连接，就<code>go handlerConnection(theConnection)</code>，这样就使用一个go程去管理该生命周期。</p>
+
+<p>在go中实现reactor模式很简单，其实在java中实现也不难。无非就是新建一个线程/提交到线程池，代码也就是<code>new Thread().start()</code>或者<code>excutors.submit(task)</code>这样。</p>
+
+<p>这里又要向<a href="https://github.com/iluwatar/java-design-patterns/tree/master/reactor">java-design-pattern</a>学习了。他对事件处理引入了一个Dispatcer接口（接口就有很多中实现啦，单线程的分派、线程池的分派、自己实现的线程池的分派）。</p>
+
+<p>Dispatcher接口</p>
+
+<pre><code class="language-java">public interface Dispatcher {
+  void onChannelReadEvent(AbstractNioChannel channel, Object readObject, SelectionKey key);
+  void stop() throws InterruptedException;
+}
+</code></pre>
+
+<p>一个Dispatcher实现</p>
+
+<pre><code class="language-java">public class ThreadPoolDispatcher implements Dispatcher {
+  private final ExecutorService executorService;
+  public ThreadPoolDispatcher(int poolSize) {
+    this.executorService = Executors.newFixedThreadPool(poolSize);
+  }
+
+  @Override
+  public void onChannelReadEvent(AbstractNioChannel channel, Object readObject, SelectionKey key) {
+    executorService.execute(() -&gt; channel.getHandler().handleChannelRead(channel, readObject, key));
+  }
+  @Override
+  public void stop() throws InterruptedException {
+    executorService.shutdown();
+    executorService.awaitTermination(4, TimeUnit.SECONDS);
+  }
+}
+</code></pre>
+
+<p>可以看到，核心也就是一行<code>executorService.execute(lambda)</code>。但是就是要抽取出（!增加!）一个Dispatcher，这样我们要写的不是<code>executorService.execute(lambda)</code>而是<code>dispatcher.onChannelReadEvent(.....)</code>。（搞得和事件驱动有点像，其实reactor确实有点事件驱动的意思）</p>
+
+<p>从这里也可以看到，其实设计模式就是在做抽象出一个东西（增加）的事情。所以使用设计模式其实在做的是：思考玩功能的实现之后，思考代码的组织，而这个组织的过程是在增加。</p>
+
+<p>抽取共同的东西、增加——设计模式</p>
+
+<h2 id="event-driven-事件驱动">Event Driven 事件驱动</h2>
+
+<p><code>go handler(theConnection)</code>可以很方便地实现netty的reactor模式的一部分功能，但不是全部。不加入事件驱动的go代码大概就是这样了：</p>
+
+<pre><code>func handleProxyConnection(proxyConn, localConn net.Conn) {
+	for {
+		var buf = make([]byte, 2048)
+		numRead, err := proxyConn.Read(buf)//一直读，下面是读结果的处理....................
+		if nil != err {
+			fmt.Println(&quot;读远程出错，&quot;, err)//出错啦，下面是异常的处理.........................
+			proxyConn.Close()
+			proxyConn.Close()
+			break
+		}
+		fmt.Println(&quot;从远程读到：&quot;, numRead, &quot;字节&quot;)
+		writeAllBytes(localConn, proxyConn, buf, numRead)
+	}
+}
+</code></pre>
+
+<p>这段代码是真实的我在使用的代码（代理的客户端）。可以看到，不使用<code>事件驱动</code>就是这样，事件和事件的处理放在了一起。我们一般的做法是，将代码隔离成方法。就像上面那样，将写定义在<code>writeAllBytes</code>函数中。这样做就实现了，事件名称（名称、声明&hellip;）和事件的处理（定义）相分离。但是这还不是事件驱动，事件驱动是真正实现事件接收和事件处理分离。</p>
+
+<p>一个典型的<a href="https://github.com/iluwatar/java-design-patterns/tree/master/event-driven-architecture">事件驱动</a>：</p>
+
+<pre><code class="language-java">//事件
+public interface Event {
+  Class&lt;? extends Event&gt; getType();
+}
+//事件处理
+public interface Handler&lt;E extends Event&gt; {
+  void onEvent(E event);
+}
+
+//事件分派器
+public class EventDispatcher {
+  private Map&lt;Class&lt;? extends Event&gt;, Handler&lt;? extends Event&gt;&gt; handlers;
+  public EventDispatcher() {
+    handlers = new HashMap&lt;&gt;();
+  }
+  public &lt;E extends Event&gt; void registerHandler(Class&lt;E&gt; eventType,
+                                                Handler&lt;E&gt; handler) {
+    handlers.put(eventType, handler);
+  }
+  @SuppressWarnings(&quot;unchecked&quot;)
+  public &lt;E extends Event&gt; void dispatch(E event) {
+    Handler&lt;E&gt; handler = (Handler&lt;E&gt;) handlers.get(event.getClass());
+    if (handler != null) {
+      handler.onEvent(event);
+    }
+  }
+}
+</code></pre>
+
+<p>可以看到，事件与事件的真正分离，各自与dispacther耦合，可以认为是事件不依赖事件处理，而依赖事件分派器。！！！所以实现事件驱动不难，只要引入事件分派器！就可以称为事件驱动了，谨记。</p>
+
+<h2 id="pipeline架构模式">pipeline架构模式</h2>
+
+<p>有的事情，一步做不好，我分几步做。所以好几个handler组成一个pipeline，一个handler的工作做完了，我fire下一个handler，不多说啦。</p>
+
+<p>reactor、事件驱动、pipeline，这三个东西是netty最重要的抽象了。至于EventLoopGroup、EventLoop则是实现上的事情。</p>
+
+<p>netty的另一个贡献，直接内存我只会用，确保不用错，但没有深入，不扯。</p>
+
+<h1 id="outofdirectmemory异常">OutOfDirectMemory异常</h1>
+
+<p>这个问题的已经在<a href="/posts/netty/netty直接内存溢出问题解决/">netty直接内存溢出问题解决</a>详细进行了解释。但还是要在这提一下，因为这个坑只有遇到才会知道吧，也算是一种独特的经历了。详情见那一篇文章啦。</p>
+
+<h1 id="总结">总结</h1>
+
+<p>经历了自建ssr被封，linux下没有好的客户端种种事情之后，现在终于有了好用的自己的代理，很是舒服。最关键的是用自己写的，心里明明白白、胸有成竹的感觉。</p>
+
+<p>额外分享一个小诀窍，linux快速设置shell代理</p>
+
+<pre><code>#vim /usr/local/bin/pass
+
+#! /bin/bash
+# 设置http代理，使用方法：
+# 在terminal中输入 &quot;. pass&quot; （前提是将此路径加入path）
+# 效果：该terminal将使用如下的代理
+export http_proxy=http://127.0.0.1:8081
+export https_proxy=http://127.0.0.1:8081
+</code></pre>
+
+<p>以后，输入<code>. pass</code>，当前终端就可以使用这个代理了。原因：source/. 是在当前shell执行的，不会新建bash</p>
+
+<p>心心念念也算有一年多了，至此终于写出了一个完善的http翻墙代理，也算是完成了一个夙愿！</p>
+  </div>
+  
+    
+        
+<script src="https://utteranc.es/client.js"
+        repo="arloor/blog"
+        issue-term="pathname"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+        
+</script>
+
+<script>
+document.head.insertAdjacentHTML("beforeend", "<style>\n    .utterances {\n      position: relative;\n      box-sizing: border-box;\n      width: 100%;\n      max-width: 100%;\n      margin-left: auto;\n      margin-right: auto;\n    }\n    .utterances-frame {\n      position: absolute;\n      left: 0;\n      right: 0;\n      width: 1px;\n      min-width: 100%;\n      max-width: 100%;\n      height: 100%;\n      border: 0;\n    }\n  </style>");
+</script>
+
+    
+
+
+  
+
+<div class="navigation navigation-single">
+    
+    <a href="/posts/linux/ubuntu-desktop-entry-example/" class="navigation-prev">
+      <i aria-hidden="true" class="fa fa-chevron-left"></i>
+      <span class="navigation-tittle">Ubuntu Desktop Entry Example</span>
+    </a>
+    
+    
+    <a href="/posts/linux/turn-ubuntu-mine-own/" class="navigation-next">
+      <span class="navigation-tittle">把ubuntu18.04 变成我的ubuntu</span>
+      <i aria-hidden="true" class="fa fa-chevron-right"></i>
+    </a>
+    
+</div>
+
+
+  
+
+</article>
+
+
+        </div>
+        
+    
+  
+  
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-133187648-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+<script defer src="https://use.fontawesome.com/releases/v5.5.0/js/all.js" integrity="sha384-GqVMZRt5Gn7tB9D9q7ONtcp4gtHIUEW/yG7h98J7IpE3kpi+srfFyyB/04OV6pG0" crossorigin="anonymous"></script>
+
+
+    
+    
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/highlight.min.js"></script>
+        
+    
+    <script type="text/javascript">
+        
+        hljs.initHighlightingOnLoad();
+    </script>
+    
+
+
+
+
+
+
+    
+
+
+
+    </body>
+</html>

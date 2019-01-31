@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+    
+    
+
+
+    <head>
+    <link href="https://gmpg.org/xfn/11" rel="profile">
+    <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta http-equiv="Cache-Control" content="public" />
+<!-- Enable responsiveness on mobile devices -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<meta name="generator" content="Hugo 0.53" />
+
+    
+    
+    
+
+<title>安卓Vpn开发思路 • ARLOOR</title>
+
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="安卓Vpn开发思路"/>
+<meta name="twitter:description" content="经过2个月的开发，我的http代理可以说没有遗憾了，当然还有可以改进的地方，比如多用户认证啥的，但是没有必要啦。
+
+为了在安卓上也能愉快地使用自己开发的代理，研究了一下安卓Vpnservice，在此记录一下当前的进度，并确定以后的开发思路。"/>
+
+<meta property="og:title" content="安卓Vpn开发思路" />
+<meta property="og:description" content="经过2个月的开发，我的http代理可以说没有遗憾了，当然还有可以改进的地方，比如多用户认证啥的，但是没有必要啦。
+
+为了在安卓上也能愉快地使用自己开发的代理，研究了一下安卓Vpnservice，在此记录一下当前的进度，并确定以后的开发思路。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://arloor.com/posts/other/android-vpnservice-and-vpn-dev/" /><meta property="article:published_time" content="2019-01-30T00:00:00&#43;00:00"/>
+<meta property="article:modified_time" content="2019-01-30T00:00:00&#43;00:00"/><meta property="og:site_name" content="Title" />
+
+
+    
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/scss/hyde-hyde.e0e469ad030f6f6906870f8469432a17e9699a3466fb4a1ab7ba3b03fc407e37.css" integrity="sha256-4ORprQMPb2kGhw&#43;EaUMqF&#43;lpmjRm&#43;0oat7o7A/xAfjc=">
+
+
+<link rel="stylesheet" href="/scss/print.2744dcbf8a0b2e74f8a50e4b34e5f441be7cf93cc7de27029121c6a09f9e77bc.css" integrity="sha256-J0Tcv4oLLnT4pQ5LNOX0Qb58&#43;TzH3icCkSHGoJ&#43;ed7w=" media="print">
+
+
+
+
+<link rel="stylesheet" href="/scss/hugo-toc.8549a64d301421b4256ea9a0d5ca8b99178799f569d5d2daeb95f24cef3ce6b7.css" integrity="sha256-hUmmTTAUIbQlbqmg1cqLmReHmfVp1dLa65XyTO885rc=">
+
+
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <!-- Icons -->
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+    <link rel="shortcut icon" href="/favicon.png">
+    
+
+</head>
+
+
+    <body class=" ">
+    
+<div class="sidebar">
+  <div class="container ">
+    <div class="sidebar-about">
+      <span class="site__title">
+        <a href="https://arloor.com/">ARLOOR</a>
+      </span>
+      
+        
+        
+        
+        <div class="author-image">
+          <img src="https://arloor.com//img/head.jpeg" alt="Author Image" class="img--circle img--headshot element--center">
+        </div>
+        
+      
+      
+      <p class="site__description">
+        
+      </p>
+    </div>
+    <div class="collapsible-menu">
+      <input type="checkbox" id="menuToggle">
+      <label for="menuToggle">ARLOOR</label>
+      <div class="menu-content">
+        <div>
+	<ul class="sidebar-nav">
+		 
+		 
+			 
+				<li>
+					<a href="/categories/">
+						<span>分类</span>
+					</a>
+				</li>
+			 
+		 
+			 
+				<li>
+					<a href="/posts/">
+						<span>文章</span>
+					</a>
+				</li>
+			 
+		 
+			 
+				<li>
+					<a href="/tags/">
+						<span>标签</span>
+					</a>
+				</li>
+			 
+		 
+			 
+				<li>
+					<a href="/about/">
+						<span>About</span>
+					</a>
+				</li>
+			 
+		
+		</li>
+	</ul>
+</div>
+
+        <section class="social">
+	
+	
+	
+	<a href="https://github.com/arloor" rel="me"><i class="fab fa-github fa-lg" aria-hidden="true"></i></a>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<a href="mailto:admin@arloor.com" rel="me"><i class="fas fa-at fa-lg" aria-hidden="true"></i></a>
+	
+</section>
+
+      </div>
+    </div>
+    
+<div class="copyright">
+  &copy; 2019 htr3n
+  
+    <a href="https://creativecommons.org/licenses/by-sa/4.0">CC BY-SA 4.0</a>
+  
+</div>
+
+
+<div class="builtwith">
+Built with <a href="https://gohugo.io">Hugo</a> ❤️ <a href="https://github.com/htr3n/hyde-hyde">hyde-hyde</a>.
+</div>
+
+
+  </div>
+</div>
+
+        <div class="content container">
+            
+    <article>
+  <header>
+    <h1>安卓Vpn开发思路</h1>
+    
+    
+<div class="post__meta">
+    
+    
+      <i class="fas fa-calendar-alt"></i> Jan 30, 2019
+    
+    
+    
+      
+      
+          in
+          
+          
+              <a class="badge badge-category" href="/categories/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B">网络编程</a>
+              
+          
+      
+    
+    
+    
+      
+      
+          <br/>
+           <i class="fas fa-tags"></i>
+          
+          <a class="badge badge-tag" href="/tags/program">program</a>
+          
+      
+    
+    
+    <br/>
+    <i class="fas fa-clock"></i> 1 min read
+</div>
+
+
+  </header>
+  
+  
+  <div class="toc-wrapper">
+    <input type="checkbox" id="tocToggle">
+    <label for="tocToggle">Table of Content</label>
+    
+        <nav id="TableOfContents">
+<ul>
+<li><a href="#前言-几种不同的代理方式">前言——几种不同的代理方式</a></li>
+<li><a href="#vpnservice和安卓vpn例子">VpnService和安卓VPN例子</a></li>
+<li><a href="#所以问题来了">所以问题来了</a></li>
+<li><a href="#解决方案一">解决方案一</a></li>
+<li><a href="#解决方案二">解决方案二</a>
+<ul>
+<li><a href="#总览">总览</a></li>
+<li><a href="#什么是socks代理">什么是socks代理</a></li>
+<li><a href="#附-socks代理如何运作">附：socks代理如何运作</a></li>
+<li><a href="#什么是tun网卡">什么是tun网卡</a></li>
+<li><a href="#什么是透明代理">什么是透明代理</a></li>
+<li><a href="#现实中的需求">现实中的需求</a></li>
+<li><a href="#tun2socks能做什么">tun2socks能做什么</a>
+<ul>
+<li><a href="#1-tun网卡部分">1.tun网卡部分</a></li>
+<li><a href="#2-协议处理部分">2.协议处理部分</a></li>
+<li><a href="#3-socks协议转换部分">3.socks协议转换部分</a></li>
+<li><a href="#tun2socks与openvpn">tun2socks与OpenVPN</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
+    
+  </div>
+  
+  <div class="post">
+    <p>经过2个月的开发，我的http代理可以说没有遗憾了，当然还有可以改进的地方，比如多用户认证啥的，但是没有必要啦。</p>
+
+<p>为了在安卓上也能愉快地使用自己开发的代理，研究了一下安卓Vpnservice，在此记录一下当前的进度，并确定以后的开发思路。</p>
+
+<h1 id="前言-几种不同的代理方式">前言——几种不同的代理方式</h1>
+
+<p>在网上找了一篇我觉得讲的比较对和易懂的<a href="https://blog.csdn.net/binhoubin/article/details/63251662">博客</a>:引用开始</p>
+
+<p>翻墙有几种方式：</p>
+
+<p>1：vpn和各种自定义的vpn；它们是把iOS的ip数据包的内容通过一个tcp转发到vpn服务器，然后在服务器上创建一个tun虚拟网卡，再把接收到的ip数据包内容通过系统的函数发给网卡，然后网卡再把这个原始的ip数据包内容加上自己的ip地址等信息发送出去，对方接收到数据之后，解析出来，在ip之上的内容是没有改变的，所以tcp的连接之类的整个过程是不会影响的，只是在返回数据时，它识别到的源ip地址变成了服务器上虚拟网卡的地址；</p>
+
+<p>2：http代理，现在主流的系统都支持设置http代理；它们的原理是客户端系统在发送http请求时，并不是把数据包发给真正的目的地址，而是与代理服务器创建一个tcp连接，把http包发送给代理服务器，这样代理服务器就可以接收到一个http请求，然后再从请求中得到真正的目的地址，把这个请求转发给目的ip，所以从服务器上来看，就是一个最基本的http服务器而已，只是它的目的从处理请求变成了转发请求；整个请求过程中，在http层上的内容不会改变，但是在tcp这一层会改变；对于客户端操作系统来说，在发送http之前，我们要先与目的地建立连接，但是操作系统并不知道我们是不是用来发送http的，所以它就不能让我们去连接代理服务器，由此可知，http代理的客户端处理不会是操作系统来提供，而是应该上层应用程序来提供；比如提供一个发送http的函数，那么在这个函数中，我们就可以知道它肯定是用来发http的，就可以去连接代理服务器而不是直接的目标服务器；这就解释了为什么有些http请求不走代理（比如libcurl创建的http请求，大部分的linux终端命令），因为这要库去支持，不过现在主流的浏览器都支持；</p>
+
+<p>3：socks5代理，socks5代理中，客户端与代理服务器tcp连接上后，客户端会向代理服务器发送协商数据和真正的目标地址，代理服务器就与直接的目标地址连接，然后再把后续的请求转发到目标地址上；相对于http代理来说，socks5代理不区分上层协议，所以可以在系统库中去实现；</p>
+
+<p>翻墙原理上是这几个基本的方法，vpn的ip数据转发，http代理的http数据转发，sock5代理的tcp,udp数据转发。</p>
+
+<p>但是由于这几种方式都有它的明确的特征和易于识别，比如vpn,sock5代理特征明显，http代理数据明文可见，导致了用来翻墙不稳定(当然自定义vpn可以解决这个问题)；</p>
+
+<p>ShadowSocks的优点为sock5代理类似，由于不是在ip层面上，所以数据包相对来说要小（不用传ip数据包头与tcp数据包头，所有理论上它要快一些）</p>
+
+<p>所以现在大家都在用ShadowSocks，在pc端它的实现比较简单，因为它只要在本地实现一个sockt5代理服务器就好了，这样在sock5代理服务器内部，就能得到tcp数据的内容，把内容通过自己的协议转发到远程服务器，让远程服务器转发tcp的内容；相当于本地和服务器上两边实现了类似的socket5代理；</p>
+
+<p>但是对于iOS，android而言，sock5代理在非越狱和root的情况下不被支持，不过能得到ip数据包，所以要想办法把ip数据包转成tcp/udp的包，这样才能分析出tcp/udp中的内容进行转发；</p>
+
+<p>这里引入一个开源的tcp/ip协议栈，它简单占用内存小，所以能运行在移动设备上，我们要的是让它接收系统的ip数据包，分析出tcp/udp数据内容。但是对于标准的tcp/ip协议栈，由于系统的ip数据包发送的目的地与这个协议栈运行的地址，所以正常情况下它是不会被解析出来的，不过由于这个协议栈相对来说简单，所以我们可以进行改造，让它不管是去哪里的ip数据包，都像本来就是发送给他的一样；这样它能accept 发给其它地址的tcp的连接，可以直接读取tcp连接之后的发送的内容；这也就是为什么叫tun2socks了（改造的过程其实很简单，只是把在tcp段组成tcp时的ip和port限制去掉就行了），并且由于它能让我们得到tcp发送的数据包，这样就不用另一个socks代理了。</p>
+
+<p>引用结束。</p>
+
+<p>我写的<a href="https://github.com/arloor/proxy">HttpProxy</a>就是一个http代理（tcp代理），而安卓、iphone要求的是一个VPN（因为手机只给ip数据报）。socks则是不管应用层是tcp还是udp。所以从通用性上讲，VPN&gt;socks&gt;tcp代理。我的HttpProxy在这个时代可以说超级菜鸡了。</p>
+
+<p>引用部分最后提到的开源tcp/ip协议栈是iwIP（我在别的博客看到的，可能我引用的部分是抄的别人的。。），引用还提到的tun2socks，则将在<a href="#解决方案二">解决方案二</a>中详细解释。</p>
+
+<h1 id="vpnservice和安卓vpn例子">VpnService和安卓VPN例子</h1>
+
+<p>VpnService是开发安卓VPN的基础，下面是<a href="https://developer.android.com/reference/android/net/VpnService">官方文档的阐释</a></p>
+
+<p>VpnService is a base class for applications to extend and build their own VPN solutions. In general, it creates a virtual network interface, configures addresses and routing rules, and returns a file descriptor to the application. Each read from the descriptor retrieves an outgoing packet which was routed to the interface. Each write to the descriptor injects an incoming packet just like it was received from the interface. The interface is running on Internet Protocol (IP), so packets are always started with IP headers. The application then completes a VPN connection by processing and exchanging packets with the remote server over a tunnel.</p>
+
+<p>上面的阐释的重点是：虚拟一个网卡、返回文件描述符、 读写的内容是ip数据报</p>
+
+<p>安卓example的<a href="https://android.googlesource.com/platform/development/+/master/samples/ToyVpn">ToyVpn</a>；初步搭一个vpn应用的框架可以看<a href="https://www.tuicool.com/articles/uuiMje">这里</a>，这个仅仅是搭建了框架，功能（ip数据包的收发）则没有实现</p>
+
+<h1 id="所以问题来了">所以问题来了</h1>
+
+<p>Vpnservice是安卓提供给开发者用于开发自己的VPN的服务。开发者继承这个Vpnservice，从而实现VPN。手机本身是有一块网卡，安卓虚拟出一个网卡，然后通过NAT，将真实网卡上的出站流量转发到虚拟网卡上，然后Vpnservice获取这个虚拟网卡上的“流量”，并转发给Vpn的服务端。其实还是挺好理解的。问题在于，上面说的流量，并不是传输层的tcp/udp流量，而是ip数据报。</p>
+
+<p>tcp代理所操作的是tcp包，现在要处理ip数据报。而且java语言只提供了传输层（tcp/udp）的socket传输api。这意味着，开发Vpn必定有一部分需要使用其他语言（C/C++）。</p>
+
+<p>看安卓example的<a href="https://android.googlesource.com/platform/development/+/master/samples/ToyVpn">ToyVpn</a>中server的代码，发现他的代码就是直接open /dev下的网卡文件，然后读写来收取ip数据（一切皆文件真的骚。。）</p>
+
+<h1 id="解决方案一">解决方案一</h1>
+
+<p>一句话：将ip数据报通过Udp发送给代理服务器，代理服务器解包后得到原始的ip数据报，通过C/C++写进网卡文件。</p>
+
+<p>通过Udp传输的原因是，Udp（用户数据报）是ip数据报的简单包裹，不像tcp数据包那样，增加了很复杂的东西，也不进行失败重传等操作。要清楚，我们这里传输的是较底层的ip数据报，在ip数据报的上层，可能是UDP，也可能是TCP，不管传输层是什么协议，消息的正确性，失败重传等等，都有人做过，我们只要传就好了，所以用UDP是最好的。</p>
+
+<p>通过C/C++写进网卡，这个可能要用JNI，没用过，学学吧。</p>
+
+<p>其实就是ip over udp。下面是一段对这个概念的阐释：<a href="https://www.cnblogs.com/zhangzl2013/p/foo_over_udp.html">原文</a></p>
+
+<p>数据报文封包和UDP隧道相对来说还是比较容易理解的概念。试想一个进入隧道的TCP数据包：</p>
+
+<p><img src="/img/090749575304490.jpg" alt="" /></p>
+
+<p>这个数据报有正常的IP和TCP头，后面是用户要发送的数据。封包的过程如下：</p>
+
+<p><img src="/img/090751088583813.jpg" alt="" /></p>
+
+<p>这样，这个数据包就是一个UDP数据包，里面装的是TCP数据包。系统可以将他想普通的UDP数据包一样发送；在接收端，额外的UDP头部被去掉后，原始的包含tcp消息的ip数据报经修改后（修改源ip地址）继续进入网络堆栈进行处理。</p>
+
+<p>这其实也就是正经的VPN的概念了。这也是ToyVpn所采用的实现方式。</p>
+
+<h1 id="解决方案二">解决方案二</h1>
+
+<p>在安卓机上解析ip数据报，最终拿到tcp/udp的数据部分，最后传输。这意味着需要处理tcp协议栈中的握手等等，怎么看怎么不靠谱，主要是难度大。</p>
+
+<p>直到看到了tun2socks和iwIP，才意识到这个有难度的轮子其实已经有人造了。安卓使用最广泛的翻墙工具就是shadowsocks了，赫然看到<a href="https://github.com/shadowsocks/shadowsocks-android">shadowsocks-android</a>的readme中的“OPEN SOURCE LICENSES”含有tun2socks。行吧，shadowsocks都用这个技术，够权威了。</p>
+
+<p>下面就说，什么是tun2socks，直接引用别人的<a href="https://blog.csdn.net/dog250/article/details/70343230">博客</a>了。这个博主csdn排名15，牛逼</p>
+
+<h2 id="总览">总览</h2>
+
+<p>tun2socks实现一种机制，它可以让你无需改动任何应用程序而完全透明地将数据用socks协议封装，转发给一个socks代理，然后由该代理程序负责与真实服务器之间转发应用数据。使用代理有两种方式，一种是你自己显式配置代理，这样一来，数据离开你的主机时它的目标地址就是代理服务器，另一种是做透明代理，即在中途把原始数据重定向到一个应用程序，由该代理程序代理转发。tun2socks在第二种的基础上，完成了socks协议的封装，并且实现该机制时使用了强大的tun网卡而不必再去配置复杂的iptables规则。</p>
+
+<h2 id="什么是socks代理">什么是socks代理</h2>
+
+<p>本文以TCP为例，就不再提UDP了。所以说，简单点，把socks代理称为带有认证功能的TCP代理是合适的。</p>
+
+<p>TCP代理非常容易理解，然而纯粹的TCP代理并不实用，必然要加入一些控制功能，比如谁可以被代理，谁不能被代理，如何认证，最多可以代理多少路的请求等等。有了这些控制手段，TCP代理才真正变得实用起来。</p>
+
+<h2 id="附-socks代理如何运作">附：socks代理如何运作</h2>
+
+<p>socks的运作原理非常简单，就是在TCP数据外包一层socks协议头，到达socks代理服务器后，脱去socks头，然后通过socks服务器与真实服务器之间建立的连接将TCP裸数据传给真实服务器。如下图所示：</p>
+
+<p><img src="/img/20170422014544920.png" alt="" /></p>
+
+<p>请注意，socks代理并不理解任何应用层协议，它只是负责转发应用层数据而已，这一点使socks成为了一个通用的代理协议，这一点和HTTP代理服务器是完全不同的。</p>
+
+<h2 id="什么是tun网卡">什么是tun网卡</h2>
+
+<p>这个就不再多说。之所以有这个小节是为了文章的完整性。也是为了给初学者一个完整的提纲来更深入的学习。</p>
+
+<h2 id="什么是透明代理">什么是透明代理</h2>
+
+<p>我理解的透明代理就是“偷偷的给你做代理”，这一点与你在浏览器里显式设置socks代理服务器完全不同。透明代理就比如说下面这样子：</p>
+
+<p><img src="20170422014626480.png" alt="" /></p>
+
+<p>要实现这一点有很多方式，比如你可以用Linux的TProxy+Policy routing机制，关于这种方式请参见<a href="https://blog.csdn.net/dog250/article/details/7518054">《socket的IP_TRANSPARENT选项实现代理》</a>，然而，很多时候，这种方式行不通。</p>
+
+<h2 id="现实中的需求">现实中的需求</h2>
+
+<p>如果给一个Linux的root账户，那么几乎可以随意显摆，而很多时候这并不可能。比如Android系统就不能随意root，这就意味着你无法在Android系统上随意地配置iptables规则，路由等。那么想在Android系统上免root实现一个透明代理，就需要别的办法。而tun2socks提供了一种这样的办法。</p>
+
+<h2 id="tun2socks能做什么">tun2socks能做什么</h2>
+
+<p>如果理解了上述所有的概念，那么tun2socks就不剩下什么了。先给出一个总览图：</p>
+
+<p><img src="/img/20170422014704077.png" alt="" /></p>
+
+<p>通过上图，我们看到tun2socks可以被拆解出三个部分，即tun网卡部分，协议处理部分以及socks转换部分，这三部分在tun2socks的处理流程是串行的。我来一个一个说。</p>
+
+<h3 id="1-tun网卡部分">1.tun网卡部分</h3>
+
+<p>该部分解决了一个基本的问题，即“如何获取原始的数据包”。拿到了数据包，什么都好办了。</p>
+
+<h3 id="2-协议处理部分">2.协议处理部分</h3>
+
+<p>如果你想做透明代理，那么你必须“想办法把数据流导入到本地”，完成这件事有好多种办法，以Linux为例，比如做一个DNAT即可完成，再比如如上所述，用tun网卡直接把原始数据包捕获到一个应用程序。显然tun2socks采用了后者。</p>
+
+<p>两者有何不同呢？</p>
+
+<p>很大的不同。如果使用DNAT的话，目标地址和端口将会是本地的一个代理程序，比如socks代理，那么操作系统的协议栈会自动将数据包交到该代理程序，除了这个DNAT之外不需要再做任何操作。而使用tun捕获数据包的话，由于只是捕获到了IP数据报文，这意味着你要自己处理IP层以上的逻辑，比如TCP按序交付，TCP状态处理，TCP拥塞控制，你要确保代理程序收到的数据包看起来是“经过协议栈处理过的数据包”，“就像是直接从socket的recv接口读到的一样”。</p>
+
+<p>tun2socks使用现成的lwip来完成了协议处理。lwip是一个轻量级的用户态协议栈，非常适合完成这种协议适配工作。</p>
+
+<h3 id="3-socks协议转换部分">3.socks协议转换部分</h3>
+
+<p>经过第2部分，即协议处理之后，现在tun2socks拿到的已经是源主机试图发送到原始目标主机的裸数据了，接下来它可以做的事情可就多了，当然可以用socks协议封装裸数据，将其发送给一个socks代理程序。</p>
+
+<h3 id="tun2socks与openvpn">tun2socks与OpenVPN</h3>
+
+<p>只要是使用了tun网卡获取原始数据，那么任何框架都会面临一个必须回答的问题，即拿到原始的IP数据报文或者以太帧之后，下一步如何处理这些数据。OpenVPN和tun2socks显然是给出了两种不同的回答，而这不同的回答即是OpenVPN和tun2socks之间唯一的不同。</p>
+
+<p>引用结束，作者说tun2socks和OpenVPN采用了两种完全不同的解答，其实也就是这里的tun2socks和OpenVpn了。</p>
+
+<p>看到这里不禁感叹前人的智慧，存在即合理。看起来，我的http代理用于翻墙只是一种过时的选择了，的确是socks的时代，特别是有了tun2socks。</p>
+  </div>
+  
+    
+        
+<script src="https://utteranc.es/client.js"
+        repo="arloor/blog"
+        issue-term="pathname"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+        
+</script>
+
+<script>
+document.head.insertAdjacentHTML("beforeend", "<style>\n    .utterances {\n      position: relative;\n      box-sizing: border-box;\n      width: 100%;\n      max-width: 100%;\n      margin-left: auto;\n      margin-right: auto;\n    }\n    .utterances-frame {\n      position: absolute;\n      left: 0;\n      right: 0;\n      width: 1px;\n      min-width: 100%;\n      max-width: 100%;\n      height: 100%;\n      border: 0;\n    }\n  </style>");
+</script>
+
+    
+
+
+  
+
+<div class="navigation navigation-single">
+    
+    <a href="/posts/other/proxynew-docker-install/" class="navigation-prev">
+      <i aria-hidden="true" class="fa fa-chevron-left"></i>
+      <span class="navigation-tittle">HttpProxy一键安装</span>
+    </a>
+    
+    
+</div>
+
+
+  
+
+</article>
+
+
+        </div>
+        
+    
+  
+  
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-133187648-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+<script defer src="https://use.fontawesome.com/releases/v5.5.0/js/all.js" integrity="sha384-GqVMZRt5Gn7tB9D9q7ONtcp4gtHIUEW/yG7h98J7IpE3kpi+srfFyyB/04OV6pG0" crossorigin="anonymous"></script>
+
+
+    
+    
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/highlight.min.js"></script>
+        
+    
+    <script type="text/javascript">
+        
+        hljs.initHighlightingOnLoad();
+    </script>
+    
+
+
+
+
+
+
+    
+
+
+
+    </body>
+</html>

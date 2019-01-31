@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="en">
+    
+    
+
+
+    <head>
+    <link href="https://gmpg.org/xfn/11" rel="profile">
+    <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta http-equiv="Cache-Control" content="public" />
+<!-- Enable responsiveness on mobile devices -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<meta name="generator" content="Hugo 0.53" />
+
+    
+    
+    
+
+<title>把ubuntu18.04 变成我的ubuntu • ARLOOR</title>
+
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="把ubuntu18.04 变成我的ubuntu"/>
+<meta name="twitter:description" content="拿到一个电脑的第一件事，当然是把他变成自己的电脑。装上ubuntu之后的第一件事就是变成自己的ubuntu啦。"/>
+
+<meta property="og:title" content="把ubuntu18.04 变成我的ubuntu" />
+<meta property="og:description" content="拿到一个电脑的第一件事，当然是把他变成自己的电脑。装上ubuntu之后的第一件事就是变成自己的ubuntu啦。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://arloor.com/posts/linux/turn-ubuntu-mine-own/" /><meta property="article:published_time" content="2019-01-01T13:14:59&#43;08:00"/>
+<meta property="article:modified_time" content="2019-01-01T13:14:59&#43;08:00"/><meta property="og:site_name" content="Title" />
+
+
+    
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/scss/hyde-hyde.e0e469ad030f6f6906870f8469432a17e9699a3466fb4a1ab7ba3b03fc407e37.css" integrity="sha256-4ORprQMPb2kGhw&#43;EaUMqF&#43;lpmjRm&#43;0oat7o7A/xAfjc=">
+
+
+<link rel="stylesheet" href="/scss/print.2744dcbf8a0b2e74f8a50e4b34e5f441be7cf93cc7de27029121c6a09f9e77bc.css" integrity="sha256-J0Tcv4oLLnT4pQ5LNOX0Qb58&#43;TzH3icCkSHGoJ&#43;ed7w=" media="print">
+
+
+
+
+<link rel="stylesheet" href="/scss/hugo-toc.8549a64d301421b4256ea9a0d5ca8b99178799f569d5d2daeb95f24cef3ce6b7.css" integrity="sha256-hUmmTTAUIbQlbqmg1cqLmReHmfVp1dLa65XyTO885rc=">
+
+
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <!-- Icons -->
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+    <link rel="shortcut icon" href="/favicon.png">
+    
+
+</head>
+
+
+    <body class=" ">
+    
+<div class="sidebar">
+  <div class="container ">
+    <div class="sidebar-about">
+      <span class="site__title">
+        <a href="https://arloor.com/">ARLOOR</a>
+      </span>
+      
+        
+        
+        
+        <div class="author-image">
+          <img src="https://arloor.com//img/head.jpeg" alt="Author Image" class="img--circle img--headshot element--center">
+        </div>
+        
+      
+      
+      <p class="site__description">
+        
+      </p>
+    </div>
+    <div class="collapsible-menu">
+      <input type="checkbox" id="menuToggle">
+      <label for="menuToggle">ARLOOR</label>
+      <div class="menu-content">
+        <div>
+	<ul class="sidebar-nav">
+		 
+		 
+			 
+				<li>
+					<a href="/categories/">
+						<span>分类</span>
+					</a>
+				</li>
+			 
+		 
+			 
+				<li>
+					<a href="/posts/">
+						<span>文章</span>
+					</a>
+				</li>
+			 
+		 
+			 
+				<li>
+					<a href="/tags/">
+						<span>标签</span>
+					</a>
+				</li>
+			 
+		 
+			 
+				<li>
+					<a href="/about/">
+						<span>About</span>
+					</a>
+				</li>
+			 
+		
+		</li>
+	</ul>
+</div>
+
+        <section class="social">
+	
+	
+	
+	<a href="https://github.com/arloor" rel="me"><i class="fab fa-github fa-lg" aria-hidden="true"></i></a>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<a href="mailto:admin@arloor.com" rel="me"><i class="fas fa-at fa-lg" aria-hidden="true"></i></a>
+	
+</section>
+
+      </div>
+    </div>
+    
+<div class="copyright">
+  &copy; 2019 htr3n
+  
+    <a href="https://creativecommons.org/licenses/by-sa/4.0">CC BY-SA 4.0</a>
+  
+</div>
+
+
+<div class="builtwith">
+Built with <a href="https://gohugo.io">Hugo</a> ❤️ <a href="https://github.com/htr3n/hyde-hyde">hyde-hyde</a>.
+</div>
+
+
+  </div>
+</div>
+
+        <div class="content container">
+            
+    <article>
+  <header>
+    <h1>把ubuntu18.04 变成我的ubuntu</h1>
+    
+    
+<div class="post__meta">
+    
+    
+      <i class="fas fa-calendar-alt"></i> Jan 1, 2019
+    
+    
+    
+      
+      
+          in
+          
+          
+              <a class="badge badge-category" href="/categories/ubuntu">UBUNTU</a>
+              
+          
+      
+    
+    
+    
+      
+      
+          <br/>
+           <i class="fas fa-tags"></i>
+          
+          <a class="badge badge-tag" href="/tags/linux">linux</a>
+          
+      
+    
+    
+    <br/>
+    <i class="fas fa-clock"></i> 3 min read
+</div>
+
+
+  </header>
+  
+  
+  <div class="toc-wrapper">
+    <input type="checkbox" id="tocToggle">
+    <label for="tocToggle">Table of Content</label>
+    
+        <nav id="TableOfContents">
+<ul>
+<li><a href="#先放截图">先放截图</a></li>
+<li><a href="#首先安装需要的工具">首先安装需要的工具</a></li>
+<li><a href="#解决双系统时间不一致问题">解决双系统时间不一致问题</a></li>
+<li><a href="#安装windows下的字体-主要是微软雅黑">安装windows下的字体，主要是微软雅黑</a></li>
+<li><a href="#安装fcitx和搜狗输入法">安装fcitx和搜狗输入法</a></li>
+<li><a href="#设置开机自启动">设置开机自启动</a></li>
+<li><a href="#干掉顶部横栏-增大桌面的可用面积">干掉顶部横栏，增大桌面的可用面积</a></li>
+<li><a href="#安装网易云音乐">安装网易云音乐</a></li>
+<li><a href="#使用dconf-editor修改小配置">使用dconf-editor修改小配置</a></li>
+<li><a href="#安装tar包的软件">安装tar包的软件</a></li>
+<li><a href="#安装ca证书">安装ca证书</a></li>
+<li><a href="#设置shell代理">设置shell代理</a></li>
+<li><a href="#安装静态博客网站生成器hugo">安装静态博客网站生成器hugo</a></li>
+<li><a href="#安装grub主题">安装grub主题</a></li>
+<li><a href="#设置登录页面-gdm-的背景">设置登录页面(GDM)的背景</a></li>
+<li><a href="#开启bbr-tcp拥塞控制">开启bbr（tcp拥塞控制）</a></li>
+<li><a href="#开启ssh服务并设置防火墙">开启ssh服务并设置防火墙</a></li>
+<li><a href="#安装tlp-tlp-rdw-设置充电阀值">安装tlp, tlp-rdw：设置充电阀值</a></li>
+<li><a href="#最后">最后</a></li>
+</ul>
+</nav>
+    
+  </div>
+  
+  <div class="post">
+    <p>拿到一个电脑的第一件事，当然是把他变成自己的电脑。装上ubuntu之后的第一件事就是变成自己的ubuntu啦。</p>
+
+<h1 id="先放截图">先放截图</h1>
+
+<p><img src="/img/my-ubuntu.png" alt="我的ubuntu" /></p>
+
+<h1 id="首先安装需要的工具">首先安装需要的工具</h1>
+
+<pre><code>sudo apt install dconf-editor
+sudo apt install gnome-tweak-tool
+sudo apt install chrome-gnome-shell
+</code></pre>
+
+<h1 id="解决双系统时间不一致问题">解决双系统时间不一致问题</h1>
+
+<pre><code>timedatectl set-local-rtc 1 --adjust-system-clock
+</code></pre>
+
+<h1 id="安装windows下的字体-主要是微软雅黑">安装windows下的字体，主要是微软雅黑</h1>
+
+<p>安装windows字体其实就是把双系统下windows中<code>C:\Windows\Fonts</code>下的所有字体，复制到<code>/usr/share/fonts/windows</code>中。注意坑：ubuntu下打不开windows存放字体的那个文件夹，所以需要提前在windows中讲fonts压缩好。</p>
+
+<p>字体放大1.25(高分屏笔记本必需啊)，使用之前安装的<code>tweak</code>（中文叫优化），修改字体为<code>微软雅黑</code>，缩放比例为1.25。
+<img src="/img/tweak-set-font-ubuntu.png" alt="tweak设置字体" /></p>
+
+<p>为什么要安装windows字体呢？主要因为ubuntu自带的字体放大之后模糊。使用微软雅黑之后就没有这个问题。另外，很多网页都设置<code>font-family</code>为雅黑，安装个雅黑总是好的。</p>
+
+<h1 id="安装fcitx和搜狗输入法">安装fcitx和搜狗输入法</h1>
+
+<p>Ubuntu 18.04 没有提供 Fcitx 输入框架，先安装框架：</p>
+
+<p>sudo apt install fcitx
+先去 <a href="https://pinyin.sogou.com/linux/?r=pinyin">搜狗输入法官网</a> 下载输入法安装包，为 deb 格式的安装包，安装它：</p>
+
+<p>sudo gdebi xxxxxx.deb
+然后移步到 设置→区域和语言 ，删除一部分输入源，只保留汉语，接着选择 管理已安装的语言 ，修改 键盘输入法系统 为 fcitx 。关闭窗口，打开所有程序，选择软件 Fcitx 配置 ，选择加号添加搜狗输入法。</p>
+
+<h1 id="设置开机自启动">设置开机自启动</h1>
+
+<p>ubuntu 18.04使用了systemd作为服务管理。因此要做如下操作：</p>
+
+<pre><code>ln -fs /lib/systemd/system/rc-local.service /etc/systemd/system/rc-local.service
+</code></pre>
+
+<p>之后，编辑<code>/etc/rc.local</code>编写一个自启动脚本即可。我的rc.local如下：</p>
+
+<pre><code>#!/bin/bash
+
+#开启代理
+cd /home/x1/bin/proxy
+(./proxy &amp;&gt;&gt; proxy.log &amp;)
+lsof -i:8081||echo
+</code></pre>
+
+<h1 id="干掉顶部横栏-增大桌面的可用面积">干掉顶部横栏，增大桌面的可用面积</h1>
+
+<p>我很讨厌这个横栏，所以曾经十分讨厌gnome。今天终于找到办法将横栏删除。</p>
+
+<ol>
+<li>方法一：使用<code>hide top bar</code>gnome拓展。推荐！</li>
+<li>方法二：修改gnome shell css</li>
+</ol>
+
+<p>如何修改gnome shell css:直接修改：/usr/share/gnome-shell/theme/ubuntu.css，在最底部加入：</p>
+
+<pre><code>#panel,#panel *{
+height: 0px;
+color: rgba(0, 0, 0, 0)
+}
+</code></pre>
+
+<h1 id="安装网易云音乐">安装网易云音乐</h1>
+
+<p>在写这篇文章时，网易云音乐为：1.1.0</p>
+
+<p>首先 下载安装包（Ubuntu 16.04 64 位），然后就是正常的 deb 包安装过程。</p>
+
+<p>安装完毕后，会发现在应用列表中 点击应用图标无法启动软件 ，解决方案：</p>
+
+<p>修改网易云音乐的启动图标</p>
+
+<pre><code>sudo gedit /usr/share/applications/netease-cloud-music.desktop
+</code></pre>
+
+<p>修改 Exec 这一行内容</p>
+
+<pre><code>Exec=sh -c &quot;unset SESSION_MANAGER &amp;&amp; netease-cloud-music %U&quot;
+</code></pre>
+
+<h1 id="使用dconf-editor修改小配置">使用dconf-editor修改小配置</h1>
+
+<p>找到之前安装的<code>dconf-editor</code>。这是一个类似windows注册表的东西。</p>
+
+<p>我做的修改是：</p>
+
+<pre><code>将org.gnome.shell.extensions.dash-to-dock的click-action设为 'cycle-windows'
+</code></pre>
+
+<p>这样以后点击dock上的图标后的反应比较适合我。使用<code>dconf-editor</code>还可以修改很多东西，自己摸索吧。</p>
+
+<h1 id="安装tar包的软件">安装tar包的软件</h1>
+
+<p>曾经我喜欢将tar包解压到/opt文件夹，然后编辑<code>/etc/profile.d/xx.sh</code>来设置$PATH。但是有个问题，sudo到root之后，自己设置的path就不管用了。原因是secure path：在sudo命令后，PATH被设置为预定的secure path。也就是<code>/etc/profile.d</code>下的sh文件配置PATH对sudo 之后的环境不生效。</p>
+
+<p>所以以后我决定将所有软件安装到<code>/usr/local</code>，然后创建可执行文件的软连接到<code>/usr/local/bin</code>。</p>
+
+<p>以下是安装<code>nodejs</code>的例子：</p>
+
+<pre><code># 先将node-v8.15.0-linux-x64.tar.gz解压到/usr/bin，然后：
+sudo ln -fs /usr/local/node-v8.15.0-linux-x64/bin/node /usr/local/bin/node 
+sudo ln -fs /usr/local/node-v8.15.0-linux-x64/bin/npm /usr/local/bin/npm
+</code></pre>
+
+<p>注意，以后可能要全局安装其他npm包，也需要创建软连接，比如安装pm2:</p>
+
+<pre><code>sudo npm install -g pm2
+sudo ln -fs /usr/local/node-v8.15.0-linux-x64/bin/pm2 /usr/local/bin/pm2
+</code></pre>
+
+<h1 id="安装ca证书">安装ca证书</h1>
+
+<p>因为是个程序员，所以会有这个需求，操作如下</p>
+
+<pre><code>#将cer格式的证书转成pem格式的crt文件
+openssl x509 -inform der -in CharlesRoot.cer -outform pem -out CharlesRoot.crt
+sudo apt install ca-certificates
+sudo cp CharlesRoot.crt /usr/share/ca-certificates
+sudo dpkg-reconfigure ca-certificates   #选择ask,勾选CharlesRoot.crt(按空格)并确认
+</code></pre>
+
+<h1 id="设置shell代理">设置shell代理</h1>
+
+<pre><code>#vim /usr/local/bin/pass
+
+#! /bin/bash
+# 设置http代理，使用方法：
+# 在terminal中输入 &quot;. pass&quot; （前提是将此路径加入path）
+# 效果：该terminal将使用如下的代理
+export http_proxy=http://127.0.0.1:8081
+export https_proxy=http://127.0.0.1:8081
+git config --local http.proxy 'http://127.0.0.1:8081'
+git config --local https.proxy 'http://127.0.0.1:8081'
+
+#git config --local --unset http.proxy
+#git config --local --unset https.proxy
+</code></pre>
+
+<p>这样就可以方便地用上我写的代理啦。最好的大概就是安装go、node包、apt安装docker时超级方便。</p>
+
+<p>这里要吐槽诡异的apt：使用代理之后，他的https connect请求是这样的：</p>
+
+<pre><code>CONNECT download.docker.com:443 HTTP/1.1
+Host: 127.0.0.1:8081
+User-Agent: Debian APT-HTTP/1.3 (1.6.6)
+</code></pre>
+
+<p>这个host写成我的代理。。所以我半夜改代理适配这个apt请求。。</p>
+
+<h1 id="安装静态博客网站生成器hugo">安装静态博客网站生成器hugo</h1>
+
+<p>本博客就是用hugo生成的，还是很好用的。为什么不用hexo，因为我不喜欢node，而有点喜欢go</p>
+
+<p>到<a href="https://github.com/gohugoio/hugo/releases">hugo release</a>下载hugo_extended_0.53_Linux-64bit.deb。下载完点击安装即可。</p>
+
+<p>Sass/SCSS支持还是一定要的，所以一定要下带extented的包。在写这篇博客时，我安装的hugo版本是<code>0.53</code></p>
+
+<p>多扯一下hugo生成的静态网页的部署：自己写了个脚本：</p>
+
+<pre><code>#! /bin/bash
+# 当前使用hugo 0.53(支持scss)
+dir=/home/x1/blog
+host=arloor.com
+
+# yum install httpd
+# systemctl enable httpd
+cd $dir
+echo &quot;生成静态资源...&quot;
+hugo
+
+echo &quot;上传新的静态资源....&quot;
+cd public/
+tar  -zcf  public.tar.gz --exclude=public.tar.gz *
+if [ &quot;$?&quot; != &quot;0&quot; ]; then
+    echo -e &quot;\n 压缩失败，退出&quot;
+    rm -rf ../public #删除生成的静态资源
+    exit 1
+fi
+
+scp -r ./public.tar.gz root@$host:~
+if [ &quot;$?&quot; != &quot;0&quot; ]; then
+    echo -e &quot;\n 上传静态资源失败，退出&quot;
+    rm -rf ../public #删除生成的静态资源
+    exit 1
+fi
+
+ssh root@$host &quot;
+echo &quot;删除服务器的旧版本静态资源....&quot;
+rm -rf /var/www/html/*
+tar -zxf public.tar.gz -C /var/www/html/
+rm -f public.tar.gz
+echo &quot;reload httpd....&quot;
+systemctl  reload httpd
+&quot;
+echo  &quot;部署完毕，请访问 http://&quot;$host
+cd $dir
+rm -rf public #删除生成的静态资源
+</code></pre>
+
+<p>其实也就是在centos7服务器上安装了<code>apache(httpd)</code>，然后hugo生成public文件下的静态资源，将这些静态资源复制到服务器<code>/var/www/html</code>中。为了舒服地（不需要输ssh密码）使用该脚本，请使用ssh秘钥登录centos7服务器。</p>
+
+<h1 id="安装grub主题">安装grub主题</h1>
+
+<p>主题包地址：<a href="https://www.gnome-look.org/browse/cat/109/order/latest">Gnome Look - GRUB Themes</a> （自行挑选喜欢的）</p>
+
+<p>安装步骤 ：</p>
+
+<p>首先下载主题包，多为压缩包，解压出文件。使用 sudo nautilus 打开文件管理器。</p>
+
+<p>定位到目录：/boot/grub， 新建文件夹 ：themes，把解压出的文件拷贝到文件夹中。</p>
+
+<p>接着（终端下）使用 gedit 修改 grub 文件：</p>
+
+<pre><code>sudo vim /etc/default/grub
+在该文件末尾添加：
+
+# GRUB_THEME=&quot;/boot/grub/themes/主题包文件夹名称/theme.txt&quot;
+GRUB_THEME=&quot;/boot/grub/themes/Cyber-Security/theme.txt&quot;
+
+最后：更新grub配置
+sudo update-grub
+</code></pre>
+
+<h1 id="设置登录页面-gdm-的背景">设置登录页面(GDM)的背景</h1>
+
+<p>需要修改文件 ubuntu.css，它位于 /usr/share/gnome-shell/theme 。</p>
+
+<pre><code>sudo vim /usr/share/gnome-shell/theme/ubuntu.css
+</code></pre>
+
+<p>在文件中找到关键字 lockDialogGroup，如下行：</p>
+
+<pre><code>#lockDialogGroup {
+   background: #2c001e url(resource:///org/gnome/shell/theme/noise-texture.png);
+   background-repeat: repeat; }
+</code></pre>
+
+<p>修改图片路径即可，样例如下：</p>
+
+<pre><code>#lockDialogGroup {
+  background: #2c001e url(file:///boot/grub/gdm.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center; }
+</code></pre>
+
+<p>最后执行<code>update-grub</code></p>
+
+<h1 id="开启bbr-tcp拥塞控制">开启bbr（tcp拥塞控制）</h1>
+
+<pre><code>echo &quot;net.core.default_qdisc=fq&quot; &gt;&gt; /etc/sysctl.conf
+echo &quot;net.ipv4.tcp_congestion_control=bbr&quot; &gt;&gt; /etc/sysctl.conf
+sysctl -p 
+lsmod | grep bbr  #检查是否有tcp_bbr
+</code></pre>
+
+<h1 id="开启ssh服务并设置防火墙">开启ssh服务并设置防火墙</h1>
+
+<pre><code>sudo apt-get install openssh-server
+# sudo service ssh start
+
+#安装gufw图形化防火墙配置工具
+sudo apt install gufw
+</code></pre>
+
+<p>打开防火墙配置（gufw），要是不知道如何配置，搜一下吧～</p>
+
+<h1 id="安装tlp-tlp-rdw-设置充电阀值">安装tlp, tlp-rdw：设置充电阀值</h1>
+
+<p>保护电池用啦～关于电池，有一条：最好的电池电量是40%-60%。我设置我的电脑到70%停止充电。</p>
+
+<pre><code>sudo apt install tlp, tlp-rdw
+sudo tlp start
+</code></pre>
+
+<p>tlp可以设置充电阀值，详见<a href="https://wiki.archlinux.org/index.php/TLP_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)">arch linux wiki</a></p>
+
+<p>实际上我没有用tlp，因为发现在windows下配置了之后，就不需要在ubuntu上再做设置了。</p>
+
+<h1 id="最后">最后</h1>
+
+<p>我说过x1 carbon带给我了windows的最好体验，但是对于开发者，windows还是有些不足的，甚至Macos也有些不舒服。经过一番折腾，ubuntu成为了我喜欢的样子，比较开心。</p>
+  </div>
+  
+    
+        
+<script src="https://utteranc.es/client.js"
+        repo="arloor/blog"
+        issue-term="pathname"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+        
+</script>
+
+<script>
+document.head.insertAdjacentHTML("beforeend", "<style>\n    .utterances {\n      position: relative;\n      box-sizing: border-box;\n      width: 100%;\n      max-width: 100%;\n      margin-left: auto;\n      margin-right: auto;\n    }\n    .utterances-frame {\n      position: absolute;\n      left: 0;\n      right: 0;\n      width: 1px;\n      min-width: 100%;\n      max-width: 100%;\n      height: 100%;\n      border: 0;\n    }\n  </style>");
+</script>
+
+    
+
+
+  
+
+<div class="navigation navigation-single">
+    
+    <a href="/posts/netty/proxynew-break-the-wall-by-netty/" class="navigation-prev">
+      <i aria-hidden="true" class="fa fa-chevron-left"></i>
+      <span class="navigation-tittle">HttpProxy-基于netty的翻墙代理</span>
+    </a>
+    
+    
+    <a href="/posts/docker/docker-first-use/" class="navigation-next">
+      <span class="navigation-tittle">docker使用笔记</span>
+      <i aria-hidden="true" class="fa fa-chevron-right"></i>
+    </a>
+    
+</div>
+
+
+  
+
+</article>
+
+
+        </div>
+        
+    
+  
+  
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-133187648-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+<script defer src="https://use.fontawesome.com/releases/v5.5.0/js/all.js" integrity="sha384-GqVMZRt5Gn7tB9D9q7ONtcp4gtHIUEW/yG7h98J7IpE3kpi+srfFyyB/04OV6pG0" crossorigin="anonymous"></script>
+
+
+    
+    
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/highlight.min.js"></script>
+        
+    
+    <script type="text/javascript">
+        
+        hljs.initHighlightingOnLoad();
+    </script>
+    
+
+
+
+
+
+
+    
+
+
+
+    </body>
+</html>

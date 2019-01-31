@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>ARLOOR</title>
+    <link>https://arloor.com/</link>
+    <description>Recent content on ARLOOR</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Wed, 30 Jan 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://arloor.com/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>安卓Vpn开发思路</title>
+      <link>https://arloor.com/posts/other/android-vpnservice-and-vpn-dev/</link>
+      <pubDate>Wed, 30 Jan 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://arloor.com/posts/other/android-vpnservice-and-vpn-dev/</guid>
+      <description>&lt;p&gt;经过2个月的开发，我的http代理可以说没有遗憾了，当然还有可以改进的地方，比如多用户认证啥的，但是没有必要啦。&lt;/p&gt;
+
+&lt;p&gt;为了在安卓上也能愉快地使用自己开发的代理，研究了一下安卓Vpnservice，在此记录一下当前的进度，并确定以后的开发思路。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>HttpProxy一键安装</title>
+      <link>https://arloor.com/posts/other/proxynew-docker-install/</link>
+      <pubDate>Mon, 21 Jan 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://arloor.com/posts/other/proxynew-docker-install/</guid>
+      <description>为了方便其他同学在自己的服务器上安装HttpProxy，搞了一个简单的部署方式。不得不说docker很香
+使用说明 系统需要是centos 7
+开始安装 这个部署使用了docker镜像，高玩可以研究一下，普通玩家可以直接复制运行应该就可以了。
+首先需要安装docker，然后再拉取docker镜像，最后运行，下面开始
+安装docker 安装相关依赖</description>
+    </item>
+    
+    <item>
+      <title>centos7配置使用</title>
+      <link>https://arloor.com/posts/linux/centos7-some-tweaks/</link>
+      <pubDate>Fri, 18 Jan 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://arloor.com/posts/linux/centos7-some-tweaks/</guid>
+      <description>&lt;p&gt;买了搬瓦工家的vps，相关配置记录一下。时隔两年又用回了搬瓦工，搬瓦工不是屌丝了，我也不是小白了。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>基于netty的http服务器实现</title>
+      <link>https://arloor.com/posts/netty/httpserver-on-netty/</link>
+      <pubDate>Thu, 10 Jan 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://arloor.com/posts/netty/httpserver-on-netty/</guid>
+      <description>&lt;p&gt;现在发现自己代理的一个问题，准备将代理的http请求解析改用netty自带的一些组件，所以来研究一下netty源码中http服务器的实现。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>java-AES加密后再Base64混淆</title>
+      <link>https://arloor.com/posts/other/java-aes128-then-base64/</link>
+      <pubDate>Fri, 04 Jan 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://arloor.com/posts/other/java-aes128-then-base64/</guid>
+      <description>&lt;p&gt;这是上一篇&lt;a href=&#34;https://arloor.com/posts/other/java-aes128加密.代码与一些约定/&#34;&gt;java-AES128加密-代码与一些约定&lt;/a&gt;的后续。这一篇将会记录自己看到的在AES128之后所做的混淆。混淆原来为c语言实现，自己转成了java实现。感觉这一套比较好用，所以记下来变成自己的😁咳咳，最终发现这个混淆就是对Base64的一个实现，只是将64个可打印字符的顺序弄乱了。所以我有了自定义Base64来实现混淆的代码？？？黑人问号&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>java-AES128加密-代码与一些约定</title>
+      <link>https://arloor.com/posts/other/java-aes128/</link>
+      <pubDate>Thu, 03 Jan 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://arloor.com/posts/other/java-aes128/</guid>
+      <description>&lt;p&gt;在爬虫岗位实习，免不了接触加密解密，今天的工作中踩了一些java AES128加密的坑，也学习到了一些加密的常用做法。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>docker使用笔记</title>
+      <link>https://arloor.com/posts/docker/docker-first-use/</link>
+      <pubDate>Wed, 02 Jan 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://arloor.com/posts/docker/docker-first-use/</guid>
+      <description>&lt;p&gt;docker很火，所以我想入门。这篇文章是记录学习的，所以可能很乱，称为杂说&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>把ubuntu18.04 变成我的ubuntu</title>
+      <link>https://arloor.com/posts/linux/turn-ubuntu-mine-own/</link>
+      <pubDate>Tue, 01 Jan 2019 13:14:59 +0800</pubDate>
+      
+      <guid>https://arloor.com/posts/linux/turn-ubuntu-mine-own/</guid>
+      <description>&lt;p&gt;拿到一个电脑的第一件事，当然是把他变成自己的电脑。装上ubuntu之后的第一件事就是变成自己的ubuntu啦。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>HttpProxy-基于netty的翻墙代理</title>
+      <link>https://arloor.com/posts/netty/proxynew-break-the-wall-by-netty/</link>
+      <pubDate>Mon, 31 Dec 2018 23:55:22 +0800</pubDate>
+      
+      <guid>https://arloor.com/posts/netty/proxynew-break-the-wall-by-netty/</guid>
+      <description>&lt;p&gt;暑假使用java NIO实现了一个java http代理。那个http代理远远不算完善：两个线程，不能翻墙。之后学习了netty，并且使用netty实现了一个可翻墙的http代理，经过一个多月的使用，十分满意。今天来记录一下这里面值得写下来的东西。&lt;/p&gt;
+
+&lt;p&gt;先放项目地址&lt;a href=&#34;https://github.com/arloor/HttpProxy&#34;&gt;HttpProxy&lt;/a&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Ubuntu Desktop Entry Example</title>
+      <link>https://arloor.com/posts/linux/ubuntu-desktop-entry-example/</link>
+      <pubDate>Mon, 31 Dec 2018 23:52:22 +0800</pubDate>
+      
+      <guid>https://arloor.com/posts/linux/ubuntu-desktop-entry-example/</guid>
+      <description>&lt;p&gt;steam.desktop的内容，可以仿照&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Shell关闭占用某端口的应用</title>
+      <link>https://arloor.com/posts/linux/shell-close-process-that-hold-some-port/</link>
+      <pubDate>Sun, 30 Dec 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://arloor.com/posts/linux/shell-close-process-that-hold-some-port/</guid>
+      <description>&lt;p&gt;现在在自己的centos7上跑了应用，有个需求：重启该应用。实现如下&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Netty直接内存溢出问题解决</title>
+      <link>https://arloor.com/posts/netty/netty-direct-memory-leak/</link>
+      <pubDate>Mon, 10 Dec 2018 20:24:51 +0800</pubDate>
+      
+      <guid>https://arloor.com/posts/netty/netty-direct-memory-leak/</guid>
+      <description>&lt;h2 id=&#34;问题&#34;&gt;问题&lt;/h2&gt;
+
+&lt;p&gt;自己用netty实现的代理，在测速、下载（跑满网速）的情况下总是会报OutOfDirectMemory异常。&lt;/p&gt;
+
+&lt;h2 id=&#34;原因及解决&#34;&gt;原因及解决&lt;/h2&gt;
+
+&lt;p&gt;在github netty项目下有这样一个&lt;a href=&#34;https://github.com/netty/netty/issues/7699&#34;&gt;issue&lt;/a&gt;。描述了这样一个问题。&lt;/p&gt;
+
+&lt;p&gt;总结一下里面说的。出现这个异常有两种情况，pooled buf没有release；写太快，超过了极限。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Proxyme-基于javaNIO的http代理</title>
+      <link>https://arloor.com/posts/netty/proxyme-based-on-javanio/</link>
+      <pubDate>Tue, 14 Aug 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://arloor.com/posts/netty/proxyme-based-on-javanio/</guid>
+      <description>proxyme 一个http代理 使用java NIO的http代理。支持https。建议不要再chrome上使用本代理，因为chrome本身会请求很多谷歌的api，结果被墙住了，又只有两个线程，导致其他都被阻塞，很尴尬。
+之前也打算做过这个东西，结果做出来的有点缺陷（现在想可能是selector中锁的问题，忘记了）。这大概隔了半年，这个项目的http代理功能实现了。
+源码地址 https://github.com/arloor/proxyme
+运行日志 11:23:08.883 [main] INFO com.</description>
+    </item>
+    
+    <item>
+      <title>spring cloud学习（二）</title>
+      <link>https://arloor.com/posts/%E5%BE%AE%E6%9C%8D%E5%8A%A1/spring_cloud-study-two/</link>
+      <pubDate>Fri, 22 Jun 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://arloor.com/posts/%E5%BE%AE%E6%9C%8D%E5%8A%A1/spring_cloud-study-two/</guid>
+      <description>&lt;p&gt;spring cloud学习（一）中已经了有了注册与发现、服务消费、负载均衡、断路器。但是这不是完整的微服务架构。&lt;/p&gt;
+
+&lt;p&gt;在微服务架构中，需要几个基础的服务治理组件，包括服务注册与发现、服务消费、负载均衡、断路器、智能路由、配置管理等，由这几个基础组件相互协作，共同组建了一个简单的微服务系统。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>spring cloud学习（一）</title>
+      <link>https://arloor.com/posts/%E5%BE%AE%E6%9C%8D%E5%8A%A1/spring_cloud-study-one/</link>
+      <pubDate>Thu, 21 Jun 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://arloor.com/posts/%E5%BE%AE%E6%9C%8D%E5%8A%A1/spring_cloud-study-one/</guid>
+      <description>作死了解一下spring cloud。当然，不知道能了解到什么程度。先作一死。
+找到了一个博客，准备照着那个博客来搞搞博客地址。这个博客的好处是原理和介绍带一些，代码、pom、配置全都在博客中可以直接复制。第二点——可以直接复制黏贴实践，第一点——复制了能让你知道复制的是干了嘛。当然，原理和介绍稍微有点少，所以哈，最好还是提前了解一些微服务的一些概念。
+先讲一下我的环境。jdk1.8.0_171+springboot 1.5.2.RELEASE+spring cloud Dalston.RC1 。事实证明，因为springcloud这个项目还在快速的变化之中，版本之间的变化很快，所以版本对应就很重要。
+github源码地址：https://github.com/arloor/cloud/</description>
+    </item>
+    
+    <item>
+      <title>微服务架构是什么</title>
+      <link>https://arloor.com/posts/%E5%BE%AE%E6%9C%8D%E5%8A%A1/what-is-microservice/</link>
+      <pubDate>Thu, 21 Jun 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://arloor.com/posts/%E5%BE%AE%E6%9C%8D%E5%8A%A1/what-is-microservice/</guid>
+      <description>&lt;p&gt;最近总是能看得到微服务这个概念，今天来整理一下微服务的相关概念。内容源自《微服务架构与实践》王磊&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>opencv c&#43;&#43;学习</title>
+      <link>https://arloor.com/posts/other/opencv-c&#43;&#43;-study/</link>
+      <pubDate>Fri, 15 Jun 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://arloor.com/posts/other/opencv-c&#43;&#43;-study/</guid>
+      <description>终于来搞搞opencv啦。。
+在windows上安装opencv，并且创建visual studio 2017项目 本来想要用clion的，但是编译源码总是出错，就直接用vs2017了。。。
+安装 在opencv的release页面下载opencv3.4.1的win pack。win pack是opencv适用于vs的免编译版本。</description>
+    </item>
+    
+    <item>
+      <title>redis与springboot整合学习</title>
+      <link>https://arloor.com/posts/springboot/redis%E4%B8%8Espringboot%E6%95%B4%E5%90%88%E5%AD%A6%E4%B9%A0/</link>
+      <pubDate>Fri, 15 Jun 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://arloor.com/posts/springboot/redis%E4%B8%8Espringboot%E6%95%B4%E5%90%88%E5%AD%A6%E4%B9%A0/</guid>
+      <description>&lt;p&gt;最近在做一个电商网站。今天想要实现一下购物车的功能。&lt;/p&gt;
+
+&lt;p&gt;考虑问题如下：用户访问购物车会比较频繁，而且经常更改（比如修改数字）。对于后端的数据来说，也就是读写都很频繁。于是考虑通过redis，来减少对数据库的读写。&lt;/p&gt;
+
+&lt;p&gt;就研究一下怎么使用redis以及整合到springboot中。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>DERA</title>
+      <link>https://arloor.com/portfolio/dera/</link>
+      <pubDate>Thu, 21 Jun 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://arloor.com/portfolio/dera/</guid>
+      <description>This is a Java reference implementation of dynamic event-driven actors runtime aiming at providing adequate abstraction levels and mechanisms for modelling and developing (distributed) event-based systems.</description>
+    </item>
+    
+    <item>
+      <title>hyde-hyde</title>
+      <link>https://arloor.com/portfolio/hyde-hyde/</link>
+      <pubDate>Sat, 27 Jan 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://arloor.com/portfolio/hyde-hyde/</guid>
+      <description>Hyde-hyde is a responsive Hugo theme inspired by @spf13&amp;rsquo;s Hyde and its variant Nate Finch&amp;rsquo;s blog.</description>
+    </item>
+    
+    <item>
+      <title>LaraMod</title>
+      <link>https://arloor.com/portfolio/laramod/</link>
+      <pubDate>Fri, 19 Jan 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://arloor.com/portfolio/laramod/</guid>
+      <description>LaraMod is another modularisation effort to systematically organising a Laravel based project.</description>
+    </item>
+    
+    <item>
+      <title>About Hugo</title>
+      <link>https://arloor.com/about/</link>
+      <pubDate>Wed, 09 Apr 2014 00:00:00 +0000</pubDate>
+      
+      <guid>https://arloor.com/about/</guid>
+      <description>Hugo is a static site engine written in Go.
+It makes use of a variety of open source projects including:</description>
+    </item>
+    
+    <item>
+      <title>归档</title>
+      <link>https://arloor.com/archives/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://arloor.com/archives/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

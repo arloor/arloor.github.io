@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Ubuntu on ARLOOR</title>
+    <link>https://arloor.com/categories/ubuntu/</link>
+    <description>Recent content in Ubuntu on ARLOOR</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Tue, 01 Jan 2019 13:14:59 +0800</lastBuildDate>
+    
+	<atom:link href="https://arloor.com/categories/ubuntu/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>把ubuntu18.04 变成我的ubuntu</title>
+      <link>https://arloor.com/posts/linux/turn-ubuntu-mine-own/</link>
+      <pubDate>Tue, 01 Jan 2019 13:14:59 +0800</pubDate>
+      
+      <guid>https://arloor.com/posts/linux/turn-ubuntu-mine-own/</guid>
+      <description>&lt;p&gt;拿到一个电脑的第一件事，当然是把他变成自己的电脑。装上ubuntu之后的第一件事就是变成自己的ubuntu啦。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Ubuntu Desktop Entry Example</title>
+      <link>https://arloor.com/posts/linux/ubuntu-desktop-entry-example/</link>
+      <pubDate>Mon, 31 Dec 2018 23:52:22 +0800</pubDate>
+      
+      <guid>https://arloor.com/posts/linux/ubuntu-desktop-entry-example/</guid>
+      <description>&lt;p&gt;steam.desktop的内容，可以仿照&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

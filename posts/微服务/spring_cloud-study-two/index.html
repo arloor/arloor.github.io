@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="en">
+    
+    
+
+
+    <head>
+    <link href="https://gmpg.org/xfn/11" rel="profile">
+    <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta http-equiv="Cache-Control" content="public" />
+<!-- Enable responsiveness on mobile devices -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<meta name="generator" content="Hugo 0.53" />
+
+    
+    
+    
+
+<title>spring cloud学习（二） • ARLOOR</title>
+
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="spring cloud学习（二）"/>
+<meta name="twitter:description" content="spring cloud学习（一）中已经了有了注册与发现、服务消费、负载均衡、断路器。但是这不是完整的微服务架构。
+
+在微服务架构中，需要几个基础的服务治理组件，包括服务注册与发现、服务消费、负载均衡、断路器、智能路由、配置管理等，由这几个基础组件相互协作，共同组建了一个简单的微服务系统。"/>
+
+<meta property="og:title" content="spring cloud学习（二）" />
+<meta property="og:description" content="spring cloud学习（一）中已经了有了注册与发现、服务消费、负载均衡、断路器。但是这不是完整的微服务架构。
+
+在微服务架构中，需要几个基础的服务治理组件，包括服务注册与发现、服务消费、负载均衡、断路器、智能路由、配置管理等，由这几个基础组件相互协作，共同组建了一个简单的微服务系统。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://arloor.com/posts/%E5%BE%AE%E6%9C%8D%E5%8A%A1/spring_cloud-study-two/" /><meta property="article:published_time" content="2018-06-22T00:00:00&#43;00:00"/>
+<meta property="article:modified_time" content="2018-06-22T00:00:00&#43;00:00"/><meta property="og:site_name" content="Title" />
+
+
+    
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/scss/hyde-hyde.e0e469ad030f6f6906870f8469432a17e9699a3466fb4a1ab7ba3b03fc407e37.css" integrity="sha256-4ORprQMPb2kGhw&#43;EaUMqF&#43;lpmjRm&#43;0oat7o7A/xAfjc=">
+
+
+<link rel="stylesheet" href="/scss/print.2744dcbf8a0b2e74f8a50e4b34e5f441be7cf93cc7de27029121c6a09f9e77bc.css" integrity="sha256-J0Tcv4oLLnT4pQ5LNOX0Qb58&#43;TzH3icCkSHGoJ&#43;ed7w=" media="print">
+
+
+
+
+<link rel="stylesheet" href="/scss/hugo-toc.8549a64d301421b4256ea9a0d5ca8b99178799f569d5d2daeb95f24cef3ce6b7.css" integrity="sha256-hUmmTTAUIbQlbqmg1cqLmReHmfVp1dLa65XyTO885rc=">
+
+
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <!-- Icons -->
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+    <link rel="shortcut icon" href="/favicon.png">
+    
+
+</head>
+
+
+    <body class=" ">
+    
+<div class="sidebar">
+  <div class="container ">
+    <div class="sidebar-about">
+      <span class="site__title">
+        <a href="https://arloor.com/">ARLOOR</a>
+      </span>
+      
+        
+        
+        
+        <div class="author-image">
+          <img src="https://arloor.com//img/head.jpeg" alt="Author Image" class="img--circle img--headshot element--center">
+        </div>
+        
+      
+      
+      <p class="site__description">
+        
+      </p>
+    </div>
+    <div class="collapsible-menu">
+      <input type="checkbox" id="menuToggle">
+      <label for="menuToggle">ARLOOR</label>
+      <div class="menu-content">
+        <div>
+	<ul class="sidebar-nav">
+		 
+		 
+			 
+				<li>
+					<a href="/categories/">
+						<span>分类</span>
+					</a>
+				</li>
+			 
+		 
+			 
+				<li>
+					<a href="/posts/">
+						<span>文章</span>
+					</a>
+				</li>
+			 
+		 
+			 
+				<li>
+					<a href="/tags/">
+						<span>标签</span>
+					</a>
+				</li>
+			 
+		 
+			 
+				<li>
+					<a href="/about/">
+						<span>About</span>
+					</a>
+				</li>
+			 
+		
+		</li>
+	</ul>
+</div>
+
+        <section class="social">
+	
+	
+	
+	<a href="https://github.com/arloor" rel="me"><i class="fab fa-github fa-lg" aria-hidden="true"></i></a>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<a href="mailto:admin@arloor.com" rel="me"><i class="fas fa-at fa-lg" aria-hidden="true"></i></a>
+	
+</section>
+
+      </div>
+    </div>
+    
+<div class="copyright">
+  &copy; 2019 htr3n
+  
+    <a href="https://creativecommons.org/licenses/by-sa/4.0">CC BY-SA 4.0</a>
+  
+</div>
+
+
+<div class="builtwith">
+Built with <a href="https://gohugo.io">Hugo</a> ❤️ <a href="https://github.com/htr3n/hyde-hyde">hyde-hyde</a>.
+</div>
+
+
+  </div>
+</div>
+
+        <div class="content container">
+            
+    <article>
+  <header>
+    <h1>spring cloud学习（二）</h1>
+    
+    
+<div class="post__meta">
+    
+    
+      <i class="fas fa-calendar-alt"></i> Jun 22, 2018
+    
+    
+    
+      
+      
+          in
+          
+          
+              <a class="badge badge-category" href="/categories/java">JAVA</a>
+              •
+          
+              <a class="badge badge-category" href="/categories/%E5%BE%AE%E6%9C%8D%E5%8A%A1">微服务</a>
+              
+          
+      
+    
+    
+    
+      
+      
+          <br/>
+           <i class="fas fa-tags"></i>
+          
+          <a class="badge badge-tag" href="/tags/program">program</a>
+          
+      
+    
+    
+    <br/>
+    <i class="fas fa-clock"></i> 2 min read
+</div>
+
+
+  </header>
+  
+  
+  <div class="toc-wrapper">
+    <input type="checkbox" id="tocToggle">
+    <label for="tocToggle">Table of Content</label>
+    
+        <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#模块-4-service-zuul">模块 4-service-zuul</a>
+<ul>
+<li><a href="#服务路由功能">服务路由功能</a></li>
+<li><a href="#服务过滤功能">服务过滤功能</a></li>
+</ul></li>
+<li><a href="#模块-5-config-server">模块 5-config-server</a></li>
+<li><a href="#模块-6-config-client">模块 6-config-client</a></li>
+<li><a href="#高可用的配置中心">高可用的配置中心</a>
+<ul>
+<li><a href="#创建-启动一个服务注册中心">创建/启动一个服务注册中心</a></li>
+<li><a href="#改造模块-5-config-server-将其改成eureka-client">改造模块 5-config-server 将其改成eureka client</a></li>
+<li><a href="#改造模块-6-config-client-将其改造成eureka-client">改造模块 6-config-client 将其改造成eureka client</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
+    
+  </div>
+  
+  <div class="post">
+    <p>spring cloud学习（一）中已经了有了注册与发现、服务消费、负载均衡、断路器。但是这不是完整的微服务架构。</p>
+
+<p>在微服务架构中，需要几个基础的服务治理组件，包括服务注册与发现、服务消费、负载均衡、断路器、智能路由、配置管理等，由这几个基础组件相互协作，共同组建了一个简单的微服务系统。</p>
+
+<h2 id="模块-4-service-zuul">模块 4-service-zuul</h2>
+
+<p>zuul的主要功能是路由转发和过滤器。路由功能是微服务的一部分，比如／api/user转发到到user服务，/api/shop转发到到shop服务。zuul默认和Ribbon结合实现了负载均衡的功能。</p>
+
+<h3 id="服务路由功能">服务路由功能</h3>
+
+<p>Main类:@EnableZuulProxy</p>
+
+<pre><code>@EnableZuulProxy//开启zuul路由
+@EnableEurekaClient
+@SpringBootApplication
+public class ServiceZuulApplication {
+
+    public static void main(String[] args) {
+        SpringApplication.run(ServiceZuulApplication.class, args);
+    }
+}
+</code></pre>
+
+<p>application.yml</p>
+
+<pre><code>eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+server:
+  port: 8769
+spring:
+  application:
+    name: service-zuul
+zuul:
+  routes:
+    api-a:
+      path: /api-a/**
+      serviceId: service-ribbon
+    api-b:
+      path: /api-b/**
+      serviceId: service-feign
+</code></pre>
+
+<p>application.yml还是有几个比较传统的配置：注册中心地址、端口、服务名。最后zuul.routes.*定义了路由配置。也就是：<code>/api-a/**</code>的走<code>service-ribbon</code>,<code>/api-b/**</code>的走<code>service-feign</code>。</p>
+
+<p>测试：把所有模块都跑起来，然后输入<code>http://localhost:8769/api-a/hi?name=moontell</code>，<code>http://localhost:8769/api-b/hi?name=moontell</code>，都能成功显示<code>hi moontell,i am from port:8763/2</code></p>
+
+<h3 id="服务过滤功能">服务过滤功能</h3>
+
+<p>首先讲一下这个服务过滤功能是啥。</p>
+
+<p>看代码就知道，实现服务过滤功能就是加了一个filter。看其实现和java web开发的过滤器也是很像的，就是对请求、响应进行修改。</p>
+
+<p>看代码：</p>
+
+<pre><code class="language-java">@Component
+public class MyFilter extends ZuulFilter {
+
+    private static Logger log = LoggerFactory.getLogger(MyFilter.class);
+    @Override
+    public String filterType() {
+        return &quot;pre&quot;;
+    }
+
+    @Override
+    public int filterOrder() {
+        return 0;
+    }
+
+    @Override
+    public boolean shouldFilter() {
+        return true;
+    }
+
+    @Override
+    public Object run() {
+        RequestContext ctx = RequestContext.getCurrentContext();
+        //获取当前请求
+        HttpServletRequest request = ctx.getRequest();
+        log.info(String.format(&quot;%s &gt;&gt;&gt; %s&quot;, request.getMethod(), request.getRequestURL().toString()));
+        //如果token为空，那么就写response。
+        Object accessToken = request.getParameter(&quot;token&quot;);
+        if(accessToken == null) {
+            log.warn(&quot;token is empty&quot;);
+            ctx.setSendZuulResponse(false);
+            ctx.setResponseStatusCode(401);
+            try {
+                ctx.getResponse().getWriter().write(&quot;token is empty&quot;);
+            }catch (Exception e){}
+
+            return null;
+        }
+        log.info(&quot;token permit&quot;);
+        return null;
+    }
+}
+</code></pre>
+
+<p>通过这段代码，就实现了一个验证token的功能。这个应该是以后Oauth2也会用到。</p>
+
+<p>filterType：返回一个字符串代表过滤器的类型，在zuul中定义了四种不同生命周期的过滤器类型，具体如下：
+- pre：路由之前
+- routing：路由之时
+- post： 路由之后
+- error：发送错误调用</p>
+
+<p>filterOrder：过滤的顺序</p>
+
+<p>shouldFilter：这里可以写逻辑判断，是否要过滤，本文true,永远过滤。</p>
+
+<p>run：过滤器的具体逻辑。可用很复杂，包括查sql，nosql去判断该请求到底有没有权限访问。</p>
+
+<h2 id="模块-5-config-server">模块 5-config-server</h2>
+
+<p>主类：@EnableConfigServer</p>
+
+<pre><code>@SpringBootApplication
+@EnableConfigServer
+public class ConfigServerApplication {
+
+    public static void main(String[] args) {
+        SpringApplication.run(ConfigServerApplication.class, args);
+    }
+}
+</code></pre>
+
+<p>application.properties</p>
+
+<pre><code>spring.application.name=config-server
+server.port=8888
+        
+spring.cloud.config.server.git.uri=https://github.com/arloor/cloud/ #就是本项目了
+spring.cloud.config.server.git.searchPaths=config#仓库下的路径
+spring.cloud.config.label=master
+spring.cloud.config.server.git.username=your username#如果是公开项目不需要设置
+spring.cloud.config.server.git.password=your password##如果是公开项目不需要设置
+</code></pre>
+
+<p>主类依然只需要加上一个注解@EnableConfigServer，然后在application.propertities上加上git仓库的配置。spring cloud config是查询git仓库内容进行配置的。</p>
+
+<p>在如上的配置中，我项目的<code>{dir_root}\config\config-client-dev.properties</code>文件内容如下：</p>
+
+<pre><code>foo = foo version 5
+</code></pre>
+
+<p>启动服务，访问<a href="http://localhost:8888/foo/dev">http://localhost:8888/foo/dev</a>可以看到</p>
+
+<pre><code>{&quot;name&quot;:&quot;foo&quot;,&quot;profiles&quot;:[&quot;dev&quot;],&quot;label&quot;:&quot;master&quot;,&quot;version&quot;:&quot;213f32d6d577237186e71a9ae17aa52cd3a55ac0&quot;,&quot;state&quot;:null,&quot;propertySources&quot;:[]}
+</code></pre>
+
+<h2 id="模块-6-config-client">模块 6-config-client</h2>
+
+<p>主类：</p>
+
+<pre><code>@SpringBootApplication
+@RestController
+public class ConfigClientApplication {
+
+    public static void main(String[] args) {
+        SpringApplication.run(ConfigClientApplication.class, args);
+    }
+
+    @Value(&quot;${foo}&quot;)
+    String foo;
+    @RequestMapping(value = &quot;/hi&quot;)
+    public String hi(){
+        return foo;
+    }
+}
+</code></pre>
+
+<p>bootstrap.properties</p>
+
+<pre><code>spring.application.name=config-client
+spring.cloud.config.label=master
+spring.cloud.config.profile=dev
+spring.cloud.config.uri= http://localhost:8888/
+server.port=8881
+</code></pre>
+
+<p>注意！是bootstrap.application。最初虽然没有看懂spring cloud的文档，但是了解到有一个叫bootstrap的context上下文。这个context早于application的context启动。作为配置信息，确实需要在应用启动之前被加载好。</p>
+
+<p>可以看到主类中的<code>@Value(&quot;${foo}&quot;)String foo;</code>其实就是<code>config-server</code>所指定的git仓库中的<code>config-client-dev.properties</code>中定义的foo。这应该就是配置服务中心的一般使用方法，将本来在application.propertitis中的属性放到统一的git仓库中，允许不同微服务使用同一个值。</p>
+
+<p>启动服务，访问<a href="http://localhost:8881/hi">http://localhost:8881/hi</a>，显示</p>
+
+<pre><code>foo version 5
+</code></pre>
+
+<p>另外，为什么配置文件命名为<code>config-client-dev.properties</code>？</p>
+
+<p>因为http请求地址和资源文件映射如下:</p>
+
+<ul>
+<li>/{application}/{profile}[/{label}]</li>
+<li>/{application}-{profile}.yml</li>
+<li>/{label}/{application}-{profile}.yml</li>
+<li>/{application}-{profile}.properties</li>
+<li>/{label}/{application}-{profile}.properties</li>
+</ul>
+
+<p>在<code>6-config-client</code>中，有</p>
+
+<pre><code>spring.application.name=config-client
+spring.cloud.config.label=master
+spring.cloud.config.profile=dev
+</code></pre>
+
+<p>因此是<code>config-client-dev.properties</code></p>
+
+<h2 id="高可用的配置中心">高可用的配置中心</h2>
+
+<p>所谓高可用的配置服务中心，我感觉就是配置中心做一个冗余然后通过负载均衡，平衡压力。</p>
+
+<p>具体怎么操作，就是将配置中心服务纳入服务注册中心的管理，然后通过配置中心的服务名来调用配置中心的服务。</p>
+
+<p>下面来介绍一下怎么操作。</p>
+
+<h3 id="创建-启动一个服务注册中心">创建/启动一个服务注册中心</h3>
+
+<p>学习博客中，单独创建了一个新的服务注册中心，我觉得没有必要，就直接使用<code>0-eureka-server</code>这个服务注册中心。</p>
+
+<p>首先在@8761启动<code>0-eureka-server</code>实例，作为服务注册中心。</p>
+
+<h3 id="改造模块-5-config-server-将其改成eureka-client">改造模块 5-config-server 将其改成eureka client</h3>
+
+<p>所做的工作如下：</p>
+
+<ol>
+<li>pom增加eureka的依赖</li>
+<li>在application.yml中配置eureka server的地址</li>
+<li>增加@EnableEurekaClient注解（学习博客上写的是@EnableEureka，应该是错的）</li>
+</ol>
+
+<p>就是这么简单，说到底就是将配置中心注册一下。</p>
+
+<p>或者时候打开<a href="http://localhost:8761">http://localhost:8761</a>就能看到名为<code>config-server</code>的服务</p>
+
+<h3 id="改造模块-6-config-client-将其改造成eureka-client">改造模块 6-config-client 将其改造成eureka client</h3>
+
+<p>所作工作如下:</p>
+
+<ol>
+<li>pom增加eureka的依赖</li>
+<li>在bootstrap.porperties中配置eureka server的地址</li>
+<li>将以url使用config-server改为使用服务名的方式</li>
+<li>增加@EnableEurekaClient注解（学习博客上没有这一步、不知道是不是必须，反正加上）</li>
+</ol>
+
+<p>第三步所做的事就是改变<code>bootstrap.porperties</code>的如下几行：</p>
+
+<pre><code>### 服务配置中心地址——这种没有被纳入服务注册中心的管理
+#spring.cloud.config.uri= http://localhost:8888/
+
+### 将配置中心纳入服务注册中心管理，以实现高可用
+eureka.client.serviceUrl.defaultZone=http://localhost:8761/eureka/
+spring.cloud.config.discovery.enabled=true
+spring.cloud.config.discovery.serviceId=config-server
+</code></pre>
+
+<p>这样改造之后，就通过服务注册中心的方式使用了config-server。也就允许了冗余。</p>
+
+<p>学习博客中这样说：</p>
+
+<pre><code>这时发现，在读取配置文件不再写ip地址，而是服务名，这时如果配置服务部署多份，通过负载均衡，从而高可用。
+</code></pre>
+
+<p>不知道负载均衡需不需要单独配置。想来是不需要的，但还是提出这个疑问先。毕竟在config-client中没有引入ribbon这个负责负载均衡的包。。。先留个疑问在这吧。</p>
+  </div>
+  
+    
+        
+<script src="https://utteranc.es/client.js"
+        repo="arloor/blog"
+        issue-term="pathname"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+        
+</script>
+
+<script>
+document.head.insertAdjacentHTML("beforeend", "<style>\n    .utterances {\n      position: relative;\n      box-sizing: border-box;\n      width: 100%;\n      max-width: 100%;\n      margin-left: auto;\n      margin-right: auto;\n    }\n    .utterances-frame {\n      position: absolute;\n      left: 0;\n      right: 0;\n      width: 1px;\n      min-width: 100%;\n      max-width: 100%;\n      height: 100%;\n      border: 0;\n    }\n  </style>");
+</script>
+
+    
+
+
+  
+
+<div class="navigation navigation-single">
+    
+    <a href="/posts/%E5%BE%AE%E6%9C%8D%E5%8A%A1/spring_cloud-study-one/" class="navigation-prev">
+      <i aria-hidden="true" class="fa fa-chevron-left"></i>
+      <span class="navigation-tittle">spring cloud学习（一）</span>
+    </a>
+    
+    
+    <a href="/posts/netty/proxyme-based-on-javanio/" class="navigation-next">
+      <span class="navigation-tittle">Proxyme-基于javaNIO的http代理</span>
+      <i aria-hidden="true" class="fa fa-chevron-right"></i>
+    </a>
+    
+</div>
+
+
+  
+
+</article>
+
+
+        </div>
+        
+    
+  
+  
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-133187648-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+<script defer src="https://use.fontawesome.com/releases/v5.5.0/js/all.js" integrity="sha384-GqVMZRt5Gn7tB9D9q7ONtcp4gtHIUEW/yG7h98J7IpE3kpi+srfFyyB/04OV6pG0" crossorigin="anonymous"></script>
+
+
+    
+    
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/highlight.min.js"></script>
+        
+    
+    <script type="text/javascript">
+        
+        hljs.initHighlightingOnLoad();
+    </script>
+    
+
+
+
+
+
+
+    
+
+
+
+    </body>
+</html>

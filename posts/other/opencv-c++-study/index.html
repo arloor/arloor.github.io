@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="en">
+    
+    
+
+
+    <head>
+    <link href="https://gmpg.org/xfn/11" rel="profile">
+    <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta http-equiv="Cache-Control" content="public" />
+<!-- Enable responsiveness on mobile devices -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<meta name="generator" content="Hugo 0.53" />
+
+    
+    
+    
+
+<title>opencv c&#43;&#43;学习 • ARLOOR</title>
+
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="opencv c&#43;&#43;学习"/>
+<meta name="twitter:description" content="终于来搞搞opencv啦。。
+在windows上安装opencv，并且创建visual studio 2017项目 本来想要用clion的，但是编译源码总是出错，就直接用vs2017了。。。
+安装 在opencv的release页面下载opencv3.4.1的win pack。win pack是opencv适用于vs的免编译版本。"/>
+
+<meta property="og:title" content="opencv c&#43;&#43;学习" />
+<meta property="og:description" content="终于来搞搞opencv啦。。
+在windows上安装opencv，并且创建visual studio 2017项目 本来想要用clion的，但是编译源码总是出错，就直接用vs2017了。。。
+安装 在opencv的release页面下载opencv3.4.1的win pack。win pack是opencv适用于vs的免编译版本。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://arloor.com/posts/other/opencv-c&#43;&#43;-study/" /><meta property="article:published_time" content="2018-06-15T00:00:00&#43;00:00"/>
+<meta property="article:modified_time" content="2018-06-15T00:00:00&#43;00:00"/><meta property="og:site_name" content="Title" />
+
+
+    
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/scss/hyde-hyde.e0e469ad030f6f6906870f8469432a17e9699a3466fb4a1ab7ba3b03fc407e37.css" integrity="sha256-4ORprQMPb2kGhw&#43;EaUMqF&#43;lpmjRm&#43;0oat7o7A/xAfjc=">
+
+
+<link rel="stylesheet" href="/scss/print.2744dcbf8a0b2e74f8a50e4b34e5f441be7cf93cc7de27029121c6a09f9e77bc.css" integrity="sha256-J0Tcv4oLLnT4pQ5LNOX0Qb58&#43;TzH3icCkSHGoJ&#43;ed7w=" media="print">
+
+
+
+
+<link rel="stylesheet" href="/scss/hugo-toc.8549a64d301421b4256ea9a0d5ca8b99178799f569d5d2daeb95f24cef3ce6b7.css" integrity="sha256-hUmmTTAUIbQlbqmg1cqLmReHmfVp1dLa65XyTO885rc=">
+
+
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <!-- Icons -->
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+    <link rel="shortcut icon" href="/favicon.png">
+    
+
+</head>
+
+
+    <body class=" ">
+    
+<div class="sidebar">
+  <div class="container ">
+    <div class="sidebar-about">
+      <span class="site__title">
+        <a href="https://arloor.com/">ARLOOR</a>
+      </span>
+      
+        
+        
+        
+        <div class="author-image">
+          <img src="https://arloor.com//img/head.jpeg" alt="Author Image" class="img--circle img--headshot element--center">
+        </div>
+        
+      
+      
+      <p class="site__description">
+        
+      </p>
+    </div>
+    <div class="collapsible-menu">
+      <input type="checkbox" id="menuToggle">
+      <label for="menuToggle">ARLOOR</label>
+      <div class="menu-content">
+        <div>
+	<ul class="sidebar-nav">
+		 
+		 
+			 
+				<li>
+					<a href="/categories/">
+						<span>分类</span>
+					</a>
+				</li>
+			 
+		 
+			 
+				<li>
+					<a href="/posts/">
+						<span>文章</span>
+					</a>
+				</li>
+			 
+		 
+			 
+				<li>
+					<a href="/tags/">
+						<span>标签</span>
+					</a>
+				</li>
+			 
+		 
+			 
+				<li>
+					<a href="/about/">
+						<span>About</span>
+					</a>
+				</li>
+			 
+		
+		</li>
+	</ul>
+</div>
+
+        <section class="social">
+	
+	
+	
+	<a href="https://github.com/arloor" rel="me"><i class="fab fa-github fa-lg" aria-hidden="true"></i></a>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<a href="mailto:admin@arloor.com" rel="me"><i class="fas fa-at fa-lg" aria-hidden="true"></i></a>
+	
+</section>
+
+      </div>
+    </div>
+    
+<div class="copyright">
+  &copy; 2019 htr3n
+  
+    <a href="https://creativecommons.org/licenses/by-sa/4.0">CC BY-SA 4.0</a>
+  
+</div>
+
+
+<div class="builtwith">
+Built with <a href="https://gohugo.io">Hugo</a> ❤️ <a href="https://github.com/htr3n/hyde-hyde">hyde-hyde</a>.
+</div>
+
+
+  </div>
+</div>
+
+        <div class="content container">
+            
+    <article>
+  <header>
+    <h1>opencv c&#43;&#43;学习</h1>
+    
+    
+<div class="post__meta">
+    
+    
+      <i class="fas fa-calendar-alt"></i> Jun 15, 2018
+    
+    
+    
+      
+      
+          in
+          
+          
+              <a class="badge badge-category" href="/categories/opencv">OPENCV</a>
+              
+          
+      
+    
+    
+    
+      
+      
+          <br/>
+           <i class="fas fa-tags"></i>
+          
+          <a class="badge badge-tag" href="/tags/program">program</a>
+          
+      
+    
+    
+    <br/>
+    <i class="fas fa-clock"></i> 3 min read
+</div>
+
+
+  </header>
+  
+  
+  <div class="toc-wrapper">
+    <input type="checkbox" id="tocToggle">
+    <label for="tocToggle">Table of Content</label>
+    
+        <nav id="TableOfContents">
+<ul>
+<li><a href="#在windows上安装opencv-并且创建visual-studio-2017项目">在windows上安装opencv，并且创建visual studio 2017项目</a>
+<ul>
+<li><a href="#安装">安装</a></li>
+<li><a href="#配置vs2017-创建项目">配置vs2017 创建项目</a></li>
+</ul></li>
+<li><a href="#core模块">core模块</a>
+<ul>
+<li><a href="#mat">Mat</a></li>
+<li><a href="#matrix在内存中存储方式">matrix在内存中存储方式</a></li>
+<li><a href="#cv-lut函数-遍历每个像素并改变其值">cv::LUT函数 遍历每个像素并改变其值</a></li>
+<li><a href="#操作图片">操作图片</a></li>
+</ul></li>
+<li><a href="#vedeoio模块-调用摄像头-显示视频">vedeoio模块 调用摄像头、显示视频</a></li>
+</ul>
+</nav>
+    
+  </div>
+  
+  <div class="post">
+    
+
+<p>终于来搞搞opencv啦。。</p>
+
+<h1 id="在windows上安装opencv-并且创建visual-studio-2017项目">在windows上安装opencv，并且创建visual studio 2017项目</h1>
+
+<p>本来想要用clion的，但是编译源码总是出错，就直接用vs2017了。。。</p>
+
+<h2 id="安装">安装</h2>
+
+<p>在<a href="https://opencv.org/releases.html">opencv的release页面</a>下载opencv3.4.1的win pack。win pack是opencv适用于vs的免编译版本。</p>
+
+<p>下载好一个exe之后，双击安装到<code>D:\opencv34</code>。</p>
+
+<p>然后配置PATH环境变量，增加<code>D:\opencv34\build\x64\vc15\bin</code></p>
+
+<h2 id="配置vs2017-创建项目">配置vs2017 创建项目</h2>
+
+<p>现在就可以使用vs2017创建一个opencv项目了。</p>
+
+<p>vs2017需要安装&rdquo;使用c++的桌面开发&rdquo;工作负载</p>
+
+<p><img src="http://static.moontell.cn/images/vs2017%E5%AE%89%E8%A3%85%E9%80%89%E9%A1%B9.png" alt="vs2017安装选项" /></p>
+
+<p>如果有这一项，可以直接创建新项目了。新建项目-&gt;visual c++-&gt;windows控制台应用程序。（windows控制台程序应该不是必须，目前只会这个）</p>
+
+<p>在解决方案资源管理器中右击项目名，然后右击属性。可以直接<code>ALT+enter</code>快捷键打开属性页面</p>
+
+<p>首先将配置改为debug、平台改为x64!!!!!</p>
+
+<p><img src="http://static.moontell.cn/images/vc%2B%2B%E7%9B%AE%E5%BD%95%E9%85%8D%E7%BD%AE.png" alt="vc++目录" /></p>
+
+<p>在vc++目录中编辑包含目录，增加opencv的include目录，在这里是<code>D:\opencv34\build\include</code>、<code>D:\opencv34\build\include\opencv</code>、<code>D:\opencv34\build\include\opencv2</code></p>
+
+<p>在vc++目录中编辑库目录，增加opencv的库，在这里是<code>D:\opencv34\build\x64\vc15\lib</code>、<code>D:\opencv34\build\x64\vc15\bin</code></p>
+
+<p>然后在连接器-&gt;输入-&gt;外部依赖项中输入<code>opencv_world341d.lib</code>。这个文件在<code>D:\opencv34\build\x64\vc15\lib</code>中可以找到。说明——****d表示debug版本。不加d表示release版本。</p>
+
+<p><img src="http://static.moontell.cn/images/%E9%99%84%E5%8A%A0%E4%BE%9D%E8%B5%96%E9%A1%B9.png" alt="附加依赖项编辑" /></p>
+
+<p>现在就可以进行编程了，这是一个显示图片的例子</p>
+
+<p>注意：需要在debug和x64平台下编译和运行！！！！！</p>
+
+<pre><code>#include &quot;stdafx.h&quot;  //vs2017自定义
+#include &lt;opencv2/opencv.hpp&gt;
+#include&lt;opencv2\core\core.hpp&gt;  
+#include&lt;opencv2\highgui\highgui.hpp&gt;  
+using namespace cv;
+using namespace std;
+int main()
+{
+	// 读入一张图片    
+	Mat Image = imread(&quot;E:\\TIM.png&quot;);//路径自己改
+	// 创建一个名为 &quot;photo&quot;窗口    
+	cvNamedWindow(&quot;photo&quot;);
+	Size dsize = Size(Image.cols*0.5, Image.rows*0.5);
+	Mat dst(dsize, Image.type());
+	resize(Image, dst, dst.size());
+
+	// 在窗口中显示游戏原画    
+	imshow(&quot;photo&quot;, dst);
+	// 等待10000 ms后窗口自动关闭    
+	waitKey(10000);
+	return 0;
+}
+</code></pre>
+
+<p>应该能正常运行啦!</p>
+
+<h1 id="core模块">core模块</h1>
+
+<h2 id="mat">Mat</h2>
+
+<p>在早期的opencv中，使用了一个叫做<code>IplImage</code>的c语言数据结构来存储图像信息。这带来所有c语言的问题。最大的问题是需要手动内存管理。c++引入了类的概念使得可以自动内存管理（文档中加了more or less）。c++的唯一不足是当前大部分嵌入式设备只支持c语言。</p>
+
+<p>首先需要需要知道<code>Mat</code>不需要手动的分配内存空间和释放空间。尽管仍然可以手动分配Mat内容空间，但是大部分opencv的函数都会自动地分配输出数据的内存空间。另外一个好处是，已经被分配的<code>Mat</code>可以被复用。换一句话说，就是只需要使用需要的内存空间即可。</p>
+
+<p><code>Mat</code>这个类包含两部分信息：矩阵头信息和指向包含像素“值”的矩阵的指针。矩阵头信息包含：矩阵的大小、存储的方法、矩阵的地址等等。矩阵头信息中的矩阵大小是constant的，尽管矩阵本身大小会根据不同的图片改变。（mat代表一个图片，而mat由matrix实现，并且matrix会被复用。）</p>
+
+<p>opencv是图像处理库，传递图像给函数是一种普遍的操作。下面讲讲将大大降低程序速度的行为——复制大图片（拷贝操作）。</p>
+
+<p>首先<code>Mat A,B</code>只创建了A,B的header，并没有创建一个matrix实例。当进行读取图片操作时，才真正创建了matrix，并且将此matrix的指针给了Mat对象。当进行复制/赋值操作时，实际上被复制的是header信息和matrix指针，并没有进行“深拷贝”（将对象完全复制一遍）。看一段代码</p>
+
+<pre><code class="language-c++">Mat A, C;                          // creates just the header parts
+A = imread(argv[1], IMREAD_COLOR); // here we'll know the method used (allocate matrix)
+Mat B(A);                                 // Use the copy constructor
+C = A;                                    // Assignment operator
+</code></pre>
+
+<p>上面的所有Mat对象，最终都指向了一个matrix，只是他们可能拥有不同的header。这意味着一个<code>Mat</code>修改会影响其他的<code>Mat</code>。而不同的header决定了访问matrix的不同方式。</p>
+
+<p>例如，创建一个只关注某一矩形区域的Mat：</p>
+
+<pre><code class="language-c++">Mat D (A, Rect(10, 10, 100, 100) ); // using a rectangle
+Mat E = A(Range::all(), Range(1,3)); // using row and column boundaries
+</code></pre>
+
+<p>现在的问题是，既然这么多Mat都拥有Matrix的指针，谁负责释放Matrix。简单的回答是：最后使用它的人。这里面有一个引用计数的机制，当一个对象复制了mat的header，matrix的计数就会增加。当一个header被清除时，matrix的计数就会减少。减到0，matrix就会被清理。</p>
+
+<p>当然opencv也提供了复制matrix本身的方法：<code>cv::Mat::clone()</code>、<code>cv::Mat::copyTo()</code></p>
+
+<pre><code class="language-c++">Mat F = A.clone();
+Mat G;
+A.copyTo(G);
+</code></pre>
+
+<p>这样，Mat F、G的修改就不会影响到A。</p>
+
+<h2 id="matrix在内存中存储方式">matrix在内存中存储方式</h2>
+
+<p>那么在内存中，图片的matrix是怎么存储的呢？</p>
+
+<p>一句话：根据图片通道数量的不同，存储方式不同。以灰度图像和RGB图像为例</p>
+
+<p>灰度图像每列只有一个值
+<img src="https://docs.opencv.org/3.4.1/tutorial_how_matrix_stored_1.png" alt="灰度图像" /></p>
+
+<p>RGB图像每列有三个值，分别记录B、G、R的值
+<img src="https://docs.opencv.org/3.4.1/tutorial_how_matrix_stored_2.png" alt="RGB图像" /></p>
+
+<p><code>Mat M(200, 200, CV_8UC3, Scalar(0, 0, 255));</code>这段代码地含义是创建一个<code>CV_8UC3</code>类型地宽200，高200的图片，BGR值分别为0，0，255，也就是红色。详细解释见下</p>
+
+<p>Mat对象的type方法会返回图片的类型，最常见的图片类型是
+16对应<code>CV_8UC3</code>。对应关系见下表。8UC3含义是用8位（也就是char）无符号地（U）表示像素值，所以像素值范围0-255。C3表示3 Channel（3个通道）。</p>
+
+<table>
+<thead>
+<tr>
+<th></th>
+<th>C1</th>
+<th>C2</th>
+<th>C3</th>
+<th>C4</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>CV_8U</td>
+<td>0</td>
+<td>8</td>
+<td>16</td>
+<td>24</td>
+</tr>
+
+<tr>
+<td>CV_8S</td>
+<td>1</td>
+<td>9</td>
+<td>17</td>
+<td>25</td>
+</tr>
+
+<tr>
+<td>CV_16U</td>
+<td>2</td>
+<td>10</td>
+<td>18</td>
+<td>26</td>
+</tr>
+
+<tr>
+<td>CV_16S</td>
+<td>3</td>
+<td>11</td>
+<td>19</td>
+<td>27</td>
+</tr>
+
+<tr>
+<td>CV_32S</td>
+<td>4</td>
+<td>12</td>
+<td>20</td>
+<td>28</td>
+</tr>
+
+<tr>
+<td>CV_32F</td>
+<td>5</td>
+<td>13</td>
+<td>21</td>
+<td>29</td>
+</tr>
+
+<tr>
+<td>CV_64F</td>
+<td>6</td>
+<td>14</td>
+<td>22</td>
+<td>30</td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="cv-lut函数-遍历每个像素并改变其值">cv::LUT函数 遍历每个像素并改变其值</h2>
+
+<p>函数定义：<code>void LUT(InputArray src, InputArray lut, OutputArray dst)</code></p>
+
+<pre><code class="language-shell">Parameters: 都是Mat类型
+第一个参数：原始图像的地址； 
+第二个参数：查找表的地址，对于多通道图像的查找，它可以有一个通道，也可以与原始图像有相同的通道； 
+第三个参数：输出图像的地址。
+</code></pre>
+
+<p>对于多通道图像的查找，查找表可以有一个通道，也可以与原始图像有相同的通道</p>
+
+<p>给一个查找表的例子：</p>
+
+<pre><code>Mat lookUpTable(1, 256, CV_8U);
+uchar* p = lookUpTable.data; 
+for( int i = 0; i &lt; 256; ++i)
+   p[i] = 255-i;
+
+LUT(img,lut,img)
+</code></pre>
+
+<p>可以知道，一个像素点的取值为0-255。其中<code>p[i] = 255-i;</code> 下标i表示旧的像素值，255-i表示新的像素值。也就是原图中像素值为i的改变为255-i。这样的效果就是图片取反。类似的还可以做减少图片的色彩类型的功能，比如原来值在0-9变为0，10-19变为1&hellip;.那么lut[256]={0,0&hellip;..0,1,1&hellip;.,2&hellip;..,2&hellip;}就行</p>
+
+<h2 id="操作图片">操作图片</h2>
+
+<pre><code>Mat img = imread(filename)//读取图片
+Mat img = imread(filename, IMREAD_GRAYSCALE);//以灰度图像的形式读取RGB 3通道的图片
+
+imwrite(filename, img);//将图片写进文件，文件的格式取决于后缀。
+</code></pre>
+
+<p>获取某点的像素值：</p>
+
+<pre><code>//注意y在前、x在后
+//8UC1
+Scalar intensity = img.at&lt;uchar&gt;(y, x);
+
+
+//8UC3 最常用
+Vec3b intensity = img.at&lt;Vec3b&gt;(y, x);
+uchar blue = intensity.val[0];
+uchar green = intensity.val[1];
+uchar red = intensity.val[2];
+</code></pre>
+
+<p>对应关系如下：</p>
+
+<p>|  |C1| C2| C3| C4| C6
+|&mdash;|&mdash;|&mdash;|&ndash;|&mdash;|&mdash;|
+|uchar|uchar|   cv::Vec2b|  cv::Vec3b   |cv::Vec4b|
+|short|short|   cv::Vec2s|  cv::Vec3s|  cv::Vec4s|
+|int|int|   cv::Vec2i|  cv::Vec3i|  cv::Vec4i|
+|float|float|   cv::Vec2f|  cv::Vec3f|  cv::Vec4f|cv::Vec6f|
+|double|double| cv::Vec2d|  cv::Vec3d|  cv::Vec4d|  cv::Vec6d|</p>
+
+<p>同样的方法可以用于设置像素值：</p>
+
+<pre><code>//8UC3
+img.at&lt;uchar&gt;(y, x) = 128;
+</code></pre>
+
+<p>在操作过程中方便的显示图片的办法：</p>
+
+<pre><code>Mat img = imread(&quot;.....&quot;);
+cvNamedWindow(&quot;photo&quot;);//好像不是必须 另3.x是cvNamedWindow
+imshow(&quot;photo&quot;, img);
+waitKey();
+</code></pre>
+
+<p>缩小图片的方法</p>
+
+<pre><code>Size dsize = Size(Image.cols*0.5, Image.rows*0.5);
+Mat dst(dsize, Image.type());
+resize(Image, dst, dst.size());
+</code></pre>
+
+<h1 id="vedeoio模块-调用摄像头-显示视频">vedeoio模块 调用摄像头、显示视频</h1>
+
+<p>先放一段可以获取摄像头视频的代码：</p>
+
+<pre><code>#include &quot;stdafx.h&quot;
+#include &lt;opencv2/core.hpp&gt;
+#include &lt;opencv2/videoio.hpp&gt;
+#include &lt;opencv2/highgui.hpp&gt;
+#include &lt;iostream&gt;
+#include &lt;stdio.h&gt;
+using namespace cv;
+using namespace std;
+int main(int, char**)
+{
+	Mat frame;
+	//--- INITIALIZE VIDEOCAPTURE
+	VideoCapture cap;
+	// open the default camera using default API
+	cap.open(0);
+	// OR advance usage: select any API backend
+	int deviceID = 0;             // 0 = open default camera
+	int apiID = cv::CAP_ANY;      // 0 = autodetect default API
+								  // open selected camera using selected API
+	cap.open(deviceID + apiID);
+	// check if we succeeded
+	if (!cap.isOpened()) {
+		cerr &lt;&lt; &quot;ERROR! Unable to open camera\n&quot;;
+		return -1;
+	}
+	//--- GRAB AND WRITE LOOP
+	cout &lt;&lt; &quot;Start grabbing&quot; &lt;&lt; endl
+		&lt;&lt; &quot;Press any key to terminate&quot; &lt;&lt; endl;
+	for (;;)
+	{
+		// wait for a new frame from camera and store it into 'frame'
+		cap.read(frame);
+		// check if we succeeded
+		if (frame.empty()) {
+			cerr &lt;&lt; &quot;ERROR! blank frame grabbed\n&quot;;
+			break;
+		}
+		// show live and wait for a key with timeout long enough to show images
+		imshow(&quot;Live&quot;, frame);
+		if (waitKey(5) &gt;= 0)
+			break;
+	}
+	// the camera will be deinitialized automatically in VideoCapture destructor
+	return 0;
+}
+</code></pre>
+
+<p><code>cv::VideoCapture</code>这个类提供了进行视频操作的能力。这个本身依赖于FFmpeg开源库。video是由一连串的图片构成的，这些图片称之为帧（frame）。</p>
+
+<p>再搞搞怎么保存视频。在“合适”的地方加入下面代码。要是别的小伙伴看不懂“合适”，别骂我。。</p>
+
+<pre><code> //初始化
+ VideoWriter vw;     //新建一个多媒体文件  
+int fps = cap.get(CAP_PROP_FPS); //获取摄像头的帧率 
+if (fps &lt;= 0)fps = 25;
+//设置视频的格式  
+vw.open(&quot;E:\out.avi&quot;, VideoWriter::fourcc('M', 'J', 'P', 'G'), fps, Size(cap.get(CAP_PROP_FRAME_WIDTH), cap.get(CAP_PROP_FRAME_HEIGHT)));
+
+//for循环中
+vw.write(frame);   //将视频帧写入文件 
+</code></pre>
+
+<p>在一个博客中看到这样一段话：</p>
+
+<p>首先要先纠正个误区，我见有人用OpenCV做多媒体开发，真的是很搞笑，OpenCV这东西再强大，这方面也不行的，之所以把视频读取写入这部分做的强大一些，也是为了方便大家做视频处理的时候方便些，而且这部分也是基于vfw和ffmpeg二次开发的，功能还是很弱的。一定要记住一点，OpenCV是一个强大的计算机视觉库，而不是视频流编码器或者解码器。希望大家不要走入这个误区，可以把这部分简单单独看待。目前，OpenCV只支持avi的格式，而且生成的视频文件不能大于2GB，而且不能添加音频。如果你想突破这些限制，我建议你最好还是看看ffMpeg，而不是浪费时间在OpenCV上。</p>
+
+<p>哈哈，有时间看看ffmpeg吧</p>
+
+<p>还是看一下<code>VideoWriter</code>的构造函数或者open函数是什么意思吧</p>
+
+<pre><code>cv::VideoWriter::VideoWriter(
+const String &amp; 	filename,//文件名
+int 	fourcc,//格式
+double 	fps,//帧率
+Size 	frameSize,//帧大小
+bool 	isColor = true //是否彩色
+)
+</code></pre>
+
+<p>暂时到此为止吧。。。</p>
+
+  </div>
+  
+    
+        
+<script src="https://utteranc.es/client.js"
+        repo="arloor/blog"
+        issue-term="pathname"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+        
+</script>
+
+<script>
+document.head.insertAdjacentHTML("beforeend", "<style>\n    .utterances {\n      position: relative;\n      box-sizing: border-box;\n      width: 100%;\n      max-width: 100%;\n      margin-left: auto;\n      margin-right: auto;\n    }\n    .utterances-frame {\n      position: absolute;\n      left: 0;\n      right: 0;\n      width: 1px;\n      min-width: 100%;\n      max-width: 100%;\n      height: 100%;\n      border: 0;\n    }\n  </style>");
+</script>
+
+    
+
+
+  
+
+<div class="navigation navigation-single">
+    
+    <a href="/posts/springboot/redis%E4%B8%8Espringboot%E6%95%B4%E5%90%88%E5%AD%A6%E4%B9%A0/" class="navigation-prev">
+      <i aria-hidden="true" class="fa fa-chevron-left"></i>
+      <span class="navigation-tittle">redis与springboot整合学习</span>
+    </a>
+    
+    
+    <a href="/posts/%E5%BE%AE%E6%9C%8D%E5%8A%A1/what-is-microservice/" class="navigation-next">
+      <span class="navigation-tittle">微服务架构是什么</span>
+      <i aria-hidden="true" class="fa fa-chevron-right"></i>
+    </a>
+    
+</div>
+
+
+  
+
+</article>
+
+
+        </div>
+        
+    
+  
+  
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-133187648-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+<script defer src="https://use.fontawesome.com/releases/v5.5.0/js/all.js" integrity="sha384-GqVMZRt5Gn7tB9D9q7ONtcp4gtHIUEW/yG7h98J7IpE3kpi+srfFyyB/04OV6pG0" crossorigin="anonymous"></script>
+
+
+    
+    
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/highlight.min.js"></script>
+        
+    
+    <script type="text/javascript">
+        
+        hljs.initHighlightingOnLoad();
+    </script>
+    
+
+
+
+
+
+
+    
+
+
+
+    </body>
+</html>
