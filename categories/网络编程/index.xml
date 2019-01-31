@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>网络编程 on ARLOOR</title>
-    <link>https://arloor.com/categories/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/</link>
+    <link>https://arloor.github.io/categories/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/</link>
     <description>Recent content in 网络编程 on ARLOOR</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <lastBuildDate>Wed, 30 Jan 2019 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://arloor.com/categories/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://arloor.github.io/categories/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>安卓Vpn开发思路</title>
-      <link>https://arloor.com/posts/other/android-vpnservice-and-vpn-dev/</link>
+      <link>https://arloor.github.io/posts/other/android-vpnservice-and-vpn-dev/</link>
       <pubDate>Wed, 30 Jan 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://arloor.com/posts/other/android-vpnservice-and-vpn-dev/</guid>
+      <guid>https://arloor.github.io/posts/other/android-vpnservice-and-vpn-dev/</guid>
       <description>&lt;p&gt;经过2个月的开发，我的http代理可以说没有遗憾了，当然还有可以改进的地方，比如多用户认证啥的，但是没有必要啦。&lt;/p&gt;
 
 &lt;p&gt;为了在安卓上也能愉快地使用自己开发的代理，研究了一下安卓Vpnservice，在此记录一下当前的进度，并确定以后的开发思路。&lt;/p&gt;</description>
@@ -24,19 +24,19 @@
     
     <item>
       <title>基于netty的http服务器实现</title>
-      <link>https://arloor.com/posts/netty/httpserver-on-netty/</link>
+      <link>https://arloor.github.io/posts/netty/httpserver-on-netty/</link>
       <pubDate>Thu, 10 Jan 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://arloor.com/posts/netty/httpserver-on-netty/</guid>
+      <guid>https://arloor.github.io/posts/netty/httpserver-on-netty/</guid>
       <description>&lt;p&gt;现在发现自己代理的一个问题，准备将代理的http请求解析改用netty自带的一些组件，所以来研究一下netty源码中http服务器的实现。&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>HttpProxy-基于netty的翻墙代理</title>
-      <link>https://arloor.com/posts/netty/proxynew-break-the-wall-by-netty/</link>
+      <link>https://arloor.github.io/posts/netty/proxynew-break-the-wall-by-netty/</link>
       <pubDate>Mon, 31 Dec 2018 23:55:22 +0800</pubDate>
       
-      <guid>https://arloor.com/posts/netty/proxynew-break-the-wall-by-netty/</guid>
+      <guid>https://arloor.github.io/posts/netty/proxynew-break-the-wall-by-netty/</guid>
       <description>&lt;p&gt;暑假使用java NIO实现了一个java http代理。那个http代理远远不算完善：两个线程，不能翻墙。之后学习了netty，并且使用netty实现了一个可翻墙的http代理，经过一个多月的使用，十分满意。今天来记录一下这里面值得写下来的东西。&lt;/p&gt;
 
 &lt;p&gt;先放项目地址&lt;a href=&#34;https://github.com/arloor/HttpProxy&#34;&gt;HttpProxy&lt;/a&gt;&lt;/p&gt;</description>
@@ -44,10 +44,10 @@
     
     <item>
       <title>Proxyme-基于javaNIO的http代理</title>
-      <link>https://arloor.com/posts/netty/proxyme-based-on-javanio/</link>
+      <link>https://arloor.github.io/posts/netty/proxyme-based-on-javanio/</link>
       <pubDate>Tue, 14 Aug 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://arloor.com/posts/netty/proxyme-based-on-javanio/</guid>
+      <guid>https://arloor.github.io/posts/netty/proxyme-based-on-javanio/</guid>
       <description>proxyme 一个http代理 使用java NIO的http代理。支持https。建议不要再chrome上使用本代理，因为chrome本身会请求很多谷歌的api，结果被墙住了，又只有两个线程，导致其他都被阻塞，很尴尬。
 之前也打算做过这个东西，结果做出来的有点缺陷（现在想可能是selector中锁的问题，忘记了）。这大概隔了半年，这个项目的http代理功能实现了。
 源码地址 https://github.com/arloor/proxyme

@@ -2,48 +2,48 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Linux on ARLOOR</title>
-    <link>https://arloor.com/tags/linux/</link>
+    <link>https://arloor.github.io/tags/linux/</link>
     <description>Recent content in Linux on ARLOOR</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <lastBuildDate>Fri, 18 Jan 2019 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://arloor.com/tags/linux/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://arloor.github.io/tags/linux/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>centos7配置使用</title>
-      <link>https://arloor.com/posts/linux/centos7-some-tweaks/</link>
+      <link>https://arloor.github.io/posts/linux/centos7-some-tweaks/</link>
       <pubDate>Fri, 18 Jan 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://arloor.com/posts/linux/centos7-some-tweaks/</guid>
+      <guid>https://arloor.github.io/posts/linux/centos7-some-tweaks/</guid>
       <description>&lt;p&gt;买了搬瓦工家的vps，相关配置记录一下。时隔两年又用回了搬瓦工，搬瓦工不是屌丝了，我也不是小白了。&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>把ubuntu18.04 变成我的ubuntu</title>
-      <link>https://arloor.com/posts/linux/turn-ubuntu-mine-own/</link>
+      <link>https://arloor.github.io/posts/linux/turn-ubuntu-mine-own/</link>
       <pubDate>Tue, 01 Jan 2019 13:14:59 +0800</pubDate>
       
-      <guid>https://arloor.com/posts/linux/turn-ubuntu-mine-own/</guid>
+      <guid>https://arloor.github.io/posts/linux/turn-ubuntu-mine-own/</guid>
       <description>&lt;p&gt;拿到一个电脑的第一件事，当然是把他变成自己的电脑。装上ubuntu之后的第一件事就是变成自己的ubuntu啦。&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>Ubuntu Desktop Entry Example</title>
-      <link>https://arloor.com/posts/linux/ubuntu-desktop-entry-example/</link>
+      <link>https://arloor.github.io/posts/linux/ubuntu-desktop-entry-example/</link>
       <pubDate>Mon, 31 Dec 2018 23:52:22 +0800</pubDate>
       
-      <guid>https://arloor.com/posts/linux/ubuntu-desktop-entry-example/</guid>
+      <guid>https://arloor.github.io/posts/linux/ubuntu-desktop-entry-example/</guid>
       <description>&lt;p&gt;steam.desktop的内容，可以仿照&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>Shell关闭占用某端口的应用</title>
-      <link>https://arloor.com/posts/linux/shell-close-process-that-hold-some-port/</link>
+      <link>https://arloor.github.io/posts/linux/shell-close-process-that-hold-some-port/</link>
       <pubDate>Sun, 30 Dec 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://arloor.com/posts/linux/shell-close-process-that-hold-some-port/</guid>
+      <guid>https://arloor.github.io/posts/linux/shell-close-process-that-hold-some-port/</guid>
       <description>&lt;p&gt;现在在自己的centos7上跑了应用，有个需求：重启该应用。实现如下&lt;/p&gt;</description>
     </item>
     

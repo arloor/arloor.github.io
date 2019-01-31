@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Linux on ARLOOR</title>
-    <link>https://arloor.com/categories/linux/</link>
+    <link>https://arloor.github.io/categories/linux/</link>
     <description>Recent content in Linux on ARLOOR</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <lastBuildDate>Fri, 18 Jan 2019 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://arloor.com/categories/linux/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://arloor.github.io/categories/linux/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>centos7配置使用</title>
-      <link>https://arloor.com/posts/linux/centos7-some-tweaks/</link>
+      <link>https://arloor.github.io/posts/linux/centos7-some-tweaks/</link>
       <pubDate>Fri, 18 Jan 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://arloor.com/posts/linux/centos7-some-tweaks/</guid>
+      <guid>https://arloor.github.io/posts/linux/centos7-some-tweaks/</guid>
       <description>&lt;p&gt;买了搬瓦工家的vps，相关配置记录一下。时隔两年又用回了搬瓦工，搬瓦工不是屌丝了，我也不是小白了。&lt;/p&gt;</description>
     </item>
     

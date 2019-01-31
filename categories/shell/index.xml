@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Shell on ARLOOR</title>
-    <link>https://arloor.com/categories/shell/</link>
+    <link>https://arloor.github.io/categories/shell/</link>
     <description>Recent content in Shell on ARLOOR</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <lastBuildDate>Sun, 30 Dec 2018 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://arloor.com/categories/shell/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://arloor.github.io/categories/shell/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Shell关闭占用某端口的应用</title>
-      <link>https://arloor.com/posts/linux/shell-close-process-that-hold-some-port/</link>
+      <link>https://arloor.github.io/posts/linux/shell-close-process-that-hold-some-port/</link>
       <pubDate>Sun, 30 Dec 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://arloor.com/posts/linux/shell-close-process-that-hold-some-port/</guid>
+      <guid>https://arloor.github.io/posts/linux/shell-close-process-that-hold-some-port/</guid>
       <description>&lt;p&gt;现在在自己的centos7上跑了应用，有个需求：重启该应用。实现如下&lt;/p&gt;</description>
     </item>
     

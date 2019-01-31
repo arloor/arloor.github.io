@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Opencv on ARLOOR</title>
-    <link>https://arloor.com/categories/opencv/</link>
+    <link>https://arloor.github.io/categories/opencv/</link>
     <description>Recent content in Opencv on ARLOOR</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <lastBuildDate>Fri, 15 Jun 2018 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://arloor.com/categories/opencv/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://arloor.github.io/categories/opencv/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>opencv c&#43;&#43;学习</title>
-      <link>https://arloor.com/posts/other/opencv-c&#43;&#43;-study/</link>
+      <link>https://arloor.github.io/posts/other/opencv-c&#43;&#43;-study/</link>
       <pubDate>Fri, 15 Jun 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://arloor.com/posts/other/opencv-c&#43;&#43;-study/</guid>
+      <guid>https://arloor.github.io/posts/other/opencv-c&#43;&#43;-study/</guid>
       <description>终于来搞搞opencv啦。。
 在windows上安装opencv，并且创建visual studio 2017项目 本来想要用clion的，但是编译源码总是出错，就直接用vs2017了。。。
 安装 在opencv的release页面下载opencv3.4.1的win pack。win pack是opencv适用于vs的免编译版本。</description>

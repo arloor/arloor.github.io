@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>代理 on ARLOOR</title>
-    <link>https://arloor.com/categories/%E4%BB%A3%E7%90%86/</link>
+    <link>https://arloor.github.io/categories/%E4%BB%A3%E7%90%86/</link>
     <description>Recent content in 代理 on ARLOOR</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <lastBuildDate>Mon, 21 Jan 2019 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://arloor.com/categories/%E4%BB%A3%E7%90%86/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://arloor.github.io/categories/%E4%BB%A3%E7%90%86/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>HttpProxy一键安装</title>
-      <link>https://arloor.com/posts/other/proxynew-docker-install/</link>
+      <link>https://arloor.github.io/posts/other/proxynew-docker-install/</link>
       <pubDate>Mon, 21 Jan 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://arloor.com/posts/other/proxynew-docker-install/</guid>
+      <guid>https://arloor.github.io/posts/other/proxynew-docker-install/</guid>
       <description>为了方便其他同学在自己的服务器上安装HttpProxy，搞了一个简单的部署方式。不得不说docker很香
 使用说明 系统需要是centos 7
 开始安装 这个部署使用了docker镜像，高玩可以研究一下，普通玩家可以直接复制运行应该就可以了。

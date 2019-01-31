@@ -2,39 +2,39 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Projects on ARLOOR</title>
-    <link>https://arloor.com/portfolio/</link>
+    <link>https://arloor.github.io/portfolio/</link>
     <description>Recent content in Projects on ARLOOR</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <lastBuildDate>Thu, 21 Jun 2018 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://arloor.com/portfolio/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://arloor.github.io/portfolio/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>DERA</title>
-      <link>https://arloor.com/portfolio/dera/</link>
+      <link>https://arloor.github.io/portfolio/dera/</link>
       <pubDate>Thu, 21 Jun 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://arloor.com/portfolio/dera/</guid>
+      <guid>https://arloor.github.io/portfolio/dera/</guid>
       <description>This is a Java reference implementation of dynamic event-driven actors runtime aiming at providing adequate abstraction levels and mechanisms for modelling and developing (distributed) event-based systems.</description>
     </item>
     
     <item>
       <title>hyde-hyde</title>
-      <link>https://arloor.com/portfolio/hyde-hyde/</link>
+      <link>https://arloor.github.io/portfolio/hyde-hyde/</link>
       <pubDate>Sat, 27 Jan 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://arloor.com/portfolio/hyde-hyde/</guid>
+      <guid>https://arloor.github.io/portfolio/hyde-hyde/</guid>
       <description>Hyde-hyde is a responsive Hugo theme inspired by @spf13&amp;rsquo;s Hyde and its variant Nate Finch&amp;rsquo;s blog.</description>
     </item>
     
     <item>
       <title>LaraMod</title>
-      <link>https://arloor.com/portfolio/laramod/</link>
+      <link>https://arloor.github.io/portfolio/laramod/</link>
       <pubDate>Fri, 19 Jan 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://arloor.com/portfolio/laramod/</guid>
+      <guid>https://arloor.github.io/portfolio/laramod/</guid>
       <description>LaraMod is another modularisation effort to systematically organising a Laravel based project.</description>
     </item>
     

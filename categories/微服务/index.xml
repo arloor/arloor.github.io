@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>微服务 on ARLOOR</title>
-    <link>https://arloor.com/categories/%E5%BE%AE%E6%9C%8D%E5%8A%A1/</link>
+    <link>https://arloor.github.io/categories/%E5%BE%AE%E6%9C%8D%E5%8A%A1/</link>
     <description>Recent content in 微服务 on ARLOOR</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <lastBuildDate>Fri, 22 Jun 2018 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://arloor.com/categories/%E5%BE%AE%E6%9C%8D%E5%8A%A1/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://arloor.github.io/categories/%E5%BE%AE%E6%9C%8D%E5%8A%A1/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>spring cloud学习（二）</title>
-      <link>https://arloor.com/posts/%E5%BE%AE%E6%9C%8D%E5%8A%A1/spring_cloud-study-two/</link>
+      <link>https://arloor.github.io/posts/%E5%BE%AE%E6%9C%8D%E5%8A%A1/spring_cloud-study-two/</link>
       <pubDate>Fri, 22 Jun 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://arloor.com/posts/%E5%BE%AE%E6%9C%8D%E5%8A%A1/spring_cloud-study-two/</guid>
+      <guid>https://arloor.github.io/posts/%E5%BE%AE%E6%9C%8D%E5%8A%A1/spring_cloud-study-two/</guid>
       <description>&lt;p&gt;spring cloud学习（一）中已经了有了注册与发现、服务消费、负载均衡、断路器。但是这不是完整的微服务架构。&lt;/p&gt;
 
 &lt;p&gt;在微服务架构中，需要几个基础的服务治理组件，包括服务注册与发现、服务消费、负载均衡、断路器、智能路由、配置管理等，由这几个基础组件相互协作，共同组建了一个简单的微服务系统。&lt;/p&gt;</description>
@@ -24,10 +24,10 @@
     
     <item>
       <title>spring cloud学习（一）</title>
-      <link>https://arloor.com/posts/%E5%BE%AE%E6%9C%8D%E5%8A%A1/spring_cloud-study-one/</link>
+      <link>https://arloor.github.io/posts/%E5%BE%AE%E6%9C%8D%E5%8A%A1/spring_cloud-study-one/</link>
       <pubDate>Thu, 21 Jun 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://arloor.com/posts/%E5%BE%AE%E6%9C%8D%E5%8A%A1/spring_cloud-study-one/</guid>
+      <guid>https://arloor.github.io/posts/%E5%BE%AE%E6%9C%8D%E5%8A%A1/spring_cloud-study-one/</guid>
       <description>作死了解一下spring cloud。当然，不知道能了解到什么程度。先作一死。
 找到了一个博客，准备照着那个博客来搞搞博客地址。这个博客的好处是原理和介绍带一些，代码、pom、配置全都在博客中可以直接复制。第二点——可以直接复制黏贴实践，第一点——复制了能让你知道复制的是干了嘛。当然，原理和介绍稍微有点少，所以哈，最好还是提前了解一些微服务的一些概念。
 先讲一下我的环境。jdk1.8.0_171+springboot 1.5.2.RELEASE+spring cloud Dalston.RC1 。事实证明，因为springcloud这个项目还在快速的变化之中，版本之间的变化很快，所以版本对应就很重要。
@@ -36,10 +36,10 @@ github源码地址：https://github.com/arloor/cloud/</description>
     
     <item>
       <title>微服务架构是什么</title>
-      <link>https://arloor.com/posts/%E5%BE%AE%E6%9C%8D%E5%8A%A1/what-is-microservice/</link>
+      <link>https://arloor.github.io/posts/%E5%BE%AE%E6%9C%8D%E5%8A%A1/what-is-microservice/</link>
       <pubDate>Thu, 21 Jun 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://arloor.com/posts/%E5%BE%AE%E6%9C%8D%E5%8A%A1/what-is-microservice/</guid>
+      <guid>https://arloor.github.io/posts/%E5%BE%AE%E6%9C%8D%E5%8A%A1/what-is-microservice/</guid>
       <description>&lt;p&gt;最近总是能看得到微服务这个概念，今天来整理一下微服务的相关概念。内容源自《微服务架构与实践》王磊&lt;/p&gt;</description>
     </item>
     
