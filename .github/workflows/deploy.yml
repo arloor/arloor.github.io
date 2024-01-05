@@ -1,0 +1,54 @@
+name: Deploy
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+jobs:
+  all:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - name: Set outputs
+      id: vars
+      run: echo "sha_short=$(git rev-parse --short=8 HEAD)" >> $GITHUB_OUTPUT
+    - name: Set up gh-pages branch
+      env:
+        GH_TOKEN: ${{ github.token }}
+      run: |
+        rm -rf public
+        git config --global user.name "arloor"
+        git config --global user.email "admin@arloor.com"
+        if ! gh repo clone arloor/arloor.github.io public -- --depth=1 --single-branch -b gh-pages;
+        then
+          echo first time, create gh-pages branch
+          mkdir public
+          cd public
+          git init
+          git checkout --orphan gh-pages
+          git remote add origin https://github.com/arloor/arloor.github.io
+          cd ..
+        fi
+    - name: hugo build
+      run: |
+        hugoVersion="0.96.0"
+        hugoVersion="0.121.1"
+        hugoURL=https://github.com/gohugoio/hugo/releases/download/v${hugoVersion}/hugo_extended_${hugoVersion}_Linux-64bit.tar.gz
+        sudo apt install -y tar curl
+        mkdir /tmp/hugo
+        curl -Lf "$hugoURL" -o /tmp/hugo/hugo.tar.gz
+        tar -zxf /tmp/hugo/hugo.tar.gz -C /tmp/hugo/
+        install /tmp/hugo/hugo /usr/local/bin/
+        hugo -d public
+    - name: git auth
+      run: git config --global url.https://arloor:${{ github.token }}@github.com/.insteadOf https://github.com/
+    - name: commit and push
+      env:
+        GH_TOKEN: ${{ github.token }}
+      run: |
+        cd  public
+        git config user.name "arloor"
+        git config user.email "admin@arloor.com"
+        git add .&&git commit -m "${{ steps.vars.outputs.sha_short }}" && git push -u origin gh-pages -f || echo "nothing to commit"
