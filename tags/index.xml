@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tags on 八股文</title>
+    <link>https://arloor.github.io/tags/</link>
+    <description>Recent content in Tags on 八股文</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Sat, 03 Jun 2023 14:42:58 +0800</lastBuildDate>
+    <atom:link href="https://arloor.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>undefined</title>
+      <link>https://arloor.github.io/tags/undefined/</link>
+      <pubDate>Sat, 03 Jun 2023 14:42:58 +0800</pubDate>
+      <guid>https://arloor.github.io/tags/undefined/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>interview</title>
+      <link>https://arloor.github.io/tags/interview/</link>
+      <pubDate>Mon, 28 Nov 2022 21:04:01 +0800</pubDate>
+      <guid>https://arloor.github.io/tags/interview/</guid>
+      <description></description>
+    </item>
+  </channel>
+</rss>

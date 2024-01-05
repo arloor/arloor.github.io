@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    
+    
+
+
+    <head>
+    <link href="https://gmpg.org/xfn/11" rel="profile">
+    
+    <link rel="canonical" href="https://arloor.github.io/posts/interview-kafka/">
+    
+    <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<!-- Enable responsiveness on mobile devices -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<meta name="generator" content="Hugo 0.121.1">
+
+    
+    
+    
+
+<title>面试：Kafka • 八股文</title>
+<meta name="description" content="今天，你学习了吗">
+<meta name="keywords" content="刘港欢, arloor, moontell">
+<meta name="twitter:card" content="summary"/><meta name="twitter:title" content="面试：Kafka"/>
+<meta name="twitter:description" content="使用page cache磁盘读写 默认模式下，linux都是使用缓存IO，即将内存作为磁盘的缓存，称之为page cache。当读写文件时，实际是写入内存中的page cache，由操作系统来决定什么时候真正写入磁盘。 这样当我们在无积压的情况下生产和消费时，实际是内存操作，而非磁盘操作。 提升效率：batch读写，减少io次数 i"/>
+<meta name="twitter:site" content="@njulgh"/>
+
+<meta property="og:title" content="面试：Kafka" />
+<meta property="og:description" content="使用page cache磁盘读写 默认模式下，linux都是使用缓存IO，即将内存作为磁盘的缓存，称之为page cache。当读写文件时，实际是写入内存中的page cache，由操作系统来决定什么时候真正写入磁盘。 这样当我们在无积压的情况下生产和消费时，实际是内存操作，而非磁盘操作。 提升效率：batch读写，减少io次数 i" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://arloor.github.io/posts/interview-kafka/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-11-28T21:04:01+08:00" />
+<meta property="article:modified_time" content="2022-11-28T21:04:01+08:00" /><meta property="og:site_name" content="八股文" />
+
+
+
+    
+
+
+<link rel="stylesheet" href="/static/github.min.css">
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/scss/hyde-hyde.e0a163f994ccd5fb78b6074545c7e4cff283ba9948b7915f691d5c0f5459ba9c.css" integrity="sha256-4KFj&#43;ZTM1ft4tgdFRcfkz/KDuplIt5FfaR1cD1RZupw=">
+
+
+<link rel="stylesheet" href="/scss/print.2744dcbf8a0b2e74f8a50e4b34e5f441be7cf93cc7de27029121c6a09f9e77bc.css" integrity="sha256-J0Tcv4oLLnT4pQ5LNOX0Qb58&#43;TzH3icCkSHGoJ&#43;ed7w=" media="print">
+
+
+
+
+<link rel="stylesheet" href="/scss/hugo-toc.0873834b0f2e9fdc9e1d0301e8ebce21fc10383882a41e9373f29b90e85a9987.css" integrity="sha256-CHODSw8un9yeHQMB6OvOIfwQODiCpB6Tc/KbkOhamYc=">
+
+
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <!-- Icons -->
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+    <link rel="shortcut icon" href="/favicon.png">
+    
+    
+
+</head>
+
+
+    <body class=" ">
+    
+<div class="sidebar">
+  <div class="container ">
+    <div class="sidebar-about">
+      <span class="site__title">
+        <a href="https://arloor.github.io/">
+        
+          八股文
+        
+        </a>
+      </span>
+      <a href="https://arloor.github.io/">
+      
+        
+        
+        
+        <div class="author-image">
+          <img src="https://arloor.github.io/favicon.png" alt="Author Image" class="img--circle img--headshot element--center">
+        </div>
+        
+      
+      </a>
+      
+      <p class="site__description">
+         八股文 
+      </p>
+    </div>
+    <div class="collapsible-menu">
+      <input type="checkbox" id="menuToggle">
+      <label for="menuToggle">八股文</label>
+      <div class="menu-content">
+        <div class="show-in-small">
+          <a href="https://arloor.github.io/">
+            
+              
+              
+              
+              <div class="author-image">
+                <img src="https://arloor.github.io/favicon.png" alt="Author Image" class="img--circle img--headshot element--center">
+              </div>
+              
+            
+          </a>
+        </div>
+        <div>
+	<ul class="sidebar-nav">
+		 
+		 
+			 
+				<li>
+					<a href="/posts/">
+						<span>文章</span>
+					</a>
+				</li>
+			 
+		 
+			 
+				<li>
+					<a href="/tags/">
+						<span>分类</span>
+					</a>
+				</li>
+			 
+		 
+			 
+				<li>
+					<a href="/about/">
+						<span>关于我</span>
+					</a>
+				</li>
+			 
+		 
+			 
+				<li>
+					<a href="http://beian.miit.gov.cn/">
+						<span>苏ICP备17024437号</span>
+					</a>
+				</li>
+			 
+		
+	</ul>
+</div>
+
+        <section class="social">
+	
+	<a href="https://twitter.com/njulgh" rel="me"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a>
+	
+	
+	
+	
+	<a href="https://github.com/arloor" rel="me"><i class="fab fa-github fa-lg" aria-hidden="true"></i></a>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<a href="https://t.me/popstary" rel="me"><i class="fab fa-telegram fa-lg" aria-hidden="true"></i></a>
+	
+	
+	
+	
+	<a href="mailto:admin@arloor.com" rel="me"><i class="fas fa-at fa-lg" aria-hidden="true"></i></a>
+	
+	
+	
+	
+</section>
+
+      </div>
+    </div>
+    
+<div class="copyright">
+  &copy; 2024 arloor
+  
+    <a href="https://creativecommons.org/licenses/by-sa/4.0">CC BY-SA 4.0</a>
+  
+</div>
+
+
+<div class="builtwith">
+Built with <a href="https://gohugo.io">Hugo</a> ❤️ <a href="https://github.com/htr3n/hyde-hyde">hyde-hyde</a>.
+</div>
+
+
+  </div>
+</div>
+
+        <div class="content container">
+            
+    
+<article>
+  <header>
+    <h1>面试：Kafka</h1>
+    
+    
+<div class="post__meta">
+    
+    
+      <i class="fas fa-calendar-alt"></i> Nov 28, 2022
+    
+    
+    
+      
+      
+          in
+          
+          
+              <a class="badge badge-category" href="/categories/undefined">UNDEFINED</a>
+              
+          
+      
+    
+    
+    
+      
+      
+          <br/>
+           <i class="fas fa-tags"></i>
+          
+          <a class="badge badge-tag" href="/tags/interview">interview</a>
+          
+      
+    
+    
+    <br/>
+    <i class="fas fa-clock"></i> 5 min read
+</div>
+
+
+  </header>
+  
+  
+  
+    <div class="toc-wrapper">
+      <input type="checkbox" id="tocToggle">
+      <label for="tocToggle">Table of Content</label>
+      
+          <nav id="TableOfContents">
+  <ul>
+    <li><a href="#使用page-cache磁盘读写">使用page cache磁盘读写</a></li>
+    <li><a href="#提升效率batch读写减少io次数">提升效率：batch读写，减少io次数</a></li>
+    <li><a href="#提升效率使用0拷贝技术">提升效率：使用0拷贝技术</a></li>
+    <li><a href="#压缩">压缩</a></li>
+    <li><a href="#无路由层设计">无路由层设计</a></li>
+    <li><a href="#异步发送">异步发送</a></li>
+    <li><a href="#consumer">Consumer</a></li>
+    <li><a href="#静态成员资格">静态成员资格</a></li>
+    <li><a href="#推和拉的模式">推和拉的模式</a></li>
+    <li><a href="#消息分发保证">消息分发保证</a></li>
+  </ul>
+</nav>
+      
+    </div>
+  
+  
+  <div class="post">
+    <h2 id="使用page-cache磁盘读写">使用page cache磁盘读写</h2>
+<p>默认模式下，linux都是使用缓存IO，即将内存作为磁盘的缓存，称之为page cache。当读写文件时，实际是写入内存中的page cache，由操作系统来决定什么时候真正写入磁盘。</p>
+<p>这样当我们在无积压的情况下生产和消费时，实际是内存操作，而非磁盘操作。</p>
+<h2 id="提升效率batch读写减少io次数">提升效率：batch读写，减少io次数</h2>
+<p>io操作涉及到系统调用、cpu拷贝、上下文切换等等，网络IO则有rtt的影响，有不小的损耗减少IO的次数是经典的提速方式。</p>
+<h2 id="提升效率使用0拷贝技术">提升效率：使用0拷贝技术</h2>
+<p>kafka使用sendfile的系统调用，只有一次系统调用、两次上下文切换、0次cpu拷贝和2次DMA拷贝（这里指DMA gather copy支持下）。</p>
+<h2 id="压缩">压缩</h2>
+<p>kafka会对一组消息进行压缩，更多的消息意味着更多重复的字符，意味着更大的压缩比。</p>
+<h2 id="无路由层设计">无路由层设计</h2>
+<p>不像RabbitMQ设计了exchange交换机，通过binding（路由键）来决定将消息发给哪个queue，Kafka没有路由层，producer直接发送到对应partition的lead broker中。</p>
+<p>消息发送到哪个partition可以完全随机，也可以指定part key，也可以重写确定partition的逻辑。</p>
+<h2 id="异步发送">异步发送</h2>
+<h2 id="consumer">Consumer</h2>
+<p>指定offset来fetch一大段消息。offset完全由consumer记录，broker不记录。而其他大多数消息系统在broker上保存关于consumer消费到哪里的元数据。也就是当broker交给consumer一份数据时，broker立刻记录或收到consumer的ack后记录。</p>
+<h2 id="静态成员资格">静态成员资格</h2>
+<p>kafka有rebalance-protocal：消费组协调者会将动态的id授予消费组的成员，当消费者重新启动时，会授予新的id——这导致消费会发生漂移（partition-consumer的对应关系变化）。如果不想发生消费漂移，则可以启用 static membership，加一个配置即可:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plaintext" data-lang="plaintext"><span style="display:flex;"><span>ConsumerConfig#GROUP_INSTANCE_ID_CONFIG
+</span></span></code></pre></div><h2 id="推和拉的模式">推和拉的模式</h2>
+<p>producer - broker - consumer</p>
+<p>producer向broker发送消息时，使用的是push；consumer从broker获取数据使用的是pull——大多数消息系统都是这样。kafka称自己是pull-based，毕竟消费的部分才是重点。</p>
+<p>推和拉都有优劣。推的模式下，下游很有可能被生产者压垮。拉的模式下，消费者可以控制消费速率，但是可能产生消息积压（很常见）。所以kakfa增加了一个broker，把所有问题都给broker来抗，简化producer和consumer这两个会出现在业务方代码里的东西。broker模式是一种常见的架构模式，通过borker可以增加可交互性（《软件架构》）</p>
+<p>pull-based的另一个好处是拉的consumer可以控制batch。在push-based系统中，producer必须控制是立刻发送消息，还是积累到一定数量（却不知道这个数量会不会压垮下游）。</p>
+<p>拉的方式不好的地方在于，如果broker没有数据，consumer还是会进行轮训(busy-waiting)。为了解决这个，consumer的fetch请求中会有参数控制，无数据时block到有数据到达，或者等到有足够多的bytes到达。</p>
+<h2 id="消息分发保证">消息分发保证</h2>
+<p>基本上有三种消息分发保证：</p>
+<ul>
+<li>最多一次（可能丢失） —Messages may be lost but are never redelivered.</li>
+<li>最少一次（可能重复消费） —Messages are never lost but may be redelivered.</li>
+<li>准确的一次 —this is what people actually want, each message is delivered once and only once.</li>
+</ul>
+<p>这个保证可以分为两个问题：发的消息的持久化保证（produce后不会丢），保证会被消费（一定会consume）</p>
+<p>kafka的保证是这样的，produce时，消息一旦被标记为“committed”，除非repicate leader的所有broker都挂了，该消息才会完全丢失。（这里涉及的replicate、failover下面会讲）。这又可能存在重复produce的问题：committed响应丢失了，于是producer再生产一条。</p>
+<p>在0.11.0.0之后，kafka的producer增加了幂等生产和跨分区原子写入，并基于这两个功能，对kafka stream的read-process-write增加了Exact-Once支持。</p>
+<p><strong>幂等生产</strong>：producer可以修改配置，使重复produce变为幂等的（producer加id，消息增加序列号）。</p>
+<p><strong>跨分区原子写入</strong>：0.11.0.0之后，同样支持类似事物地将多个消息同时发送到多个partition，要么全部失败，要么全部成功，这用于确保准确地被“处理一次”。当然，producer可以控制是不是要等待committed，毕竟并不是所有场景都要求强持久化保证。</p>
+<p>在Kafka stream中可以通过事务保证 准确地被消费一次。kafka stream可以认为是read-process-write：从一个topic消费数据，处理一下，再发送到另一个topic。在这个过程中的能被保证的“Exact-Once”是，我一定能准确地write一次到另一个topic——失败了我就退回consume的offset，直到成功一次。</p>
+
+  </div>
+  
+
+<div class="navigation navigation-single">
+    
+    <a href="/posts/interview-socket/" class="navigation-prev">
+      <i aria-hidden="true" class="fa fa-chevron-left"></i>
+      <span class="navigation-tittle">面试：网络/IO</span>
+    </a>
+    
+    
+    <a href="/posts/interview-os/" class="navigation-next">
+      <span class="navigation-tittle">面试：操作系统</span>
+      <i aria-hidden="true" class="fa fa-chevron-right"></i>
+    </a>
+    
+</div>
+
+
+  
+
+  
+    
+
+
+</article>
+
+
+        </div>
+        
+    
+
+<script defer src="/static/all.js" integrity="sha384-ZbbbT1gw3joYkKRqh0kWyRp32UAvdqkpbLedQJSlnI8iLQcFVxaGyrOgOJiDQTTR" crossorigin="anonymous"></script>
+
+
+    
+    <script src="/static/highlight.min.js"></script>
+        
+    <script type="text/javascript">
+        
+        hljs.initHighlightingOnLoad();
+    </script>
+    
+
+
+
+
+
+    
+
+
+
+    </body>
+</html>

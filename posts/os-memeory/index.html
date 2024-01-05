@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    
+    
+
+
+    <head>
+    <link href="https://gmpg.org/xfn/11" rel="profile">
+    
+    <link rel="canonical" href="https://arloor.github.io/posts/os-memeory/">
+    
+    <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<!-- Enable responsiveness on mobile devices -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<meta name="generator" content="Hugo 0.121.1">
+
+    
+    
+    
+
+<title>Linux进程地址空间 • 八股文</title>
+<meta name="description" content="今天，你学习了吗">
+<meta name="keywords" content="刘港欢, arloor, moontell">
+<meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Linux进程地址空间"/>
+<meta name="twitter:description" content="linux进程地址空间 概览 进程地址空间是属于进程的，虚拟的。每一个进程都有自己的从0开始的地址空间，并且这些地址是虚拟的，不是实存上真实的偏移量。虚拟内存地址通过mmu内存管理单元映射到物理内存地址上。 32位系统和64位系统的地址空间大小不一样。32位进程地址空间大小为4G。64位系统没有使用Math.power(2,"/>
+<meta name="twitter:site" content="@njulgh"/>
+
+<meta property="og:title" content="Linux进程地址空间" />
+<meta property="og:description" content="linux进程地址空间 概览 进程地址空间是属于进程的，虚拟的。每一个进程都有自己的从0开始的地址空间，并且这些地址是虚拟的，不是实存上真实的偏移量。虚拟内存地址通过mmu内存管理单元映射到物理内存地址上。 32位系统和64位系统的地址空间大小不一样。32位进程地址空间大小为4G。64位系统没有使用Math.power(2," />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://arloor.github.io/posts/os-memeory/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-06-03T14:42:58+08:00" />
+<meta property="article:modified_time" content="2023-06-03T14:42:58+08:00" /><meta property="og:site_name" content="八股文" />
+
+
+
+    
+
+
+<link rel="stylesheet" href="/static/github.min.css">
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/scss/hyde-hyde.e0a163f994ccd5fb78b6074545c7e4cff283ba9948b7915f691d5c0f5459ba9c.css" integrity="sha256-4KFj&#43;ZTM1ft4tgdFRcfkz/KDuplIt5FfaR1cD1RZupw=">
+
+
+<link rel="stylesheet" href="/scss/print.2744dcbf8a0b2e74f8a50e4b34e5f441be7cf93cc7de27029121c6a09f9e77bc.css" integrity="sha256-J0Tcv4oLLnT4pQ5LNOX0Qb58&#43;TzH3icCkSHGoJ&#43;ed7w=" media="print">
+
+
+
+
+<link rel="stylesheet" href="/scss/hugo-toc.0873834b0f2e9fdc9e1d0301e8ebce21fc10383882a41e9373f29b90e85a9987.css" integrity="sha256-CHODSw8un9yeHQMB6OvOIfwQODiCpB6Tc/KbkOhamYc=">
+
+
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <!-- Icons -->
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+    <link rel="shortcut icon" href="/favicon.png">
+    
+    
+
+</head>
+
+
+    <body class=" ">
+    
+<div class="sidebar">
+  <div class="container ">
+    <div class="sidebar-about">
+      <span class="site__title">
+        <a href="https://arloor.github.io/">
+        
+          八股文
+        
+        </a>
+      </span>
+      <a href="https://arloor.github.io/">
+      
+        
+        
+        
+        <div class="author-image">
+          <img src="https://arloor.github.io/favicon.png" alt="Author Image" class="img--circle img--headshot element--center">
+        </div>
+        
+      
+      </a>
+      
+      <p class="site__description">
+         八股文 
+      </p>
+    </div>
+    <div class="collapsible-menu">
+      <input type="checkbox" id="menuToggle">
+      <label for="menuToggle">八股文</label>
+      <div class="menu-content">
+        <div class="show-in-small">
+          <a href="https://arloor.github.io/">
+            
+              
+              
+              
+              <div class="author-image">
+                <img src="https://arloor.github.io/favicon.png" alt="Author Image" class="img--circle img--headshot element--center">
+              </div>
+              
+            
+          </a>
+        </div>
+        <div>
+	<ul class="sidebar-nav">
+		 
+		 
+			 
+				<li>
+					<a href="/posts/">
+						<span>文章</span>
+					</a>
+				</li>
+			 
+		 
+			 
+				<li>
+					<a href="/tags/">
+						<span>分类</span>
+					</a>
+				</li>
+			 
+		 
+			 
+				<li>
+					<a href="/about/">
+						<span>关于我</span>
+					</a>
+				</li>
+			 
+		 
+			 
+				<li>
+					<a href="http://beian.miit.gov.cn/">
+						<span>苏ICP备17024437号</span>
+					</a>
+				</li>
+			 
+		
+	</ul>
+</div>
+
+        <section class="social">
+	
+	<a href="https://twitter.com/njulgh" rel="me"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a>
+	
+	
+	
+	
+	<a href="https://github.com/arloor" rel="me"><i class="fab fa-github fa-lg" aria-hidden="true"></i></a>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<a href="https://t.me/popstary" rel="me"><i class="fab fa-telegram fa-lg" aria-hidden="true"></i></a>
+	
+	
+	
+	
+	<a href="mailto:admin@arloor.com" rel="me"><i class="fas fa-at fa-lg" aria-hidden="true"></i></a>
+	
+	
+	
+	
+</section>
+
+      </div>
+    </div>
+    
+<div class="copyright">
+  &copy; 2024 arloor
+  
+    <a href="https://creativecommons.org/licenses/by-sa/4.0">CC BY-SA 4.0</a>
+  
+</div>
+
+
+<div class="builtwith">
+Built with <a href="https://gohugo.io">Hugo</a> ❤️ <a href="https://github.com/htr3n/hyde-hyde">hyde-hyde</a>.
+</div>
+
+
+  </div>
+</div>
+
+        <div class="content container">
+            
+    
+<article>
+  <header>
+    <h1>Linux进程地址空间</h1>
+    
+    
+<div class="post__meta">
+    
+    
+      <i class="fas fa-calendar-alt"></i> Jun 3, 2023
+    
+    
+    
+      
+      
+          in
+          
+          
+              <a class="badge badge-category" href="/categories/undefined">UNDEFINED</a>
+              
+          
+      
+    
+    
+    
+      
+      
+          <br/>
+           <i class="fas fa-tags"></i>
+          
+          <a class="badge badge-tag" href="/tags/undefined">undefined</a>
+          
+      
+    
+    
+    <br/>
+    <i class="fas fa-clock"></i> 6 min read
+</div>
+
+
+  </header>
+  
+  
+  
+    <div class="toc-wrapper">
+      <input type="checkbox" id="tocToggle">
+      <label for="tocToggle">Table of Content</label>
+      
+          <nav id="TableOfContents">
+  <ul>
+    <li><a href="#linux进程地址空间">linux进程地址空间</a>
+      <ul>
+        <li><a href="#概览">概览</a></li>
+        <li><a href="#用户地址空间各分区">用户地址空间各分区</a></li>
+        <li><a href="#c代码的内部布局例子">c代码的内部布局例子</a></li>
+      </ul>
+    </li>
+    <li><a href="#参考文档">参考文档</a></li>
+  </ul>
+</nav>
+      
+    </div>
+  
+  
+  <div class="post">
+    <h2 id="linux进程地址空间">linux进程地址空间</h2>
+<h3 id="概览">概览</h3>
+<p>进程地址空间是属于进程的，虚拟的。每一个进程都有自己的从0开始的地址空间，并且这些地址是虚拟的，不是实存上真实的偏移量。虚拟内存地址通过mmu内存管理单元映射到物理内存地址上。</p>
+<p>32位系统和64位系统的地址空间大小不一样。32位进程地址空间大小为4G。64位系统没有使用Math.power(2,64)的所有地址，而是给内核空间、用户空间各128TB，这已经完全够用了。32位和64位系统的内核空间、进程空间如下图所示。</p>
+<p><img src="/img/v2-f6b5b028da63af405fa19eaf4f545f1a_r.png" alt=""></p>
+<p>先用一张图片描述下用户空间由哪些部分构成：（图片是64位系统下的）。如图所示，从0开始分别是code、data、bss、heap。stack从高地址开始。stack和heap中间是mapping area。</p>
+<p><img src="/img/2138374-20200828154940757-1842339641.png" alt=""></p>
+<p>再用32位系统的一张图更精细地描述：</p>
+<p><img src="/img/2138374-20200828155103154-1191841853.jpg" alt=""></p>
+<h3 id="用户地址空间各分区">用户地址空间各分区</h3>
+<h4 id="代码段text">代码段（text）</h4>
+<p>通常用于存放程序执行代码(即CPU执行的机器码)</p>
+<h4 id="数据段data">数据段（data）</h4>
+<p>存放程序中已初始化且初值不为0的全局变量和静态局部变量。数据段属于静态内存分配(静态存储区)，可读可写。</p>
+<h4 id="bss段">BSS段</h4>
+<p>包括:</p>
+<ul>
+<li>未初始化的全局变量和静态局部变量</li>
+<li>初始值为0的全局变量和静态局部变量(依赖于编译器实现)</li>
+<li>未定义且初值不为0的符号(该初值即common block的大小)</li>
+</ul>
+<h4 id="堆">堆</h4>
+<ul>
+<li>堆用于存放进程运行时动态分配的内存段，可动态扩张或缩减。</li>
+<li>堆中内容是匿名的，不能按名字直接访问，只能通过指针间接访问。当进程调用malloc(C)/new(C++)等函数分配内存时，新分配的内存动态添加到堆上(扩张)；当调用free(C)/delete(C++)等函数释放内存时，被释放的内存从堆中剔除(缩减) 。</li>
+<li>堆的末端由break指针标识，当堆管理器需要更多内存时，可通过系统调用brk()和sbrk()来移动break指针以扩张堆，一般由系统自动调用。</li>
+<li>可见，堆容易造成内存碎片；由于没有专门的系统支持，效率很低；由于可能引发用户态和内核态切换，内存申请的代价更为昂贵</li>
+<li>操作系统为堆维护一个记录空闲内存地址的链表。当系统收到程序的内存分配申请时，会遍历该链表寻找第一个空间大于所申请空间的堆结点，然后将该结点从空闲结点链表中删除，并将该结点空间分配给程序。若无足够大小的空间(可能由于内存碎片太多)，有可能调用系统功能去增加程序数据段的内存空间，以便有机会分到足够大小的内存，然后进行返回</li>
+</ul>
+<h4 id="内存映射段">内存映射段</h4>
+<ul>
+<li>
+<p>此处，内核将硬盘文件的内容直接映射到内存, 任何应用程序都可通过Linux的mmap()系统调用请求这种映射。内存映射是一种方便高效的文件I/O方式，。普通文件被映射到进程地址空间后，进程可以像访问普通内存一样对文件进行访问，不必再调用read()/write()等操作。 因而被用于装载动态共享库。用户也可创建匿名内存映射，该映射没有对应的文件, 可用于存放程序数据</p>
+</li>
+<li>
+<p>从进程地址空间的布局可以看到，在有共享库的情况下，留给堆的可用空间还有两处：一处是从.bss段到0x40000000，约不到1GB的空间；另一处是从共享库到栈之间的空间，约不到2GB。这两块空间大小取决于栈、共享库的大小和数量。这样来看，是否应用程序可申请的最大堆空间只有2GB？事实上，这与Linux内核版本有关。在上面给出的进程地址空间经典布局图中，共享库的装载地址为0x40000000，这实际上是Linux kernel 2.6版本之前的情况了，在2.6版本里，共享库的装载地址已经被挪到靠近栈的位置，即位于0xBFxxxxxx附近，因此，此时的堆范围就不会被共享库分割成2个“碎片”，故kernel 2.6的32位Linux系统中，malloc申请的最大内存理论值在2.9GB左右。</p>
+</li>
+<li>
+<p>mmap/munmap是常用的一个系统调用，使用场景是：<strong>分配内存、读写大文件、连接动态库文件、多进程间共享内存</strong>。</p>
+</li>
+<li>
+<p>malloc申请内存的大小超过128K就会<strong>使用mmap分配内存，在堆和栈之间找一块空闲内存分配(对应独立内存，而且初始化为0)</strong></p>
+<ul>
+<li>mmap通过将磁盘文件映射到用户空间（0拷贝）。</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>当进程读文件时，发生缺页中断，因为很明显 当前文件还不在内存当中，要去磁盘进行访问，给虚拟内存分配对应的物理内存，在通过磁盘调页操作将磁盘数据读到物理内存上，实现了用户空间数据的读取，整个过程只有一次内存拷贝。普通文件被映射到进程地址空间后，进程可以像访问普通内存一样对文件进行访问，不必再调用read()/write()等操作
+- 用于进程间大数据量通信：（进程之间通过共享内存进行通信的实例）：</p>
+</blockquote>
+<blockquote>
+<p>两个进程映射同一个文件，在两个进程中，同一个文件区域映射的虚拟地址空间不同。当一个进程先操作文件时，先通过缺页获取物理内存，进而通过磁盘文件调页操作将文件数据读入内存。</p>
+</blockquote>
+<blockquote>
+<p>另一个进程访问文件的时候，发现没有物理页面映射到虚拟内存，通过fs的缺页处理查找cache区是否有读入磁盘文件，有的话建立映射关系（都指向同一块内存），这样两个进程通过共享内存就可以进行通信。</p>
+</blockquote>
+<p><img src="/img/2138374-20200828160949603-365007815.jpg" alt=""></p>
+<ul>
+<li>私有/共享、文件/匿名映射组合</li>
+</ul>
+<p>(1)私有文件映射:多个进程使用同样的物理页面进行初始化，但是各个进程对内存文件的修改不会共享，也不会反映到物理文件中。</p>
+<p>比如对linux .so动态库文件就采用这种方式映射到各个进程虚拟地址空间中。</p>
+<p>(2)共享文件映射:多个进程通过虚拟内存技术共享同样物理内存，对内存文件的修改会反应到实际物理内存中，也是进程间通信的一种。</p>
+<p>(3)私有匿名映射:mmap会创建一个新的映射，各个进程不共享，主要用于分配内存(malloc方式分配的内存)(malloc分配大内存会调用mmap)。</p>
+<p>(4)共享匿名映射:这种机制在进行fork时不会采用写时复制，父子进程完全共享同样的物理内存页，也就是父子进程通信,父进程或者子进程malloc了一大块空间，对于父子进程都是可以访问的，共享的。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;sys/mman.h&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">void</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">mmap</span>(<span style="color:#66d9ef">void</span> <span style="color:#f92672">*</span>addr, <span style="color:#66d9ef">size_t</span> length, <span style="color:#66d9ef">int</span> prot, <span style="color:#66d9ef">int</span> flags, <span style="color:#66d9ef">int</span> fd, <span style="color:#66d9ef">off_t</span> offset);
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">munmap</span>(<span style="color:#66d9ef">void</span> <span style="color:#f92672">*</span>addr, <span style="color:#66d9ef">size_t</span> length);
+</span></span></code></pre></div><p>mmap系统调用接口函数</p>
+<h4 id="栈">栈</h4>
+<ul>
+<li>由编译器自动分配释放</li>
+<li>为函数内部声明的非静态局部变量(C语言中称“自动变量”)提供存储空间</li>
+<li>记录函数调用过程相关的维护性信息，称为栈帧(Stack Frame)或过程活动记录(Procedure Activation Record)</li>
+<li>栈的大小在运行时由内核动态调整。</li>
+<li>Linux中ulimit -s命令可查看和设置堆栈最大值，当程序使用的堆栈超过该值时, 发生栈溢出(Stack Overflow)，程序收到一个段错误(Segmentation Fault)。</li>
+</ul>
+<h3 id="c代码的内部布局例子">c代码的内部布局例子</h3>
+<pre tabindex="0"><code class="language-c+" data-lang="c+">//main.cpp  
+int a = 0; 全局初始化区  
+char *p1; 全局未初始化区  
+main()  
+{  
+      int a = 4; 栈,4也是存在栈上  
+      char s[] = &#34;abc&#34;; 栈  &#34;abc&#34;也是存在栈上
+      char *p2; 栈  
+      char *p3 = &#34;123456&#34;; 123456\0在常量区（是在Data段上），p3在栈上。  
+      static int c =0； 全局（静态）初始化为0,就是放在BSS段   
+      p1 = (char *)malloc(10);  
+      p2 = (char *)malloc(20);  
+      malloc分配得来得10和20字节的区域就在堆区。因为属于动态申请分配内存空间  
+      strcpy(p1, &#34;123456&#34;); 123456\0放在常量区，编译器可能会将它与p3所指向的&#34;123456&#34;优化成一个地方。  
+}  
+</code></pre><p>一定注意：数组s储存的内容是在运行的时候赋值的，但是指针p3指向的常量区中的字符串内容是编译时就赋值的。</p>
+<h2 id="参考文档">参考文档</h2>
+<p><a href="https://www.cnblogs.com/yizhanwillsucceed/p/13578076.html">linux进程地址空间划分</a></p>
+<p><a href="https://www.zhihu.com/tardis/zm/art/66794639?source_id=1003">Linux的进程地址空间[一]</a></p>
+<p><a href="https://zofun.github.io/2020/05/15/%E6%AE%B5%E9%A1%B5%E5%BC%8F%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/">段页式内存管理</a></p>
+
+  </div>
+  
+
+<div class="navigation navigation-single">
+    
+    <a href="/posts/interview-os/" class="navigation-prev">
+      <i aria-hidden="true" class="fa fa-chevron-left"></i>
+      <span class="navigation-tittle">面试：操作系统</span>
+    </a>
+    
+    
+</div>
+
+
+  
+
+  
+    
+
+
+</article>
+
+
+        </div>
+        
+    
+
+<script defer src="/static/all.js" integrity="sha384-ZbbbT1gw3joYkKRqh0kWyRp32UAvdqkpbLedQJSlnI8iLQcFVxaGyrOgOJiDQTTR" crossorigin="anonymous"></script>
+
+
+    
+    <script src="/static/highlight.min.js"></script>
+        
+    <script type="text/javascript">
+        
+        hljs.initHighlightingOnLoad();
+    </script>
+    
+
+
+
+
+
+    
+
+
+
+    </body>
+</html>

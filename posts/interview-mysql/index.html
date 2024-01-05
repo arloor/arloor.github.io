@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    
+    
+
+
+    <head>
+    <link href="https://gmpg.org/xfn/11" rel="profile">
+    
+    <link rel="canonical" href="https://arloor.github.io/posts/interview-mysql/">
+    
+    <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<!-- Enable responsiveness on mobile devices -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<meta name="generator" content="Hugo 0.121.1">
+
+    
+    
+    
+
+<title>面试：Mysql • 八股文</title>
+<meta name="description" content="今天，你学习了吗">
+<meta name="keywords" content="刘港欢, arloor, moontell">
+<meta name="twitter:card" content="summary"/><meta name="twitter:title" content="面试：Mysql"/>
+<meta name="twitter:description" content="Mysql B&#43;树 一篇文章讲透MySQL为什么要用B&#43;树实现索引 二叉查找树：任意节点的左边小于右边。劣势：不平衡 深度过高，极端情况要查询的次数很多 平衡二叉树（AVL）： 在二叉树的基础上平衡化，降低深度。每个节点的左右子树高度相差不超过1 B树： B是Balance，也是平衡树 相比平衡二叉树，每个节点存储更多的数据，并且超过2个子节点"/>
+<meta name="twitter:site" content="@njulgh"/>
+
+<meta property="og:title" content="面试：Mysql" />
+<meta property="og:description" content="Mysql B&#43;树 一篇文章讲透MySQL为什么要用B&#43;树实现索引 二叉查找树：任意节点的左边小于右边。劣势：不平衡 深度过高，极端情况要查询的次数很多 平衡二叉树（AVL）： 在二叉树的基础上平衡化，降低深度。每个节点的左右子树高度相差不超过1 B树： B是Balance，也是平衡树 相比平衡二叉树，每个节点存储更多的数据，并且超过2个子节点" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://arloor.github.io/posts/interview-mysql/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-11-22T20:09:38+08:00" />
+<meta property="article:modified_time" content="2022-11-22T20:09:38+08:00" /><meta property="og:site_name" content="八股文" />
+
+
+
+    
+
+
+<link rel="stylesheet" href="/static/github.min.css">
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/scss/hyde-hyde.e0a163f994ccd5fb78b6074545c7e4cff283ba9948b7915f691d5c0f5459ba9c.css" integrity="sha256-4KFj&#43;ZTM1ft4tgdFRcfkz/KDuplIt5FfaR1cD1RZupw=">
+
+
+<link rel="stylesheet" href="/scss/print.2744dcbf8a0b2e74f8a50e4b34e5f441be7cf93cc7de27029121c6a09f9e77bc.css" integrity="sha256-J0Tcv4oLLnT4pQ5LNOX0Qb58&#43;TzH3icCkSHGoJ&#43;ed7w=" media="print">
+
+
+
+
+<link rel="stylesheet" href="/scss/hugo-toc.0873834b0f2e9fdc9e1d0301e8ebce21fc10383882a41e9373f29b90e85a9987.css" integrity="sha256-CHODSw8un9yeHQMB6OvOIfwQODiCpB6Tc/KbkOhamYc=">
+
+
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <!-- Icons -->
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+    <link rel="shortcut icon" href="/favicon.png">
+    
+    
+
+</head>
+
+
+    <body class=" ">
+    
+<div class="sidebar">
+  <div class="container ">
+    <div class="sidebar-about">
+      <span class="site__title">
+        <a href="https://arloor.github.io/">
+        
+          八股文
+        
+        </a>
+      </span>
+      <a href="https://arloor.github.io/">
+      
+        
+        
+        
+        <div class="author-image">
+          <img src="https://arloor.github.io/favicon.png" alt="Author Image" class="img--circle img--headshot element--center">
+        </div>
+        
+      
+      </a>
+      
+      <p class="site__description">
+         八股文 
+      </p>
+    </div>
+    <div class="collapsible-menu">
+      <input type="checkbox" id="menuToggle">
+      <label for="menuToggle">八股文</label>
+      <div class="menu-content">
+        <div class="show-in-small">
+          <a href="https://arloor.github.io/">
+            
+              
+              
+              
+              <div class="author-image">
+                <img src="https://arloor.github.io/favicon.png" alt="Author Image" class="img--circle img--headshot element--center">
+              </div>
+              
+            
+          </a>
+        </div>
+        <div>
+	<ul class="sidebar-nav">
+		 
+		 
+			 
+				<li>
+					<a href="/posts/">
+						<span>文章</span>
+					</a>
+				</li>
+			 
+		 
+			 
+				<li>
+					<a href="/tags/">
+						<span>分类</span>
+					</a>
+				</li>
+			 
+		 
+			 
+				<li>
+					<a href="/about/">
+						<span>关于我</span>
+					</a>
+				</li>
+			 
+		 
+			 
+				<li>
+					<a href="http://beian.miit.gov.cn/">
+						<span>苏ICP备17024437号</span>
+					</a>
+				</li>
+			 
+		
+	</ul>
+</div>
+
+        <section class="social">
+	
+	<a href="https://twitter.com/njulgh" rel="me"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a>
+	
+	
+	
+	
+	<a href="https://github.com/arloor" rel="me"><i class="fab fa-github fa-lg" aria-hidden="true"></i></a>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<a href="https://t.me/popstary" rel="me"><i class="fab fa-telegram fa-lg" aria-hidden="true"></i></a>
+	
+	
+	
+	
+	<a href="mailto:admin@arloor.com" rel="me"><i class="fas fa-at fa-lg" aria-hidden="true"></i></a>
+	
+	
+	
+	
+</section>
+
+      </div>
+    </div>
+    
+<div class="copyright">
+  &copy; 2024 arloor
+  
+    <a href="https://creativecommons.org/licenses/by-sa/4.0">CC BY-SA 4.0</a>
+  
+</div>
+
+
+<div class="builtwith">
+Built with <a href="https://gohugo.io">Hugo</a> ❤️ <a href="https://github.com/htr3n/hyde-hyde">hyde-hyde</a>.
+</div>
+
+
+  </div>
+</div>
+
+        <div class="content container">
+            
+    
+<article>
+  <header>
+    <h1>面试：Mysql</h1>
+    
+    
+<div class="post__meta">
+    
+    
+      <i class="fas fa-calendar-alt"></i> Nov 22, 2022
+    
+    
+    
+      
+      
+          in
+          
+          
+              <a class="badge badge-category" href="/categories/undefined">UNDEFINED</a>
+              
+          
+      
+    
+    
+    
+      
+      
+          <br/>
+           <i class="fas fa-tags"></i>
+          
+          <a class="badge badge-tag" href="/tags/interview">interview</a>
+          
+      
+    
+    
+    <br/>
+    <i class="fas fa-clock"></i> 7 min read
+</div>
+
+
+  </header>
+  
+  
+  
+    <div class="toc-wrapper">
+      <input type="checkbox" id="tocToggle">
+      <label for="tocToggle">Table of Content</label>
+      
+          <nav id="TableOfContents">
+  <ul>
+    <li><a href="#mysql">Mysql</a>
+      <ul>
+        <li><a href="#b树">B+树</a></li>
+        <li><a href="#聚集索引非聚集索引">聚集索引/非聚集索引</a></li>
+        <li><a href="#拓展红黑树">拓展：红黑树</a></li>
+        <li><a href="#简述mysql-innodb引擎和myisam引擎的差异">简述MySQL InnoDB引擎和MyISAM引擎的差异？</a></li>
+        <li><a href="#事务">事务</a></li>
+        <li><a href="#mvcc多版本并发控制实现已提交读可重复读">MVCC多版本并发控制（实现已提交读/可重复读）</a></li>
+        <li><a href="#依托mvcc实现了可重复读怎么解决幻读呢">依托MVCC实现了可重复读，怎么解决幻读呢？</a></li>
+        <li><a href="#数据库设计范式">数据库设计范式</a></li>
+        <li><a href="#分布式事务">分布式事务</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+      
+    </div>
+  
+  
+  <div class="post">
+    <h2 id="mysql">Mysql</h2>
+<h3 id="b树">B+树</h3>
+<ul>
+<li><a href="https://cloud.tencent.com/developer/article/1543335">一篇文章讲透MySQL为什么要用B+树实现索引</a></li>
+</ul>
+<p>二叉查找树：任意节点的左边小于右边。劣势：不平衡 深度过高，极端情况要查询的次数很多</p>
+<p><img src="/img/e3u2tgp31r.jpeg" alt=""></p>
+<p>平衡二叉树（AVL）： 在二叉树的基础上平衡化，降低深度。<strong>每个节点的左右子树高度相差不超过1</strong></p>
+<p><img src="/img/dn023lz68g.jpeg" alt=""></p>
+<p>B树：</p>
+<ul>
+<li>B是Balance，也是平衡树</li>
+<li>相比平衡二叉树，每个节点存储更多的数据，并且超过2个子节点(<strong>多叉树</strong>)</li>
+<li>下图是3阶B树，表示每个节点都有3个子节点。同时，每个节点存储两个记录</li>
+<li>因为每个节点存储更多的数据，以及有更多的子节点，所示B树会更加矮胖，查询的深度会减少，从而提高查找效率</li>
+</ul>
+<p>假如我们要查找id=28的用户信息，那么我们在上图B树中查找的流程如下：</p>
+<ol>
+<li>先找到根节点也就是页1，判断28在键值17和35之间，我们那么我们根据页1中的指针p2找到页3。</li>
+<li>将28和页3中的键值相比较，28在26和30之间，我们根据页3中的指针p2找到页8。</li>
+<li>将28和页8中的键值相比较，发现有匹配的键值28，键值28对应的用户信息为(28,bv)。</li>
+</ol>
+<p><img src="/img/9vzl8hb7jq.jpeg" alt=""></p>
+<p>B+树：</p>
+<ol>
+<li><strong>非叶节点不存储数据，今储存key。增大树的阶，降低深度，减少查询</strong> B+树非叶子节点上是不存储数据的，仅存储键值，而B树节点中不仅存储键值，也会存储数据。之所以这么做是因为在数据库中页的大小是固定的，innodb中页的默认大小是16KB。如果不存储数据，那么就会存储更多的键值，相应的树的阶数（节点的子节点树）就会更大，树就会更矮更胖，如此一来我们查找数据进行磁盘的IO次数有会再次减少，数据查询的效率也会更快。</li>
+</ol>
+<p>另外，B+树的阶数是等于键值的数量的，如果我们的B+树一个节点可以存储1000个键值，那么3层B+树可以存储1000×1000×1000=10亿个数据。一般根节点是常驻内存的，所以一般我们查找10亿数据，只需要2次磁盘IO。</p>
+<ol start="2">
+<li>
+<p><strong>叶节点存储数据，变成顺序的，适合范围查找、排序、去重</strong> 因为B+树索引的所有数据均存储在叶子节点，而且数据是按照顺序排列的。那么B+树使得范围查找，排序查找，分组查找以及去重查找变得异常简单。而B树因为数据分散在各个节点，要实现这一点是很不容易的。</p>
+</li>
+<li>
+<p>各层节点形成双向链表，叶节点内的数据是单链表</p>
+</li>
+</ol>
+<p><img src="/img/xgvagflxmk.jpeg" alt=""></p>
+<h3 id="聚集索引非聚集索引">聚集索引/非聚集索引</h3>
+<p>区别在于B+树中的key和value是什么</p>
+<ul>
+<li>聚集索引： 节点中的key是主键，叶节点中的数据是完整记录</li>
+<li>非聚集索引 节点中的key是非主键的列，叶节点中的数据是主键</li>
+</ul>
+<h3 id="拓展红黑树">拓展：红黑树</h3>
+<ul>
+<li><a href="https://zhuanlan.zhihu.com/p/258078863">万字大总结，一文搞懂二叉搜索树、B树、B+树、AVL树、红黑树</a></li>
+</ul>
+<p>延展路径：二叉搜索树 -&gt; AVL树（平衡二叉树） -&gt; 红黑树</p>
+<p>由于AVL树的限制太严格，插入时有大量的旋转操作，太耗时，出现了红黑树这种不严格平衡的树，使插入的最坏情况为 <code>O(logn)</code></p>
+<p><img src="/img/v2-c33ed2bb657a6e3796c732cb2721ecb4_1440w.webp" alt=""></p>
+<ol>
+<li>每个节点非红即黑；</li>
+<li>根节点是黑的；</li>
+<li>每个叶节点(叶节点即树尾端NULL指针或NULL节点)都是黑的；</li>
+<li>如果一个节点是红的,那么它的两儿子都是黑的；</li>
+<li>对于任意节点而言，其到叶子点树NULL指针的每条路径都包含相同数目的黑节点；</li>
+<li>高度始终保持在h = logn</li>
+<li>红黑树的查找、插入、删除的时间复杂度最坏为O(log n)</li>
+</ol>
+<h3 id="简述mysql-innodb引擎和myisam引擎的差异">简述MySQL InnoDB引擎和MyISAM引擎的差异？</h3>
+<ul>
+<li>InnoDB支持事物，而MyISAM不支持事物。</li>
+<li>InnoDB支持行级锁，而MyISAM支持表级锁。</li>
+<li>InnoDB支持MVCC, 而MyISAM不支持。</li>
+<li>InnoDB支持外键，而MyISAM不支持。</li>
+<li>InnoDB不支持全文索引，而MyISAM支持。</li>
+</ul>
+<h3 id="事务">事务</h3>
+<p>事务是指要么一起成功，要么一起失败的一组操作，满足ACID的特性：</p>
+<ul>
+<li>A 原子性：要么一起成功，要么一起失败。
+<ul>
+<li>回滚可以用回滚日志（Undo Log）来实现，回滚日志记录着事务所执行的修改操作，在回滚时反向执行这些修改操作即可。</li>
+</ul>
+</li>
+<li>C 一致性：在一致性状态下，所有事务对同一数据的读取结果是一样的</li>
+<li>I 隔离型：在事务commit之前，中间状态对其他事务不可见</li>
+<li>D 持久性：一旦事务提交，则其所做的修改将会永远保存到数据库中。即使系统发生崩溃，事务执行的结果也不能丢失。
+<ul>
+<li>系统发生崩溃可以用重做日志（Redo Log）进行恢复，从而实现持久性。与回滚日志记录数据的逻辑修改不同，重做日志记录的是数据页的物理修改。</li>
+</ul>
+</li>
+</ul>
+<p><img src="/img/image-20191207222237925.png" alt=""></p>
+<p>事务的隔离性很难得到保证，Mysql提供了四种隔离等级</p>
+<ul>
+<li>
+<p>未提交读——问题：脏读、不可重复读、幻读</p>
+</li>
+<li>
+<p>已提交读——问题：不可重复度、幻读</p>
+</li>
+<li>
+<p>可重复读（InnoDB默认隔离级别）——问题：幻读</p>
+</li>
+<li>
+<p>串行化</p>
+</li>
+<li>
+<p>脏读：读到别的事务还没有提交的数据</p>
+</li>
+<li>
+<p>不可重复读：一个事务第一次读读到一个值，再次读却读到另一个。 select * from xxx where id = xx;</p>
+</li>
+<li>
+<p>幻读：进行范围操作，同一事务两次范围选取结果不一样。 select count(1) from xxx where id between a and b;</p>
+</li>
+<li>
+<p>还有一个问题：更新丢失。事务A和B同时对一行修改，A的修改覆盖了B的修改。</p>
+</li>
+</ul>
+<p><img src="/img/image-20191207223400787.png" alt=""></p>
+<p>Mysql提供上面的隔离级别，为的是简化并发控制，避免所有情况下都要用户来使用锁控制。但是，隔离级别不能解决所有的问题，在某些场景下，还是需要使用锁的。</p>
+<p>Mysql默认使用自动提交，如果不开启自动提交，则有如下的命令，来开启事务、回滚事务、提交事务。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>START TRANSACTION
+</span></span><span style="display:flex;"><span>// ...
+</span></span><span style="display:flex;"><span>SAVEPOINT delete1
+</span></span><span style="display:flex;"><span>// ...
+</span></span><span style="display:flex;"><span>ROLLBACK TO delete1
+</span></span><span style="display:flex;"><span>// ...
+</span></span><span style="display:flex;"><span>COMMIT
+</span></span></code></pre></div><h3 id="mvcc多版本并发控制实现已提交读可重复读">MVCC多版本并发控制（实现已提交读/可重复读）</h3>
+<p>多版本并发控制（Multi-Version Concurrency Control, MVCC）是 MySQL 的 InnoDB 存储引擎实现隔离级别的一种具体方式，用于实现提交读和可重复读这两种隔离级别。而未提交读隔离级别总是读取最新的数据行，要求很低，无需使用 MVCC。可串行化隔离级别需要对所有读取的行都加锁，单纯使用 MVCC 无法实现。</p>
+<p>InnoDB存储引擎使用多版本来进行并发控制，避免所有的并发控制都依赖于加锁。加锁能解决多个事务同时执行时出现的并发一致性问题，但是对cpu消耗较大，而多版本的思想是：写操作更新最新的版本快照，而读操作去读旧版本快照，没有互斥关系，也就不用加锁了。</p>
+<p>InnoDB使用MVCC实现可重复读：（目标就是读到小于等于当前事务版本的数据）。</p>
+<ul>
+<li>SELECT时，读取创建版本号&lt;=当前事务版本号，删除版本号为空或&gt;当前事务版本号。（已创建，未删除）</li>
+<li>INSERT时，保存当前事务版本号为行的创建版本号</li>
+<li>DELETE时，保存当前事务版本号为行的删除版本号</li>
+<li>UPDATE时，插入一条新纪录，保存当前事务版本号为行创建版本号，同时保存当前事务版本号到原来删除的行。UPADTE被认为是INSERT+DELETE</li>
+</ul>
+<p>MVCC对普通select是不加锁的，对于更新（inert/update/delete）是加锁的。不加锁的操作是“快照读”，加锁的操作是“当前读”并使用最新数据。</p>
+<p>快照读：就是select</p>
+<ul>
+<li>select * from table ….;</li>
+</ul>
+<p>当前读：特殊的读操作，插入/更新/删除操作，属于当前读，处理的都是当前的数据，需要加锁。</p>
+<ul>
+<li>select * from table where ? lock in share mode;</li>
+<li>select * from table where ? for update;</li>
+<li>insert;</li>
+<li>update ;</li>
+<li>delete;</li>
+</ul>
+<h3 id="依托mvcc实现了可重复读怎么解决幻读呢">依托MVCC实现了可重复读，怎么解决幻读呢？</h3>
+<p>幻读是指在范围查询读到了该事务开始前不存在的行，即where条件为<code>where a between x and x</code>。</p>
+<p>使用Next-key锁：是记录锁（行锁）和间隙锁的结合。</p>
+<p>间隙锁的作用是锁住一个范围，禁止向这个范围内insert数据，从而解决幻读的问题。</p>
+<p>对非索引字段增加netkey锁，将会锁定全部的行和间隙，导致表现得像表锁</p>
+<h3 id="数据库设计范式">数据库设计范式</h3>
+<ul>
+<li>1NF：属性不可再分</li>
+<li>2NF：非主属性<strong>不部分</strong>依赖于主属性</li>
+<li>3NF：非主属性<strong>不传递</strong>依赖于主属性（不存在非主属性决定其他非主属性的情况）</li>
+<li>BCNF：如果一个属性组 A 能决定任意属性 B，那么属性组 A 必然包含候选键（主属性
+也不存在部分依赖和传递依赖）</li>
+</ul>
+<h3 id="分布式事务">分布式事务</h3>
+<p>上面谈到的事务都是在同一个db中的事务，如果是多个db，就存在分布式事务的问题，常见于分库分表</p>
+<p><a href="https://benym.cn/archives/325/">分布式事务XA、AT、TCC、SAGA</a></p>
+<h4 id="xa方案">XA方案</h4>
+<p>两阶段提交方案</p>
+<ul>
+<li>阶段一： prepare，但不commit</li>
+<li>阶段二： 如果阶段一都成功了，则commit，不成功则都rollback</li>
+</ul>
+<h4 id="tcc方案">TCC方案</h4>
+<p>try-confirm-cancel</p>
+<ul>
+<li>try：锁定资源。冻结账户里的30元</li>
+<li>confirm：扣减资源。扣减已被冻结的30元</li>
+<li>cancel：恢复已扣减的资源。恢复上一步被扣减的30元</li>
+</ul>
+<p>try成功则confirm一定会成功。</p>
+<p>两者区别：</p>
+<p>XA直接作用于DB，依赖DB的commit和rollback来做回滚
+TCC则作用于服务层，意味着回滚逻辑需要写代码</p>
+
+  </div>
+  
+
+<div class="navigation navigation-single">
+    
+    
+    <a href="/posts/interview-redis/" class="navigation-next">
+      <span class="navigation-tittle">面试：Redis</span>
+      <i aria-hidden="true" class="fa fa-chevron-right"></i>
+    </a>
+    
+</div>
+
+
+  
+
+  
+    
+
+
+</article>
+
+
+        </div>
+        
+    
+
+<script defer src="/static/all.js" integrity="sha384-ZbbbT1gw3joYkKRqh0kWyRp32UAvdqkpbLedQJSlnI8iLQcFVxaGyrOgOJiDQTTR" crossorigin="anonymous"></script>
+
+
+    
+    <script src="/static/highlight.min.js"></script>
+        
+    <script type="text/javascript">
+        
+        hljs.initHighlightingOnLoad();
+    </script>
+    
+
+
+
+
+
+    
+
+
+
+    </body>
+</html>
