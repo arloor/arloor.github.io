@@ -315,6 +315,7 @@ Built with <a href="https://gohugo.io">Hugo</a> ❤️ <a href="https://github.c
 <li>异步IO：两个阶段都异步</li>
 </ul>
 <h3 id="零拷贝描述的过程都是从文件读并写到socket的过程">零拷贝(描述的过程都是从文件读，并写到socket的过程)</h3>
+<p><a href="https://juejin.cn/post/6844903949359644680">深入剖析Linux IO原理和几种零拷贝机制的实现</a></p>
 <p>传统模式下有2次系统调用（read+write）（共四次上下文切换）、2次cpu拷贝（内核空间和用户空间之间）、2次DMA拷贝（外设和内核空间之间）。快速记忆：三个二</p>
 <p>2次DMA拷贝是避免不了的，想办法减少系统调用和cpu拷贝就是零拷贝技术。</p>
 <h4 id="用户态直接io">用户态直接IO</h4>
