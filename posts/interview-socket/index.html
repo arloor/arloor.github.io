@@ -299,13 +299,6 @@ Built with <a href="https://gohugo.io">Hugo</a> ❤️ <a href="https://github.c
 <p>有DMA控制器时，从硬件外设复制数据到内核缓冲区是由DMA控制器执行的，不用CPU耗费大量时间，见图中的蓝色部分。</p>
 <h3 id="io模型">IO模型</h3>
 <p>5种IO模型就是<strong>如何进行上述的两个过程</strong>，所以理解IO模型的前提是理解IO的两个阶段。IO模型一共有5种</p>
-<ul>
-<li>阻塞式IO</li>
-<li>非阻塞式IO</li>
-<li>IO复用（事件驱动IO）</li>
-<li>信号驱动IO</li>
-<li>异步IO</li>
-</ul>
 <p><img src="/img/1492928105791_3.png" alt=""></p>
 <ul>
 <li>阻塞式IO：两个阶段都阻塞，代表：java BIO</li>
