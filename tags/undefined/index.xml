@@ -13,14 +13,14 @@
       <link>https://arloor.github.io/posts/os-memeory/</link>
       <pubDate>Sat, 03 Jun 2023 14:42:58 +0800</pubDate>
       <guid>https://arloor.github.io/posts/os-memeory/</guid>
-      <description>linux进程地址空间😄 概览 进程地址空间是属于进程的，虚拟的。每一个进程都有自己的从0开始的地址空间</description>
+      <description></description>
     </item>
     <item>
       <title>面试：操作系统</title>
       <link>https://arloor.github.io/posts/interview-os/</link>
       <pubDate>Thu, 08 Dec 2022 15:57:04 +0800</pubDate>
       <guid>https://arloor.github.io/posts/interview-os/</guid>
-      <description>CS-Notes操作系统 操作系统的特性 并发：并发是指宏观上在一段时间内能同时运行多个程序，而并行则指</description>
+      <description></description>
     </item>
   </channel>
 </rss>

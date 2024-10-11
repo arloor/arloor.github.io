@@ -13,28 +13,28 @@
       <link>https://arloor.github.io/posts/interview-kafka/</link>
       <pubDate>Mon, 28 Nov 2022 21:04:01 +0800</pubDate>
       <guid>https://arloor.github.io/posts/interview-kafka/</guid>
-      <description>使用page cache磁盘读写 默认模式下，linux都是使用缓存IO，即将内存作为磁盘的缓存，称之为</description>
+      <description></description>
     </item>
     <item>
       <title>面试：网络/IO</title>
       <link>https://arloor.github.io/posts/interview-socket/</link>
       <pubDate>Mon, 28 Nov 2022 17:24:52 +0800</pubDate>
       <guid>https://arloor.github.io/posts/interview-socket/</guid>
-      <description>IO基础知识 无论是读磁盘还是读网络，都涉及到两个过程： 从磁盘/网卡，到 内核缓冲区 从内核缓存中，到 应用</description>
+      <description></description>
     </item>
     <item>
       <title>面试：Redis</title>
       <link>https://arloor.github.io/posts/interview-redis/</link>
       <pubDate>Wed, 23 Nov 2022 19:38:31 +0800</pubDate>
       <guid>https://arloor.github.io/posts/interview-redis/</guid>
-      <description>缓存雪崩、缓存击穿、缓存穿透 讨厌命名党，明明是很简单的几种情况 缓存雪崩：redis中大量key在短时</description>
+      <description></description>
     </item>
     <item>
       <title>面试：Mysql</title>
       <link>https://arloor.github.io/posts/interview-mysql/</link>
       <pubDate>Tue, 22 Nov 2022 20:09:38 +0800</pubDate>
       <guid>https://arloor.github.io/posts/interview-mysql/</guid>
-      <description>Mysql B+树 一篇文章讲透MySQL为什么要用B+树实现索引 二叉查找树：任意节点的左边小于右边。劣势：不平</description>
+      <description></description>
     </item>
   </channel>
 </rss>
