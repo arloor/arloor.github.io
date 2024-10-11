@@ -184,6 +184,8 @@ header的固定部分长度是20字节，可扩展部分是40字节，所以tcp�
 
 ### 四次挥手
 
+![alt text](/img/tcp-4-handover.png)
+
 1. 主动方：fin
 2. 被动方：ack。此时进入close_wait状态（被动方）
 3. 被动方：fin
