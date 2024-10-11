@@ -13,49 +13,49 @@
       <link>https://arloor.github.io/posts/os-memeory/</link>
       <pubDate>Sat, 03 Jun 2023 14:42:58 +0800</pubDate>
       <guid>https://arloor.github.io/posts/os-memeory/</guid>
-      <description>linux进程地址空间😄 概览 进程地址空间是属于进程的，虚拟的。每一个进程都有自己的从0开始的地址空间，并且这些地址是虚拟的，不是实存上真实的偏移量。虚拟内存地址通过mmu内存管理单元映射到物理内存地址上。 32位系统和64位系统的地址空间大小不一样。32位进程地址空间大小为4G。64位系统没有使用Math.power(2</description>
+      <description>linux进程地址空间😄 概览 进程地址空间是属于进程的，虚拟的。每一个进程都有自己的从0开始的地址空间</description>
     </item>
     <item>
       <title>面试：操作系统</title>
       <link>https://arloor.github.io/posts/interview-os/</link>
       <pubDate>Thu, 08 Dec 2022 15:57:04 +0800</pubDate>
       <guid>https://arloor.github.io/posts/interview-os/</guid>
-      <description>CS-Notes操作系统 操作系统的特性 并发：并发是指宏观上在一段时间内能同时运行多个程序，而并行则指同一时刻能运行多个指令。 共享：资源是被进程共享的。分为互斥共享和同时共享，互斥共享的被称为临界资源，需要同步机制来保护，即信号量/管程 虚拟：将物理实体映射成逻辑实体。时分复用：将CPU时间虚拟化时间片，分给进程。空分复用</description>
+      <description>CS-Notes操作系统 操作系统的特性 并发：并发是指宏观上在一段时间内能同时运行多个程序，而并行则指</description>
     </item>
     <item>
       <title>面试：Kafka</title>
       <link>https://arloor.github.io/posts/interview-kafka/</link>
       <pubDate>Mon, 28 Nov 2022 21:04:01 +0800</pubDate>
       <guid>https://arloor.github.io/posts/interview-kafka/</guid>
-      <description>使用page cache磁盘读写 默认模式下，linux都是使用缓存IO，即将内存作为磁盘的缓存，称之为page cache。当读写文件时，实际是写入内存中的page cache，由操作系统来决定什么时候真正写入磁盘。 这样当我们在无积压的情况下生产和消费时，实际是内存操作，而非磁盘操作。 提升效率：batch读写，减少io次数 i</description>
+      <description>使用page cache磁盘读写 默认模式下，linux都是使用缓存IO，即将内存作为磁盘的缓存，称之为</description>
     </item>
     <item>
       <title>面试：网络/IO</title>
       <link>https://arloor.github.io/posts/interview-socket/</link>
       <pubDate>Mon, 28 Nov 2022 17:24:52 +0800</pubDate>
       <guid>https://arloor.github.io/posts/interview-socket/</guid>
-      <description>IO基础知识 无论是读磁盘还是读网络，都涉及到两个过程： 从磁盘/网卡，到 内核缓冲区 从内核缓存中，到 应用层内存（设计到系统调用和上下文切换） 以当前典型的DMA控制器为例，可以用下图描述：从磁盘读，并写到网卡涉及到2次系统调用（共四次上下文切换）、2次cpu拷贝（内核空间和用户空间之间）、2次DMA拷贝（外设和内核空间之间）</description>
+      <description>IO基础知识 无论是读磁盘还是读网络，都涉及到两个过程： 从磁盘/网卡，到 内核缓冲区 从内核缓存中，到 应用</description>
     </item>
     <item>
       <title>面试：Redis</title>
       <link>https://arloor.github.io/posts/interview-redis/</link>
       <pubDate>Wed, 23 Nov 2022 19:38:31 +0800</pubDate>
       <guid>https://arloor.github.io/posts/interview-redis/</guid>
-      <description>缓存雪崩、缓存击穿、缓存穿透 讨厌命名党，明明是很简单的几种情况 缓存雪崩：redis中大量key在短时间失效，导致集中查询mysql，mysql压力突增。 缓存击穿：某个热点key，突然失效，导致该key上的几千qps打到mysql上。 缓存穿透：大量请求redis中不存在的key，导致向mysql中请求这些数据。多发于非法</description>
+      <description>缓存雪崩、缓存击穿、缓存穿透 讨厌命名党，明明是很简单的几种情况 缓存雪崩：redis中大量key在短时</description>
     </item>
     <item>
       <title>面试：Mysql</title>
       <link>https://arloor.github.io/posts/interview-mysql/</link>
       <pubDate>Tue, 22 Nov 2022 20:09:38 +0800</pubDate>
       <guid>https://arloor.github.io/posts/interview-mysql/</guid>
-      <description>Mysql B+树 一篇文章讲透MySQL为什么要用B+树实现索引 二叉查找树：任意节点的左边小于右边。劣势：不平衡 深度过高，极端情况要查询的次数很多 平衡二叉树（AVL）： 在二叉树的基础上平衡化，降低深度。每个节点的左右子树高度相差不超过1 B树： B是Balance，也是平衡树 相比平衡二叉树，每个节点存储更多的数据，并且超过2个子节点</description>
+      <description>Mysql B+树 一篇文章讲透MySQL为什么要用B+树实现索引 二叉查找树：任意节点的左边小于右边。劣势：不平</description>
     </item>
     <item>
       <title>About Arloor</title>
       <link>https://arloor.github.io/about/</link>
       <pubDate>Wed, 21 Aug 2019 22:03:30 +0800</pubDate>
       <guid>https://arloor.github.io/about/</guid>
-      <description>信条：Research and Development! 专业技能 常用开发语言： Java 80% go 20% 开源贡献： Github获得1854 star，122 follower Shell编程以设置iptables NAT转发获得1100Star 全功能Http代理及其客户端 源码阅读： Redis Elasticsearch Netty Skywalking监控系统 大型项目： 美团唯一链路追踪系统的开发，广泛使用Redis、ElasticS</description>
+      <description>信条：Research and Development! 专业技能 常用开发语言： Java 80% go 20% 开源贡献： Github获得1854 star，</description>
     </item>
     <item>
       <title>归档</title>
