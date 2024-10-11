@@ -85,8 +85,8 @@ name = "关于我"
 identifier = "关于我"
 weight = 4
 url = "/about/"
-[[menu.main]]
-name = "苏ICP备17024437号"
-weight = 6
-identifier = "苏ICP备17024437号"
-url = "http://beian.miit.gov.cn/"
+# [[menu.main]]
+# name = "苏ICP备17024437号"
+# weight = 6
+# identifier = "苏ICP备17024437号"
+# url = "http://beian.miit.gov.cn/"
