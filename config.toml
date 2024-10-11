@@ -40,7 +40,7 @@ showBuiltWith = true
 
 # https://highlightjs.org
 highlightjs = true
-highlightjsstyle = "default" # atom-one-dark github default
+highlightjsstyle = "atom-one-dark" # atom-one-dark github default
 
 # please choose either GraphComment or Disqus or Utterances
 #GraphCommentId = "..."
