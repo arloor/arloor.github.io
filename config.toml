@@ -4,16 +4,17 @@ languageCode = "zh-CN"
 hasCJKLanguage = true
 
 title = "八股文"
-theme = "hyde-hyde"
+theme = "hyde-arloor"
 
 ## Hugo Built-in Features
 # disqusShortname = "your-disqus-shortname"
 #googleAnalytics = "UA-133187648-1"
 enableRobotsTXT = true
 
-summarylength = 160
+summarylength = 50
 
-paginate = 10
+[pagination]
+pagerSize = 10
 
 ## Site Settings
 [params]
@@ -23,69 +24,69 @@ paginate = 10
 #UtterancesTheme="github-light"
 
 
-    layoutReverse = false
-    author = "刘港欢"
-    title = "八股文"
-    description = "八股文"
-    authorimage = "/favicon.png"
-    #authorimage = "/img/dao.jfif"
-    dateformat = "Jan 2, 2006"
+layoutReverse = false
+author = "刘港欢"
+title = "八股文"
+description = "隔很久才更新的东西"
+authorimage = "/favicon.png"
+#authorimage = "/img/dao.jfif"
+dateformat = "Jan 2, 2006"
 
-    # sidebar, copyright & license
-    copyright = "arloor"
-    license = "CC BY-SA 4.0"
-    licenseURL = "https://creativecommons.org/licenses/by-sa/4.0"
-    showBuiltWith = true
+# sidebar, copyright & license
+copyright = "arloor"
+license = "CC BY-SA 4.0"
+licenseURL = "https://creativecommons.org/licenses/by-sa/4.0"
+showBuiltWith = true
 
-    # https://highlightjs.org
-    highlightjs = true
-    highlightjsstyle = "github"
-    
-    # please choose either GraphComment or Disqus or Utterances
-    #GraphCommentId = "..."
-    #UtterancesRepo = "..." # https://utteranc.es/
-    #UtterancesIssueTerm = "..." # pathname, url, title, og:title
-    #UtterancesTheme = "..." # github-light or github-dark
+# https://highlightjs.org
+highlightjs = true
+highlightjsstyle = "default" # atom-one-dark github default
 
-    # Table of contents
-    #toc = none, "hugo", or "tocbot"
-    toc="hugo"
+# please choose either GraphComment or Disqus or Utterances
+#GraphCommentId = "..."
+#UtterancesRepo = "..." # https://utteranc.es/
+#UtterancesIssueTerm = "..." # pathname, url, title, og:title
+#UtterancesTheme = "..." # github-light or github-dark
+
+# Table of contents
+#toc = none, "hugo", or "tocbot"
+toc = "hugo"
 
 [params.meta]
-    keywords="刘港欢, arloor, moontell"
-    description = "今天，你学习了吗"
+keywords = "刘港欢, arloor, moontell"
+description = "今天，你学习了吗"
 
 ## Social Accounts
 [params.social]
-    github = "arloor"
-    #instagram = "<username>"
-    #xing = "<username>"
-    #linkedin = "<username>"
-    twitter = "njulgh"
-    #facebook = "<username>"
-    #stackoverflow = "<username>"
-    telegram = "popstary"
-    email = "admin@arloor.com"
-    #gravatar = "admin@arloor.com"
+github = "arloor"
+#instagram = "<username>"
+#xing = "<username>"
+#linkedin = "<username>"
+twitter = "njulgh"
+#facebook = "<username>"
+#stackoverflow = "<username>"
+telegram = "popstary"
+email = "admin@arloor.com"
+#gravatar = "admin@arloor.com"
 
 ## Main Menu
 [[menu.main]]
-    name = "文章"
-    weight = 2
-    identifier = "文章"
-    url = "/posts/"
+name = "文章"
+weight = 2
+identifier = "文章"
+url = "/posts/"
 [[menu.main]]
-    name = "分类"
-    weight = 3
-    identifier = "分类"
-    url = "/tags/"
+name = "分类"
+weight = 3
+identifier = "分类"
+url = "/tags/"
 [[menu.main]]
-    name = "关于我"
-    identifier = "关于我"
-    weight = 4
-    url = "/about/"
+name = "关于我"
+identifier = "关于我"
+weight = 4
+url = "/about/"
 [[menu.main]]
-    name = "苏ICP备17024437号"
-    weight = 6
-    identifier = "苏ICP备17024437号"
-    url = "http://beian.miit.gov.cn/"
+name = "苏ICP备17024437号"
+weight = 6
+identifier = "苏ICP备17024437号"
+url = "http://beian.miit.gov.cn/"
