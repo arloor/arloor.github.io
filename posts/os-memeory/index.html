@@ -13,7 +13,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <!-- Enable responsiveness on mobile devices -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
-<meta name="generator" content="Hugo 0.121.1">
+<meta name="generator" content="Hugo 0.135.0">
 
     
     
@@ -22,23 +22,31 @@
 <title>Linux进程地址空间 • 八股文</title>
 <meta name="description" content="今天，你学习了吗">
 <meta name="keywords" content="刘港欢, arloor, moontell">
-<meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Linux进程地址空间"/>
-<meta name="twitter:description" content="linux进程地址空间😄 概览 进程地址空间是属于进程的，虚拟的。每一个进程都有自己的从0开始的地址空间，并且这些地址是虚拟的，不是实存上真实的偏移量。虚拟内存地址通过mmu内存管理单元映射到物理内存地址上。 32位系统和64位系统的地址空间大小不一样。32位进程地址空间大小为4G。64位系统没有使用Math.power(2"/>
-<meta name="twitter:site" content="@njulgh"/>
 
-<meta property="og:title" content="Linux进程地址空间" />
-<meta property="og:description" content="linux进程地址空间😄 概览 进程地址空间是属于进程的，虚拟的。每一个进程都有自己的从0开始的地址空间，并且这些地址是虚拟的，不是实存上真实的偏移量。虚拟内存地址通过mmu内存管理单元映射到物理内存地址上。 32位系统和64位系统的地址空间大小不一样。32位进程地址空间大小为4G。64位系统没有使用Math.power(2" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://arloor.github.io/posts/os-memeory/" /><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2023-06-03T14:42:58+08:00" />
-<meta property="article:modified_time" content="2023-06-03T14:42:58+08:00" /><meta property="og:site_name" content="八股文" />
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Linux进程地址空间">
+  <meta name="twitter:description" content="隔很久才更新的东西">
+      <meta name="twitter:site" content="@njulgh">
 
+<meta property="og:url" content="https://arloor.github.io/posts/os-memeory/">
+  <meta property="og:site_name" content="八股文">
+  <meta property="og:title" content="Linux进程地址空间">
+  <meta property="og:description" content="隔很久才更新的东西">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2023-06-03T14:42:58+08:00">
+    <meta property="article:modified_time" content="2023-06-03T14:42:58+08:00">
+    <meta property="article:tag" content="Undefined">
 
 
     
 
 
-<link rel="stylesheet" href="/static/github.min.css">
+
+
+
+<link rel="stylesheet" href="/styles/atom-one-dark.min.css">
 
 
 
@@ -47,7 +55,7 @@
 
 
 
-<link rel="stylesheet" href="/scss/hyde-hyde.e0a163f994ccd5fb78b6074545c7e4cff283ba9948b7915f691d5c0f5459ba9c.css" integrity="sha256-4KFj&#43;ZTM1ft4tgdFRcfkz/KDuplIt5FfaR1cD1RZupw=">
+<link rel="stylesheet" href="/scss/hyde-hyde.484b96856b25751067d56c8c0af9dc1fd6372707029b6d56ee178da6bead45b5.css" integrity="sha256-SEuWhWsldRBn1WyMCvncH9Y3JwcCm21W7heNpr6tRbU=">
 
 
 <link rel="stylesheet" href="/scss/print.2744dcbf8a0b2e74f8a50e4b34e5f441be7cf93cc7de27029121c6a09f9e77bc.css" integrity="sha256-J0Tcv4oLLnT4pQ5LNOX0Qb58&#43;TzH3icCkSHGoJ&#43;ed7w=" media="print">
@@ -80,13 +88,13 @@
     <div class="sidebar-about">
       <span class="site__title">
         <a href="https://arloor.github.io/">
-        
+          
           八股文
-        
+          
         </a>
       </span>
       <a href="https://arloor.github.io/">
-      
+        
         
         
         
@@ -94,11 +102,11 @@
           <img src="https://arloor.github.io/favicon.png" alt="Author Image" class="img--circle img--headshot element--center">
         </div>
         
-      
+        
       </a>
       
       <p class="site__description">
-         八股文 
+         隔很久才更新的东西 
       </p>
     </div>
     <div class="collapsible-menu">
@@ -108,13 +116,13 @@
         <div class="show-in-small">
           <a href="https://arloor.github.io/">
             
-              
-              
-              
-              <div class="author-image">
-                <img src="https://arloor.github.io/favicon.png" alt="Author Image" class="img--circle img--headshot element--center">
-              </div>
-              
+            
+            
+            
+            <div class="author-image">
+              <img src="https://arloor.github.io/favicon.png" alt="Author Image" class="img--circle img--headshot element--center">
+            </div>
+            
             
           </a>
         </div>
@@ -159,18 +167,13 @@
 
         <section class="social">
 	
-	<a href="https://twitter.com/njulgh" rel="me"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a>
-	
-	
-	
-	
-	<a href="https://github.com/arloor" rel="me"><i class="fab fa-github fa-lg" aria-hidden="true"></i></a>
+	<a href="https://x.com/njulgh" rel="me"><i class="fa-brands fa-x-twitter fa-lg"></i></a>
 	
 	
 	
 	
 	
-	
+	<a href="https://github.com/arloor" rel="me"><i class="fa-brands fa-github fa-lg"></i></a>
 	
 	
 	
@@ -178,18 +181,23 @@
 	
 	
 	
-	<a href="https://t.me/popstary" rel="me"><i class="fab fa-telegram fa-lg" aria-hidden="true"></i></a>
 	
 	
 	
 	
-	<a href="mailto:admin@arloor.com" rel="me"><i class="fas fa-at fa-lg" aria-hidden="true"></i></a>
+	
+	
+	<a href="https://t.me/popstary" rel="me"><i class="fa-brands fa-telegram fa-lg" aria-hidden="true"></i></a>
+	
+	
+	
+	
+	<a href="mailto:admin@arloor.com" rel="me"><i class="fa-solid fa-at fa-lg"></i></a>
 	
 	
 	
 	
 </section>
-
       </div>
     </div>
     
@@ -202,13 +210,12 @@
 
 
 <div class="builtwith">
-Built with <a href="https://gohugo.io">Hugo</a> ❤️ <a href="https://github.com/htr3n/hyde-hyde">hyde-hyde</a>.
+Built with <a href="https://gohugo.io">Hugo</a> ❤️ <a href="https://github.com/arloor/hyde-arloor">hyde-arloor</a>.
 </div>
 
 
   </div>
 </div>
-
         <div class="content container">
             
     
@@ -375,7 +382,6 @@ main()
 <p><a href="https://www.cnblogs.com/yizhanwillsucceed/p/13578076.html">linux进程地址空间划分</a></p>
 <p><a href="https://www.zhihu.com/tardis/zm/art/66794639?source_id=1003">Linux的进程地址空间[一]</a></p>
 <p><a href="https://zofun.github.io/2020/05/15/%E6%AE%B5%E9%A1%B5%E5%BC%8F%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/">段页式内存管理</a></p>
-
   </div>
   
 
@@ -393,7 +399,6 @@ main()
   
 
   
-    
 
 
 </article>
@@ -403,18 +408,20 @@ main()
         
     
 
-<script defer src="/static/all.js" integrity="sha384-ZbbbT1gw3joYkKRqh0kWyRp32UAvdqkpbLedQJSlnI8iLQcFVxaGyrOgOJiDQTTR" crossorigin="anonymous"></script>
 
+
+<script defer src="/js/all.js" crossorigin="anonymous"></script>
 
     
-    <script src="/static/highlight.min.js"></script>
+    
+    <script src="/js/highlight.min.js"></script>
+    <script src="/js/languages/dos.min.js"></script>
         
     <script type="text/javascript">
         
-        hljs.initHighlightingOnLoad();
+        hljs.highlightAll();
     </script>
     
-
 
 
 

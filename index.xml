@@ -4,7 +4,7 @@
     <title>八股文</title>
     <link>https://arloor.github.io/</link>
     <description>Recent content on 八股文</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <generator>Hugo</generator>
     <language>zh-CN</language>
     <lastBuildDate>Sat, 03 Jun 2023 14:42:58 +0800</lastBuildDate>
     <atom:link href="https://arloor.github.io/index.xml" rel="self" type="application/rss+xml" />
@@ -55,7 +55,7 @@
       <link>https://arloor.github.io/about/</link>
       <pubDate>Wed, 21 Aug 2019 22:03:30 +0800</pubDate>
       <guid>https://arloor.github.io/about/</guid>
-      <description>信条：Research and Development! 专业技能 常用开发语言： Java 80% go 20% 开源贡献： Github获得1854 star，</description>
+      <description>&lt;p&gt;&lt;strong&gt;信条：Research and Development!&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;h2 id=&#34;专业技能&#34;&gt;专业技能&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;常用开发语言：&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Java 80%&lt;/li&gt;&#xA;&lt;li&gt;go 20%&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;开源贡献：&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Github获得1854 star，122 follower&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://github.com/arloor/iptablesUtils&#34;&gt;Shell编程以设置iptables NAT转发&lt;/a&gt;获得1100Star&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://github.com/arloor/HttpProxy&#34;&gt;全功能Http代理&lt;/a&gt;及其&lt;a href=&#34;https://github.com/arloor/forward&#34;&gt;客户端&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;源码阅读：&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://www.arloor.com/tags/redis/&#34;&gt;Redis&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://www.arloor.com/tags/elasticsearch/&#34;&gt;Elasticsearch&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://www.arloor.com/tags/netty/&#34;&gt;Netty&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://www.arloor.com/tags/%E5%8F%AF%E8%A7%82%E6%B5%8B%E6%80%A7/&#34;&gt;Skywalking监控系统&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;大型项目：&#xA;&lt;ul&gt;&#xA;&lt;li&gt;美团唯一链路追踪系统的开发，广泛使用Redis、ElasticSearch、Hbase、Kafka、RPC等技术。&lt;/li&gt;&#xA;&lt;li&gt;美团唯一监控系统开发，熟悉指标采集、上报、分析、聚合、存储、降采样的实现。&lt;/li&gt;&#xA;&lt;li&gt;使用go语言开发Redis集群代理，让用户像使用单机Redis一样使用Redis集群，在此过程中熟悉Redis resp协议、拷贝、分片、故障迁移。&lt;/li&gt;&#xA;&lt;li&gt;基于ElasticSearch的搜索平台建设。&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;工作经历&#34;&gt;工作经历&lt;/h2&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;2019年6月30日，于南京大学软件学院本科毕业，获工科学士学位。&lt;/li&gt;&#xA;&lt;li&gt;2019年7月8日——2020年6月12日，供职于招商银行信用卡中心，在IT部门平台架构组工作。&lt;/li&gt;&#xA;&lt;li&gt;2020年6月15日，入职美团，在基础技术部/基础架构部/系统软件中心/监控系统组工作。&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;h2 id=&#34;个人简历&#34;&gt;个人简历&lt;/h2&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://arloor.github.io/liuganghuan-resume.pdf&#34;&gt;点此查看PDF&lt;/a&gt;&lt;/p&gt;</description>
     </item>
     <item>
       <title>归档</title>
