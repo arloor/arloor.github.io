@@ -80,6 +80,11 @@ name = "分类"
 weight = 3
 identifier = "分类"
 url = "/tags/"
+[[menu.main]]
+name = "我的博客"
+weight = 4
+identifier = "我的博客"
+url = "https://www.arloor.com"
 # [[menu.main]]
 # name = "关于我"
 # identifier = "关于我"
